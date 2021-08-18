@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:shimmer="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:background="@drawable/background"
+            android:layout_height="@dimen/_140sdp">
+        </ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:id="@+id/arrow"
+                    android:src="@drawable/back_arrow">
+
+                </ImageView>
+
+                <com.robotack.loyatli.utilities.CustomFont
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingEnd="@dimen/_40sdp"
+
+                    android:text="@string/my_rewards"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold">
+
+
+                </com.robotack.loyatli.utilities.CustomFont>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="20dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_80sdp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_28sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_12sdp"
+                                    android:layout_marginRight="@dimen/_2sdp"
+                                    android:src="@drawable/ic_point">
+
+                                </ImageView>
+
+                                <com.robotack.loyatli.utilities.CustomFont
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:id="@+id/currentPoints"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_30sdp"
+                                    android:textStyle="bold"></com.robotack.loyatli.utilities.CustomFont>
+
+                                <com.robotack.loyatli.utilities.CustomFont
+                                    android:id="@+id/currentPointsValue"
+                                    android:layout_width="@dimen/_50sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_minus10sdp"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_9sdp"
+                                    android:textStyle="bold"></com.robotack.loyatli.utilities.CustomFont>
+                            </LinearLayout>
+
+                            <com.robotack.loyatli.utilities.CustomFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:text="@string/current_points_balance"
+                                android:layout_marginLeft="@dimen/_12sdp"
+                                android:layout_marginRight="@dimen/_12sdp"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10sdp"
+                                android:textStyle="bold"></com.robotack.loyatli.utilities.CustomFont>
+
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:src="@drawable/medal_icon">
+
+                        </ImageView>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:background="@color/black"
+                        android:layout_marginRight="@dimen/_12sdp"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_height="0.5dp">
+
+                    </View>
+
+                    <com.robotack.loyatli.utilities.CustomFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:id="@+id/expiryPoint"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_marginRight="@dimen/_12sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="italic"></com.robotack.loyatli.utilities.CustomFont>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/_14sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_height="@dimen/_34sdp">
+
+
+                        <com.robotack.loyatli.utilities.CustomFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:id="@+id/historyBtn"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:layout_marginRight="@dimen/_12sdp"
+                            android:text="@string/show_history"
+                            android:textColor="@color/white"
+                            android:gravity="center|start"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="bold"></com.robotack.loyatli.utilities.CustomFont>
+
+
+
+
+                        <com.robotack.loyatli.utilities.CustomFont
+                            android:layout_width="@dimen/_66sdp"
+                            android:layout_height="@dimen/_28sdp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:id="@+id/redeemBtn"
+                            android:background="@drawable/white_shape_redeem"
+                            android:layout_marginLeft="@dimen/_6sdp"
+                            android:layout_marginRight="@dimen/_6sdp"
+                            android:text="@string/redeem"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold"></com.robotack.loyatli.utilities.CustomFont>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:elevation="4dp"
+                android:id="@+id/stepsCard"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="@dimen/_60sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/steps_icon_home"
+                        android:layout_height="match_parent">
+
+                    </ImageView>
+
+                    <com.robotack.loyatli.utilities.CustomFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:layout_marginRight="@dimen/_4sdp"
+                        android:text="@string/claim_steps"
+                        android:textColor="@color/blue_color"
+                        android:gravity="center|start"
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold"></com.robotack.loyatli.utilities.CustomFont>
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="center"
+                        android:id="@+id/arrowSteps"
+
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:src="@drawable/claim_arrow">
+                    </ImageView>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <include layout="@layout/main_content_slider"></include>
+        </LinearLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:visibility="gone"
+            shimmer:duration="800">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

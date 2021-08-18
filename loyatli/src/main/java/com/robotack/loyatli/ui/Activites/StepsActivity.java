@@ -1,0 +1,60 @@
+package com.robotack.loyatli.ui.Activites;
+
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.robotack.loyalti.R;
+import com.robotack.loyalti.helpers.LanguageHelper;
+import com.robotack.loyalti.ui.Fragments.HMStepsFragment;
+import com.robotack.loyalti.ui.Fragments.StepsFragment;
+import com.robotack.loyalti.utilities.Utils;
+
+import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+
+public class StepsActivity extends AppCompatActivity {
+    ImageView backIcon;
+    TextView toolbarTitle;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        updateLanguage(this);
+        setContentView(R.layout.activity_steps_activity);
+        setToolbarView();
+
+        if (new Utils().isGMSAvailable(this)) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.coordinator, new StepsFragment()).commit();
+        } else {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.coordinator, new HMStepsFragment()).commit();
+        }
+
+    }
+
+    private void setToolbarView() {
+
+        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText(R.string.claim_steps);
+        backIcon = (ImageView) findViewById(R.id.backIcon);
+        backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        if (LanguageHelper.getCurrentLanguage(this).equals("ar")) {
+            backIcon.setScaleX(-1);
+        }
+    }
+}
