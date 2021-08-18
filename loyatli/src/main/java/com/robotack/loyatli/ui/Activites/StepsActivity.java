@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.robotack.loyatli.R;
 import com.robotack.loyatli.helpers.LanguageHelper;
-import com.robotack.loyatli.ui.Fragments.HMStepsFragment;
+
 import com.robotack.loyatli.ui.Fragments.StepsFragment;
 import com.robotack.loyatli.utilities.Utils;
 
