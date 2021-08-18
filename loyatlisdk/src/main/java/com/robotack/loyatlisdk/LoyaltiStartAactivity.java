@@ -12,11 +12,11 @@ public class LoyaltiStartAactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loyalti_start_aactivity);
 
-        try {
-            Intent myIntent = new Intent(this,Class.forName(" com.robotack.loyalti.ui.Activites.LoyaltyActivity"));
-            startActivity(myIntent );
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Intent myIntent = new Intent(this,Class.forName(" com.robotack.loyalti.ui.Activites.LoyaltyActivity"));
+//            startActivity(myIntent );
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
     }
 }
