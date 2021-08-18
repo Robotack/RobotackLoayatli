@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:visibility="visible"
+                shimmer:duration="800">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include
+                            layout="@layout/slider_placeholder"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_margin="10dp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <com.robotack.loyalti.utilities.CustomFont
+                android:layout_width="match_parent"
+                android:text="@string/points_to_transfer"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content">
+
+            </com.robotack.loyalti.utilities.CustomFont>
+
+
+            <com.robotack.loyalti.utilities.CustomFont
+                android:layout_width="match_parent"
+                android:id="@+id/points"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                android:textSize="@dimen/_16sdp"
+                android:textColor="@color/blue_color"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content">
+
+            </com.robotack.loyalti.utilities.CustomFont>
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_height="0.5dp">
+
+            </View>
+
+
+
+
+            <com.robotack.loyalti.utilities.CustomFont
+                android:layout_width="match_parent"
+                android:text="@string/transfer_to_account"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content">
+
+            </com.robotack.loyalti.utilities.CustomFont>
+
+
+            <com.robotack.loyalti.utilities.CustomFont
+                android:layout_width="match_parent"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                android:textSize="@dimen/_16sdp"
+                android:id="@+id/transfer"
+                android:textColor="@color/blue_color"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content">
+
+            </com.robotack.loyalti.utilities.CustomFont>
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_height="0.5dp">
+
+            </View>
+
+
+
+
+            <com.robotack.loyalti.utilities.CustomFont
+                android:layout_width="match_parent"
+                android:text="@string/calcualeted_cashback"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content">
+
+            </com.robotack.loyalti.utilities.CustomFont>
+
+            <com.robotack.loyalti.utilities.CustomFont
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:id="@+id/calculatePoints"
+                android:layout_marginLeft="20dp"
+                android:textSize="@dimen/_16sdp"
+
+                android:layout_marginTop="4dp"
+                android:textColor="@color/blue_color"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content">
+
+            </com.robotack.loyalti.utilities.CustomFont>
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_height="0.5dp">
+
+            </View>
+
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:indeterminateDrawable="@drawable/progress" >
+            </ProgressBar>
+
+            <com.robotack.loyalti.utilities.CustomFont
+                android:layout_width="match_parent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:id="@+id/submitClick"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/submit_"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/dark_button"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content">
+
+            </com.robotack.loyalti.utilities.CustomFont>
+
+
+
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <include layout="@layout/toolbarview">
+
+    </include>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

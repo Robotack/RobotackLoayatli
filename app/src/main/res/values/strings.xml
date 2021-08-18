@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Loyalti</string>
+    <string name="my_rewards">My Rewards</string>
+    <string name="show_history">View History</string>
+    <string name="redeem">Redeem</string>
+    <string name="history">History</string>
+    <string name="points">Points</string>
+    <string name="point_">Point</string>
+    <string name="claim_steps">Claim Steps Points</string>
+    <string name="accumlated_cashback">Accumulated Cashback</string>
+    <string name="accumlated_exipred">Accumulated Expired Points</string>
+    <string name="current_points_balance">Current points balance</string>
+    <string name="avilable_points">Available points</string>
+    <string name="points_to_transfer">Points to transfer :</string>
+    <string name="transfer_to_account">Transfer to account :</string>
+    <string name="calcualeted_cashback">Calculated cashback</string>
+    <string name="submit_">Submit</string>
+    <string name="jod">(JOD xxx)</string>
+    <string name="you_need_to_reach">You need to reach 10,000 steps to claim points.</string>
+    <string name="please_enter_points">Please Enter Points To Transfer Value</string>
+
+    <string name="expiry_points">xxx points will be expired by end of this month.</string>
+
+    <string name="huawei_error">Check whether the user has authorized the permissions. Request user authorization whenever needed.</string>
+    <string name="huawei_error2">The corresponding authorization needs to be granted on the device for the requested operation.</string>
+    <string name="huawei_error3">Check whether the device supports this platform.</string>
+    <string name="huawei_error4">Please try again.</string>
+    <string name="huawei_error5">Make sure that the activity to be started is correct.
+
+</string>
+    <string name="huawei_error6">The system version must be EMUI 8.1 or later.</string>
+    <string name="huawei_error7"><![CDATA["This exception will be thrown if the user has not authorized the Huawei Health app to open data to HUAWEI Health Kit. To authorize, the user needs to open Huawei Health, and go to Me > Settings > Data sharing > Health Kit > LINK.  "]]></string>
+    <string name="huawei_error8">The user has to be a Huawei Health app user.
+
+</string>
+    <string name="huawei_error9">Make sure that the app authorizations are correct.</string>
+    <string name="huawei_error10">Please stay tuned for future updates.</string>
+    <string name="huawei_error11">Install the latest version of Huawei Health, grant authorizations, and try again</string>
+
+    <string name="huawei_error12">Install the latest version of Huawei Health and try again.</string>
+</resources>
