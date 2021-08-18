@@ -35,9 +35,9 @@ public class StepsActivity extends AppCompatActivity {
             final FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.coordinator, new StepsFragment()).commit();
         } else {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            final FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.coordinator, new HMStepsFragment()).commit();
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            transaction.replace(R.id.coordinator, new HMStepsFragment()).commit();
         }
 
     }
