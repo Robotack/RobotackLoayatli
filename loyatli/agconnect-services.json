@@ -17,7 +17,7 @@
 		"project_id":"736430079245910853",
 		"app_id":"104592431",
 		"api_key":"CgF6e3x9/eW1ev+j16B0Gr19/tEueButCRirxhlzFnIYHMUyzheyzJmmqVinNEzwFD/VwVOtrod5hQtxfZBQC40y",
-		"package_name":"com.robotack.loyalti"
+		"package_name":"com.robotack.loyatli"
 	},
 	"oauth_client":{
 		"client_id":"104592431",
@@ -25,17 +25,17 @@
 	},
 	"app_info":{
 		"app_id":"104592431",
-		"package_name":"com.robotack.loyalti"
+		"package_name":"com.robotack.loyatli"
 	},
 	"configuration_version":"3.0",
 	"appInfos":[
 		{
-			"package_name":"com.robotack.loyalti",
+			"package_name":"com.robotack.loyatli",
 			"client":{
 				"app_id":"104592431"
 			},
 			"app_info":{
-				"package_name":"com.robotack.loyalti",
+				"package_name":"com.robotack.loyatli",
 				"app_id":"104592431"
 			},
 			"oauth_client":{
