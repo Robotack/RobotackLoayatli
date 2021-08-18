@@ -11,9 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.robotack.loyalti.R;
-import com.robotack.loyalti.models.CustomerHistoryModel;
-import com.robotack.loyalti.ui.Fragments.PointsHistoryFragment;
+
+import com.robotack.loyatli.R;
+import com.robotack.loyatli.models.CustomerHistoryModel;
+import com.robotack.loyatli.ui.Fragments.PointsHistoryFragment;
 
 import java.io.Serializable;
 import java.util.List;

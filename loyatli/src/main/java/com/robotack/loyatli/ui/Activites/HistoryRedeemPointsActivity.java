@@ -13,16 +13,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.tabs.TabLayout;
-import com.robotack.loyalti.R;
-import com.robotack.loyalti.helpers.LanguageHelper;
-import com.robotack.loyalti.managers.ApiCallResponse;
-import com.robotack.loyalti.managers.BusinessManager;
-import com.robotack.loyalti.models.CustomerHistoryModel;
-import com.robotack.loyalti.ui.Adapters.PointsHistoryPagerAdapter;
+import com.robotack.loyatli.R;
+import com.robotack.loyatli.helpers.LanguageHelper;
+import com.robotack.loyatli.managers.ApiCallResponse;
+import com.robotack.loyatli.managers.BusinessManager;
+import com.robotack.loyatli.models.CustomerHistoryModel;
+import com.robotack.loyatli.ui.Adapters.PointsHistoryPagerAdapter;
+
 
 import java.util.List;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyatli.applications.MyApplication.updateLanguage;
+
 
 public class HistoryRedeemPointsActivity extends FragmentActivity {
     ImageView backIcon;
@@ -81,7 +83,7 @@ public class HistoryRedeemPointsActivity extends FragmentActivity {
         });
     }
     private void setPointsHistoryAdapter(List<CustomerHistoryModel.Datum> data) {
-        PointsHistoryPagerAdapter  pointsHistoryPagerAdapter = new PointsHistoryPagerAdapter(getSupportFragmentManager(), activity,data);
+        PointsHistoryPagerAdapter pointsHistoryPagerAdapter = new PointsHistoryPagerAdapter(getSupportFragmentManager(), activity,data);
         historyViewPager.setAdapter(pointsHistoryPagerAdapter);
         historyTabs.setupWithViewPager(historyViewPager);
         for (int tabCounter = 0; tabCounter < historyTabs.getTabCount(); tabCounter++) {

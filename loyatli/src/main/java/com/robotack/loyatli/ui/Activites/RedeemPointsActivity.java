@@ -16,19 +16,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.robotack.loyalti.R;
-import com.robotack.loyalti.helpers.LanguageHelper;
-import com.robotack.loyalti.managers.ApiCallResponse;
-import com.robotack.loyalti.managers.BusinessManager;
-import com.robotack.loyalti.models.CustomerAccountsModel;
-import com.robotack.loyalti.models.CustomerDataModel;
-import com.robotack.loyalti.models.RedeemModel;
-import com.robotack.loyalti.utilities.Utils;
+
+import com.robotack.loyatli.R;
+import com.robotack.loyatli.helpers.LanguageHelper;
+import com.robotack.loyatli.managers.ApiCallResponse;
+import com.robotack.loyatli.managers.BusinessManager;
+import com.robotack.loyatli.models.CustomerAccountsModel;
+import com.robotack.loyatli.models.CustomerDataModel;
+import com.robotack.loyatli.models.RedeemModel;
+import com.robotack.loyatli.utilities.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyatli.applications.MyApplication.updateLanguage;
+
 
 public class RedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;

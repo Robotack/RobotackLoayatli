@@ -13,20 +13,22 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.robotack.loyalti.R;
-import com.robotack.loyalti.helpers.LanguageHelper;
-import com.robotack.loyalti.managers.ApiCallResponse;
-import com.robotack.loyalti.managers.BusinessManager;
-import com.robotack.loyalti.models.CalculateAmountClass;
-import com.robotack.loyalti.models.GenralModel;
-import com.robotack.loyalti.models.RedeemModel;
-import com.robotack.loyalti.models.SenderCalculateClass;
-import com.robotack.loyalti.models.SenderRedeemClass;
-import com.robotack.loyalti.utilities.Utils;
+import com.robotack.loyatli.R;
+import com.robotack.loyatli.helpers.LanguageHelper;
+import com.robotack.loyatli.managers.ApiCallResponse;
+import com.robotack.loyatli.managers.BusinessManager;
+import com.robotack.loyatli.models.CalculateAmountClass;
+import com.robotack.loyatli.models.GenralModel;
+import com.robotack.loyatli.models.RedeemModel;
+import com.robotack.loyatli.models.SenderCalculateClass;
+import com.robotack.loyatli.models.SenderRedeemClass;
+import com.robotack.loyatli.utilities.Utils;
+
 
 import xyz.hasnat.sweettoast.SweetToast;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyatli.applications.MyApplication.updateLanguage;
+
 
 public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;

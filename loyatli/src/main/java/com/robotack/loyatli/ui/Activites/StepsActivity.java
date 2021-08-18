@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.robotack.loyalti.R;
-import com.robotack.loyalti.helpers.LanguageHelper;
-import com.robotack.loyalti.ui.Fragments.HMStepsFragment;
-import com.robotack.loyalti.ui.Fragments.StepsFragment;
-import com.robotack.loyalti.utilities.Utils;
+import com.robotack.loyatli.R;
+import com.robotack.loyatli.helpers.LanguageHelper;
+import com.robotack.loyatli.ui.Fragments.HMStepsFragment;
+import com.robotack.loyatli.ui.Fragments.StepsFragment;
+import com.robotack.loyatli.utilities.Utils;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyatli.applications.MyApplication.updateLanguage;
+
 
 public class StepsActivity extends AppCompatActivity {
     ImageView backIcon;

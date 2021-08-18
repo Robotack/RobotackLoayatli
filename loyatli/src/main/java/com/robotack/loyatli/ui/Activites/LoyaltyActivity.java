@@ -10,14 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.robotack.loyalti.R;
-import com.robotack.loyalti.helpers.LanguageHelper;
-import com.robotack.loyalti.managers.ApiCallResponse;
-import com.robotack.loyalti.managers.BusinessManager;
-import com.robotack.loyalti.models.CustomerDataModel;
-import com.robotack.loyalti.utilities.Utils;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import com.robotack.loyatli.R;
+import com.robotack.loyatli.helpers.LanguageHelper;
+import com.robotack.loyatli.managers.ApiCallResponse;
+import com.robotack.loyatli.managers.BusinessManager;
+import com.robotack.loyatli.models.CustomerDataModel;
+import com.robotack.loyatli.utilities.Utils;
+
+import static com.robotack.loyatli.applications.MyApplication.updateLanguage;
+
 
 public class LoyaltyActivity extends AppCompatActivity {
 
