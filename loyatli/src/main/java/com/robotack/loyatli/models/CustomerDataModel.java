@@ -11,6 +11,7 @@ public class CustomerDataModel implements Serializable {
     @SerializedName("identifierType")
     @Expose
     private String identifierType;
+
     @SerializedName("identifierValue")
     @Expose
     private String identifierValue;
