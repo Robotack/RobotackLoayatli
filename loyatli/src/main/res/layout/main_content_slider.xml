@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="2"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <com.robotack.loyatli.utilities.CustomFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:id="@+id/accumulatedCashback"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold">
+
+            </com.robotack.loyatli.utilities.CustomFont>
+
+            <com.robotack.loyatli.utilities.CustomFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/accumlated_cashback"
+                android:textColor="@color/gray_color"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                android:layout_marginLeft="@dimen/_14sdp"
+                android:layout_marginRight="@dimen/_14sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold">
+
+            </com.robotack.loyatli.utilities.CustomFont>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
+            android:background="#E8E7E7"
+            android:layout_marginTop="16dp"
+            android:layout_height="match_parent">
+
+        </View>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <com.robotack.loyatli.utilities.CustomFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/accumulatedPoints"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold">
+
+            </com.robotack.loyatli.utilities.CustomFont>
+
+            <com.robotack.loyatli.utilities.CustomFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/_14sdp"
+                android:layout_marginRight="@dimen/_14sdp"
+                android:textSize="@dimen/_11sdp"
+                android:text="@string/accumlated_exipred"
+                android:textColor="@color/gray_color"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold">
+
+            </com.robotack.loyatli.utilities.CustomFont>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <com.robotack.loyatli.utilities.AutoScrollViewPager
+            android:id="@+id/imagesViewPager"
+            android:layout_width="fill_parent"
+
+            android:layout_height="180dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.robotack.loyatli.utilities.CirclePageIndicator
+            android:id="@+id/imagesPageIndicator"
+            class="CirclePageIndicator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imagesViewPager"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
