@@ -77,4 +77,3 @@ dependencies {
 
 
 }
-apply plugin: 'com.huawei.agconnect'
