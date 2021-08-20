@@ -135,11 +135,13 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
                     if (genralModel.getErrorCode() == 0) {
 
                         SweetToast.success(getActivity(), genralModel.getDescriptionCode(), 3000);
-                        Intent intent = new Intent(getActivity(), LoyaltyActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+
                     } else {
-                        SweetToast.error(getActivity(), genralModel.getDescriptionCode(), 3000);
+                        try {
+                            SweetToast.error(getActivity(), genralModel.getDescriptionCode(), 3000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -151,8 +153,12 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
             public void onFailure(String errorResponse) {
                 progressBar.setVisibility(View.GONE);
                 submitCLick.setEnabled(true);
-                SweetToast.error(getActivity(), errorResponse, 3000);
-            
+                try {
+                    SweetToast.error(getActivity(), errorResponse, 3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }
