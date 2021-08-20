@@ -50,7 +50,10 @@ import com.robotack.loyalti.R;
 import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.GainPointsModel;
+import com.robotack.loyalti.models.GenralModel;
 import com.robotack.loyalti.models.SenderRedeemClass;
+import com.robotack.loyalti.ui.Activites.ConfirmationRedeemPointsActivity;
+import com.robotack.loyalti.ui.Activites.LoyaltyActivity;
 import com.robotack.loyalti.utilities.Utils;
 
 
@@ -62,6 +65,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import xyz.hasnat.sweettoast.SweetToast;
 
 
 public class StepsFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
@@ -124,12 +129,30 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
             public void onSuccess(Object responseObject, String responseMessage) {
                 progressBar.setVisibility(View.GONE);
                 submitCLick.setEnabled(true);
+                GenralModel genralModel = null;
+                try {
+                    genralModel = (GenralModel) responseObject;
+                    if (genralModel.getErrorCode() == 0) {
+
+                        SweetToast.success(getActivity(), genralModel.getDescriptionCode(), 3000);
+                        Intent intent = new Intent(getActivity(), LoyaltyActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        SweetToast.error(getActivity(), genralModel.getDescriptionCode(), 3000);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
             public void onFailure(String errorResponse) {
                 progressBar.setVisibility(View.GONE);
                 submitCLick.setEnabled(true);
+                SweetToast.error(getActivity(), errorResponse, 3000);
+            
             }
         });
     }
@@ -140,6 +163,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
         task.execute();
 
     }
+
     @Override
     public void onConnectionSuspended(int i) {
         Log.e("HistoryAPI", "onConnectionSuspended");
@@ -148,6 +172,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -156,6 +181,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
             mGoogleApiClient.disconnect();
         }
     }
+
     private void setupFitness() {
         FitnessOptions fitnessOptions = FitnessOptions.builder()
                 .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE, FitnessOptions.ACCESS_READ)
@@ -170,6 +196,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
             subscribe();
         }
     }
+
     public void subscribe() {
         Fitness.getRecordingClient(getActivity(), GoogleSignIn.getLastSignedInAccount(getActivity()))
                 .subscribe(DataType.TYPE_STEP_COUNT_CUMULATIVE)
@@ -347,8 +374,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
                     showDataSet(dataSets.get(j));
                 }
             }
-        }
-        else if (dataReadResult.getDataSets().size() > 0) {
+        } else if (dataReadResult.getDataSets().size() > 0) {
             Log.e("History", "Number of returned DataSets: " + dataReadResult.getDataSets().size());
             for (DataSet dataSet : dataReadResult.getDataSets()) {
                 showDataSet(dataSet);
