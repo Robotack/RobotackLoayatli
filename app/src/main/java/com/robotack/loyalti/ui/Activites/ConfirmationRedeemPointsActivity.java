@@ -114,6 +114,7 @@ public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
     }
 
     private void setRedeemPoints(String points, String accountId) {
+        submitClick.setEnabled(false);
         progressBar.setVisibility(View.VISIBLE);
         SenderRedeemClass senderClass = new SenderRedeemClass();
         senderClass.identifierValue = new Utils().getIdentifierValue(this);
@@ -128,6 +129,7 @@ public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
         new BusinessManager().redeemPoints(this, gsonObject, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
+                submitClick.setEnabled(true);
                 progressBar.setVisibility(View.GONE);
                 GenralModel genralModel = (GenralModel) responseObject;
                 if (genralModel.getErrorCode() == 0) {
@@ -146,6 +148,7 @@ public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
             @Override
             public void onFailure(String errorResponse) {
                 progressBar.setVisibility(View.GONE);
+                submitClick.setEnabled(true);
                 SweetToast.error(ConfirmationRedeemPointsActivity.this, errorResponse, 3000);
                 Intent intent = new Intent(ConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

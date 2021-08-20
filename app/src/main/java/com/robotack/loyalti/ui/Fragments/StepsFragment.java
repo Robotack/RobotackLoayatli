@@ -7,20 +7,25 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
@@ -37,8 +42,16 @@ import com.google.android.gms.fitness.result.DailyTotalResult;
 import com.google.android.gms.fitness.result.DataReadResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 import com.robotack.loyalti.R;
+import com.robotack.loyalti.managers.ApiCallResponse;
+import com.robotack.loyalti.managers.BusinessManager;
+import com.robotack.loyalti.models.GainPointsModel;
+import com.robotack.loyalti.models.SenderRedeemClass;
+import com.robotack.loyalti.utilities.Utils;
 
 
 import java.text.DateFormat;
@@ -52,31 +65,30 @@ import java.util.concurrent.TimeUnit;
 
 
 public class StepsFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, SwipeRefreshLayout.OnRefreshListener {
+        GoogleApiClient.OnConnectionFailedListener {
 
     private static final int REQUEST_OAUTH_REQUEST_CODE = 0x1001;
-
     private TextView submitCLick;
     private TextView tvToday;
     String todaySteps = "";
     private GoogleApiClient mGoogleApiClient;
     CircularProgressBar circularProgressBar;
     ArrayList<String> steps = new ArrayList<>();
-    String stepsCount;
-    LinearLayout getCoinsLinearLayout;
     private Handler handler;
     private int delay = 3000;
 
+    ProgressBar progressBar;
     Runnable runnable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
         tvToday = (TextView) rootView.findViewById(R.id.tvToday);
+        progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         submitCLick = (TextView) rootView.findViewById(R.id.submitCLick);
         circularProgressBar = rootView.findViewById(R.id.circularProgressbar);
         circularProgressBar.setProgressBarColor(Color.parseColor("#306095"));
-        circularProgressBar.setBackgroundProgressBarColor(Color.parseColor("#CC306095"));
+        circularProgressBar.setBackgroundProgressBarColor(Color.parseColor("#40306095"));
         setupFitness();
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACTIVITY_RECOGNITION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -85,9 +97,42 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
                     new String[]{Manifest.permission.ACTIVITY_RECOGNITION},
                     101);
         }
+
+        submitCLick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gainPoints();
+            }
+        });
         return rootView;
     }
 
+    private void gainPoints() {
+        submitCLick.setEnabled(false);
+        progressBar.setVisibility(View.VISIBLE);
+        GainPointsModel senderClass = new GainPointsModel();
+        senderClass.identifierValue = new Utils().getIdentifierValue(getActivity());
+        senderClass.points = todaySteps;
+        senderClass.eventKey = "steps";
+        Gson gson = new Gson();
+        String json = gson.toJson(senderClass);
+        JsonObject gsonObject = new JsonObject();
+        JsonParser jsonParser = new JsonParser();
+        gsonObject = (JsonObject) jsonParser.parse(json.toString());
+        new BusinessManager().gainPoints(getActivity(), gsonObject, new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                progressBar.setVisibility(View.GONE);
+                submitCLick.setEnabled(true);
+            }
+
+            @Override
+            public void onFailure(String errorResponse) {
+                progressBar.setVisibility(View.GONE);
+                submitCLick.setEnabled(true);
+            }
+        });
+    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -95,7 +140,6 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
         task.execute();
 
     }
-
     @Override
     public void onConnectionSuspended(int i) {
         Log.e("HistoryAPI", "onConnectionSuspended");
@@ -103,10 +147,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-
     }
-
     @Override
     public void onPause() {
         super.onPause();
@@ -114,9 +155,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
             mGoogleApiClient.stopAutoManage(getActivity());
             mGoogleApiClient.disconnect();
         }
-
     }
-
     private void setupFitness() {
         FitnessOptions fitnessOptions = FitnessOptions.builder()
                 .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE, FitnessOptions.ACCESS_READ)
@@ -131,7 +170,6 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
             subscribe();
         }
     }
-
     public void subscribe() {
         Fitness.getRecordingClient(getActivity(), GoogleSignIn.getLastSignedInAccount(getActivity()))
                 .subscribe(DataType.TYPE_STEP_COUNT_CUMULATIVE)
@@ -216,7 +254,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
                 }
             } else {
                 try {
-                    tvToday.setText(todaySteps+""+"/10000");
+                    tvToday.setText(todaySteps + "" + "/10000");
                     circularProgressBar.setProgressMax(10000f);
                     circularProgressBar.setProgress(Integer.parseInt(todaySteps));
                     circularProgressBar.setProgressWithAnimation(Integer.parseInt(todaySteps), (long) 10000);
@@ -267,12 +305,6 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
 
     }
 
-    @Override
-    public void onRefresh() {
-
-    }
-
-
     private Date getStart() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
         Calendar cal = Calendar.getInstance();
@@ -282,8 +314,6 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         return cal.getTime();
-
-
     }
 
     private Date getEnd() {
@@ -299,36 +329,25 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
 
     private void getStepsForYesterday() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
-
         long end = getEnd().getTime();
-        ;
         long start = getStart().getTime();
-
-
-        Log.e(">>>>>", "Start: " + sdf.format(start) + " >> End: " + sdf.format(end));
-
         DataReadRequest readRequest = new DataReadRequest.Builder()
                 .aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
                 .bucketByTime(1, TimeUnit.DAYS)
                 .setTimeRange(start, end, TimeUnit.MILLISECONDS)
-
                 .build();
         DataReadResult dataReadResult =
                 Fitness.HistoryApi
                         .readData(mGoogleApiClient, readRequest)
                         .await(1, TimeUnit.MINUTES);
-
         if (dataReadResult.getBuckets().size() > 0) {
-            Log.e("History", "Number of buckets: " + dataReadResult.getBuckets().size());
-
             for (int i = 0; i < dataReadResult.getBuckets().size(); i++) {
                 List<DataSet> dataSets = dataReadResult.getBuckets().get(i).getDataSets();
                 for (int j = 0; j < dataSets.size(); j++) {
                     showDataSet(dataSets.get(j));
                 }
             }
-
-        }//Used for non-aggregated data
+        }
         else if (dataReadResult.getDataSets().size() > 0) {
             Log.e("History", "Number of returned DataSets: " + dataReadResult.getDataSets().size());
             for (DataSet dataSet : dataReadResult.getDataSets()) {
@@ -339,7 +358,6 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
 
     private void showDataSet(DataSet dataSet) {
         for (DataPoint dp : dataSet.getDataPoints()) {
-//            logDays(dp,dateFormat,timeFormat);
             for (Field field : dp.getDataType().getFields()) {
                 if (!"user_input".equals(dp.getOriginalDataSource().getStreamName()))
                     try {

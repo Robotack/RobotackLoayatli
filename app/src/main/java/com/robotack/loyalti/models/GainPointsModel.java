@@ -1,9 +1,18 @@
-package com.robotack.loyatli.models;
+package com.robotack.loyalti.models;
 
-public class SenderCalculateClass {
+public class GainPointsModel {
 
+    public String eventKey;
     public String identifierValue;
-    public String points;
+    public  String points;
+
+    public String getEventKey() {
+        return eventKey;
+    }
+
+    public void setEventKey(String eventKey) {
+        this.eventKey = eventKey;
+    }
 
     public String getIdentifierValue() {
         return identifierValue;

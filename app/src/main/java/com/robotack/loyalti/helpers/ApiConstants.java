@@ -8,4 +8,5 @@ public class ApiConstants {
     public static final String getUserAccountAPI = "/account";
     public static final String calculateAmountAPI = "customer/calculate_amount";
     public static final String redeemAPI = "customer/redeem";
+    public static final String gainAPI = "customer/gain";
 }

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.robotack.loyalti.helpers.ApiConstants.calculateAmountAPI;
+import static com.robotack.loyalti.helpers.ApiConstants.gainAPI;
 import static com.robotack.loyalti.helpers.ApiConstants.redeemAPI;
 
 public class BusinessManager {
@@ -109,6 +110,27 @@ public class BusinessManager {
 
     public void redeemPoints(Context context, JsonObject gsonObject, final ApiCallResponse callResponse) {
         String url = redeemAPI;
+        new ConnectionManager().PostRAW(context,gsonObject,url, new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                try {
+                    Gson gson = new Gson();
+                    String json = responseObject.toString();
+                    GenralModel parseObject = gson.fromJson(json, GenralModel.class);
+                    callResponse.onSuccess(parseObject, responseMessage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(String errorResponse) {
+                callResponse.onFailure(errorResponse);
+            }
+        });
+    }
+
+    public void gainPoints(Context context, JsonObject gsonObject, final ApiCallResponse callResponse) {
+        String url = gainAPI;
         new ConnectionManager().PostRAW(context,gsonObject,url, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
