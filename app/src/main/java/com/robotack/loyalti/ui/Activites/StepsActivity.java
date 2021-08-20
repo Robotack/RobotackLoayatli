@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
-import com.robotack.loyalti.ui.Fragments.HMStepsFragment;
+
 import com.robotack.loyalti.ui.Fragments.StepsFragment;
 import com.robotack.loyalti.utilities.Utils;
 
@@ -28,15 +28,18 @@ public class StepsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_steps_activity);
         setToolbarView();
 
-        if (new Utils().isGMSAvailable(this)) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            final FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.coordinator, new StepsFragment()).commit();
-        } else {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            final FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.coordinator, new HMStepsFragment()).commit();
-        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.coordinator, new StepsFragment()).commit();
+//        if (new Utils().isGMSAvailable(this)) {
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            transaction.replace(R.id.coordinator, new StepsFragment()).commit();
+//        } else {
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            transaction.replace(R.id.coordinator, new HMStepsFragment()).commit();
+//        }
 
     }
 
