@@ -31,10 +31,10 @@
                     android:layout_height="@dimen/_120sdp"
                     android:layout_gravity="center"
                     android:foregroundGravity="center"
-                    app:cpb_background_progressbar_color="@color/blue_color"
+                    app:cpb_background_progressbar_color="@color/blue_colorsdk"
                     app:cpb_background_progressbar_width="8dp"
 
-                    app:cpb_progressbar_color="@color/blue_color_progress"
+                    app:cpb_progressbar_color="@color/blue_color_progresssdk"
                     app:cpb_progressbar_width="8dp"/>
 
                 <RelativeLayout
@@ -61,7 +61,7 @@
                         android:layout_centerInParent="true"
                         android:layout_below="@id/steps"
                         android:text=""
-                        android:textColor="@color/blue_color"
+                        android:textColor="@color/blue_colorsdk"
                         android:textSize="@dimen/_12sdp"/>
                 </RelativeLayout>
 
@@ -79,7 +79,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="@dimen/_14sdp"
-            android:textColor="@color/blue_color"
+            android:textColor="@color/blue_colorsdk"
             android:layout_height="wrap_content">
 
         </com.robotack.loyalti.utilities.CustomFont>
@@ -112,7 +112,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:id="@+id/submitCLick"
-            android:textColor="@color/white"
+            android:textColor="@color/whitesdk"
             android:background="@drawable/dark_button"
             android:layout_marginRight="20dp"
             android:layout_height="wrap_content">
@@ -129,7 +129,7 @@
             android:gravity="center"
             android:textStyle="italic"
             android:layout_marginTop="@dimen/_14sdp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimarysdk"
             android:layout_height="wrap_content">
 
         </com.robotack.loyalti.utilities.CustomFont>

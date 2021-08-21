@@ -26,7 +26,7 @@ import com.robotack.loyalti.utilities.Utils;
 
 import xyz.hasnat.sweettoast.SweetToast;
 
-public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
+public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;
     TextView toolbarTitle;
     TextView points;
@@ -132,12 +132,12 @@ public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
                 GenralModel genralModel = (GenralModel) responseObject;
                 if (genralModel.getErrorCode() == 0) {
 
-                    SweetToast.success(ConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
-                    Intent intent = new Intent(ConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
+                    SweetToast.success(LoyaltiConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
+                    Intent intent = new Intent(LoyaltiConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else {
-                    SweetToast.error(ConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
+                    SweetToast.error(LoyaltiConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
 //                    Intent intent = new Intent(ConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                    startActivity(intent);
@@ -147,8 +147,8 @@ public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
             public void onFailure(String errorResponse) {
                 progressBar.setVisibility(View.GONE);
                 submitClick.setEnabled(true);
-                SweetToast.error(ConfirmationRedeemPointsActivity.this, errorResponse, 3000);
-                Intent intent = new Intent(ConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
+                SweetToast.error(LoyaltiConfirmationRedeemPointsActivity.this, errorResponse, 3000);
+                Intent intent = new Intent(LoyaltiConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

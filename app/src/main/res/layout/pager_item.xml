@@ -7,7 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <com.robotack.loyalti.utilities.CustomFont
         android:layout_width="wrap_content"
-        android:textColor="@color/tab_text_color"
+        android:textColor="@color/tab_text_colorsdk"
         android:paddingStart="@dimen/_24sdp"
         android:paddingTop="@dimen/_4sdp"
         android:paddingBottom="@dimen/_4sdp"

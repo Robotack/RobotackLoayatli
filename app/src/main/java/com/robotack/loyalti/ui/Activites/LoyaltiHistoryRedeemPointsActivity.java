@@ -25,7 +25,7 @@ import com.robotack.loyalti.utilities.Utils;
 import java.util.List;
 
 
-public class HistoryRedeemPointsActivity extends FragmentActivity {
+public class LoyaltiHistoryRedeemPointsActivity extends FragmentActivity {
     ImageView backIcon;
     TextView toolbarTitle;
     Activity activity = this;
@@ -92,19 +92,19 @@ public class HistoryRedeemPointsActivity extends FragmentActivity {
         TextView tvNameCategory = (TextView) historyTabs.getRootView().findViewById(R.id.tvNameCategory);
         LinearLayout categoryView = (LinearLayout) historyTabs.getRootView().findViewById(R.id.categoryView);
         categoryView.setBackground(activity.getDrawable(R.drawable.red_pager_shape));
-        tvNameCategory.setTextColor(ContextCompat.getColor(this, R.color.white));
+        tvNameCategory.setTextColor(ContextCompat.getColor(this, R.color.whitesdk));
         historyTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 TextView tvNameCategory = (TextView) tab.getCustomView().findViewById(R.id.tvNameCategory);
-                tvNameCategory.setTextColor(ContextCompat.getColor(activity, R.color.white));
+                tvNameCategory.setTextColor(ContextCompat.getColor(activity, R.color.whitesdk));
                 LinearLayout categoryView = (LinearLayout) tab.getCustomView().findViewById(R.id.categoryView);
                 categoryView.setBackground(activity.getDrawable(R.drawable.red_pager_shape));
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 TextView tvNameCategory = (TextView) tab.getCustomView().findViewById(R.id.tvNameCategory);
-                tvNameCategory.setTextColor(ContextCompat.getColor(activity, R.color.tab_text_color));
+                tvNameCategory.setTextColor(ContextCompat.getColor(activity, R.color.tab_text_colorsdk));
                 LinearLayout categoryView = (LinearLayout) tab.getCustomView().findViewById(R.id.categoryView);
                 categoryView.setBackground(activity.getDrawable(R.drawable.gray_pager_shape));
             }

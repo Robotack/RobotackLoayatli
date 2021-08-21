@@ -7,7 +7,7 @@
     android:layout_gravity="start"
     android:layout_marginTop="@dimen/_4sdp"
     android:gravity="start"
-    android:textColor="@color/blue_dark_color"
+    android:textColor="@color/blue_dark_colorsdk"
 
     android:paddingStart="@dimen/_4sdp"
     android:paddingTop="@dimen/_10sdp"

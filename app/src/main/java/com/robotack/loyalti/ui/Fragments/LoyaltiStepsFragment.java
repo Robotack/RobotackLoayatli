@@ -19,12 +19,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.common.ConnectionResult;
@@ -51,9 +47,6 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.GainPointsModel;
 import com.robotack.loyalti.models.GenralModel;
-import com.robotack.loyalti.models.SenderRedeemClass;
-import com.robotack.loyalti.ui.Activites.ConfirmationRedeemPointsActivity;
-import com.robotack.loyalti.ui.Activites.LoyaltyActivity;
 import com.robotack.loyalti.utilities.Utils;
 
 
@@ -69,7 +62,7 @@ import java.util.concurrent.TimeUnit;
 import xyz.hasnat.sweettoast.SweetToast;
 
 
-public class StepsFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
+public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
     private static final int REQUEST_OAUTH_REQUEST_CODE = 0x1001;
@@ -87,7 +80,7 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
+        View rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
         tvToday = (TextView) rootView.findViewById(R.id.tvToday);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         submitCLick = (TextView) rootView.findViewById(R.id.submitCLick);
@@ -217,8 +210,8 @@ public class StepsFragment extends Fragment implements GoogleApiClient.Connectio
                                         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                                                 .addApi(Fitness.HISTORY_API)
                                                 .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ_WRITE))
-                                                .addConnectionCallbacks(StepsFragment.this)
-                                                .enableAutoManage(getActivity(), 0, StepsFragment.this)
+                                                .addConnectionCallbacks(LoyaltiStepsFragment.this)
+                                                .enableAutoManage(getActivity(), 0, LoyaltiStepsFragment.this)
                                                 .build();
                                     } catch (Exception ex) {
 

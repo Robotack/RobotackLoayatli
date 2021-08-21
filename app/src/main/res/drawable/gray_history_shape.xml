@@ -10,7 +10,7 @@
 
     <stroke
         android:width="1dp"
-        android:color="@color/gray_color_tab">
+        android:color="@color/gray_color_tabsdk">
     </stroke>
     <solid
         android:color="@color/transparent">

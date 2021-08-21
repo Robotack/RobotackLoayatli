@@ -57,7 +57,7 @@ public class RedeemPointsActivity extends AppCompatActivity {
                 RedeemModel redeemModel = new RedeemModel();
                 redeemModel.setAccount(accountID);
                 redeemModel.setPoints(pointsValue.getText().toString());
-                startActivity(new Intent(RedeemPointsActivity.this,ConfirmationRedeemPointsActivity.class).putExtra("redeemModel",redeemModel));
+                startActivity(new Intent(RedeemPointsActivity.this, LoyaltiConfirmationRedeemPointsActivity.class).putExtra("redeemModel",redeemModel));
             }
         });
         toolbarTitle.setText(R.string.redeem);
@@ -96,7 +96,7 @@ public class RedeemPointsActivity extends AppCompatActivity {
         }
 
         accountsSpinner.getBackground().setColorFilter(ContextCompat.getColor(this,
-                R.color.gray_color), PorterDuff.Mode.SRC_ATOP);
+                R.color.gray_colorsdk), PorterDuff.Mode.SRC_ATOP);
 
 
         pointsValue.addTextChangedListener(new TextWatcher() {

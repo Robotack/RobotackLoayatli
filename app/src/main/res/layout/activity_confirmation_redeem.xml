@@ -201,7 +201,7 @@
                 android:layout_marginTop="4dp"
                 android:textStyle="bold"
                 android:textSize="@dimen/_16sdp"
-                android:textColor="@color/blue_color"
+                android:textColor="@color/blue_colorsdk"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_height="wrap_content">
@@ -240,7 +240,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/_16sdp"
                 android:id="@+id/transfer"
-                android:textColor="@color/blue_color"
+                android:textColor="@color/blue_colorsdk"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_height="wrap_content">
@@ -279,7 +279,7 @@
                 android:textSize="@dimen/_16sdp"
 
                 android:layout_marginTop="4dp"
-                android:textColor="@color/blue_color"
+                android:textColor="@color/blue_colorsdk"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content">
 
@@ -321,7 +321,7 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/whitesdk"
                 android:background="@drawable/dark_button"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content">

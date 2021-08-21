@@ -77,7 +77,7 @@ public class LoyaltyActivity extends AppCompatActivity {
         historyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoyaltyActivity.this, HistoryRedeemPointsActivity.class));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class));
             }
         });
         new Utils().setUserID("UAT-00281252", this);

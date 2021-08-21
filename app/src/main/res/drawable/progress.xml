@@ -23,10 +23,10 @@
             android:width="48dip" />
 
         <gradient
-            android:centerColor="@color/colorPrimary"
+            android:centerColor="@color/colorPrimarysdk"
             android:centerY="0.50"
-            android:endColor="@color/white"
-            android:startColor="@color/colorPrimary"
+            android:endColor="@color/whitesdk"
+            android:startColor="@color/colorPrimarysdk"
             android:type="sweep"
             android:useLevel="false" />
     </shape>

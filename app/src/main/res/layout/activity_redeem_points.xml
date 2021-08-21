@@ -22,7 +22,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                app:cardBackgroundColor="@color/colorAccent"
+                app:cardBackgroundColor="@color/colorAccentsdk"
                 app:cardCornerRadius="20dp">
 
 
@@ -67,7 +67,7 @@
                                     android:layout_gravity="center"
                                     android:gravity="center"
                                     android:id="@+id/currentPoints"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/whitesdk"
                                     android:textSize="@dimen/_36sdp"
                                     android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
 
@@ -89,7 +89,7 @@
                                     android:text="@string/avilable_points"
                                     android:layout_marginLeft="@dimen/_48sdp"
                                     android:layout_marginRight="@dimen/_48sdp"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/whitesdk"
                                     android:textSize="@dimen/_10sdp"
                                     android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
 
@@ -103,7 +103,7 @@
                                     android:layout_marginBottom="4dp"
                                     android:layout_marginRight="@dimen/_8sdp"
                                     android:layout_marginLeft="@dimen/_8sdp"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/whitesdk"
                                     android:textSize="@dimen/_13sdp"
                                     android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
                             </LinearLayout>
@@ -129,7 +129,7 @@
                 android:text="@string/points_to_transfer"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="14dp"
-                android:textColor="@color/gray_color"
+                android:textColor="@color/gray_colorsdk"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content">
 
@@ -160,7 +160,7 @@
                 android:text="@string/transfer_to_account"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="14dp"
-                android:textColor="@color/gray_color"
+                android:textColor="@color/gray_colorsdk"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content">
 
@@ -180,7 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="@color/whitesdk"
                    />
             </RelativeLayout>
 
@@ -198,7 +198,7 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/whitesdk"
                 android:background="@drawable/dark_button"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content">
@@ -218,7 +218,7 @@
                 android:gravity="center"
                 android:textStyle="italic"
                 android:layout_marginTop="@dimen/_14sdp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimarysdk"
                 android:layout_height="wrap_content">
 
             </com.robotack.loyalti.utilities.CustomFont>

@@ -13,8 +13,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.Activites.RedeemPointsActivity" />
         <activity android:name=".ui.Activites.StepsActivity" />
-        <activity android:name=".ui.Activites.HistoryRedeemPointsActivity" />
-        <activity android:name=".ui.Activites.ConfirmationRedeemPointsActivity" />
+        <activity android:name=".ui.Activites.LoyaltiHistoryRedeemPointsActivity" />
+        <activity android:name=".ui.Activites.LoyaltiConfirmationRedeemPointsActivity" />
         <activity android:name=".ui.Activites.LoyaltyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

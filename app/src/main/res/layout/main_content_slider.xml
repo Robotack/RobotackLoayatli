@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@string/accumlated_cashback"
-                android:textColor="@color/gray_color"
+                android:textColor="@color/gray_colorsdk"
                 android:layout_gravity="center"
                 android:gravity="center"
 
@@ -83,7 +83,7 @@
                 android:layout_marginRight="@dimen/_14sdp"
                 android:textSize="@dimen/_11sdp"
                 android:text="@string/accumlated_exipred"
-                android:textColor="@color/gray_color"
+                android:textColor="@color/gray_colorsdk"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textStyle="bold">

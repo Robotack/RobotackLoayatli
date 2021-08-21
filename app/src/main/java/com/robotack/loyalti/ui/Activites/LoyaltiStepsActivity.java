@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
 
-import com.robotack.loyalti.ui.Fragments.StepsFragment;
+import com.robotack.loyalti.ui.Fragments.LoyaltiStepsFragment;
 import com.robotack.loyalti.utilities.Utils;
 
 
@@ -29,7 +29,7 @@ public class StepsActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.coordinator, new StepsFragment()).commit();
+        transaction.replace(R.id.coordinator, new LoyaltiStepsFragment()).commit();
 //        if (new Utils().isGMSAvailable(this)) {
 //            FragmentManager fragmentManager = getSupportFragmentManager();
 //            final FragmentTransaction transaction = fragmentManager.beginTransaction();

@@ -63,7 +63,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
         final Resources res = getResources();
         final int defaultPageColor = res.getColor(R.color.default_circle_indicator_page_color);
         //default_circle_indicator_fill_color
-        final int defaultFillColor = res.getColor(R.color.colorAccent);
+        final int defaultFillColor = res.getColor(R.color.colorAccentsdk);
         final int defaultOrientation = res.getInteger(R.integer.default_circle_indicator_orientation);
         final int defaultStrokeColor = res.getColor(R.color.default_circle_indicator_stroke_color);
         final float defaultStrokeWidth = res.getDimension(R.dimen.default_circle_indicator_stroke_width);
