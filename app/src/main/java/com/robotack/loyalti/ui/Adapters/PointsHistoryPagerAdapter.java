@@ -49,7 +49,7 @@ public class PointsHistoryPagerAdapter extends FragmentPagerAdapter {
         return data.get(position).getTitle();
     }
     public View getTabView(int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.pager_item, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.sdk_pager_item, null);
         TextView tvNameCategory = (TextView) view.findViewById(R.id.tvNameCategory);
         LinearLayout categoryView = (LinearLayout) view.findViewById(R.id.categoryView);
         tvNameCategory.setText(data.get(position).getTitle());

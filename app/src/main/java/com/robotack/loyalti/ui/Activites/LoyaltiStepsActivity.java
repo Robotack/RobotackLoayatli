@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
 
+import com.robotack.loyalti.ui.Fragments.LoyaltiHMStepsFragment;
 import com.robotack.loyalti.ui.Fragments.LoyaltiStepsFragment;
 import com.robotack.loyalti.utilities.Utils;
 
@@ -27,18 +28,15 @@ public class LoyaltiStepsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_steps_activity);
         setToolbarView();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.coordinator, new LoyaltiStepsFragment()).commit();
-//        if (new Utils().isGMSAvailable(this)) {
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            final FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.coordinator, new StepsFragment()).commit();
-//        } else {
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            final FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.coordinator, new HMStepsFragment()).commit();
-//        }
+        if (new Utils().isGMSAvailable(this)) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.coordinator, new LoyaltiStepsFragment()).commit();
+        } else {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.coordinator, new LoyaltiHMStepsFragment()).commit();
+        }
 
     }
 

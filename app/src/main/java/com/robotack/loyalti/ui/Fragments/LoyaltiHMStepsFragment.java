@@ -90,7 +90,11 @@ public class LoyaltiHMStepsFragment extends Fragment {
     private void signIn() {
         List<Scope> scopeList = new ArrayList<>();
         scopeList.add(new Scope(Scopes.HEALTHKIT_STEP_BOTH));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_HEIGHTWEIGHT_BOTH));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_BOTH));
         scopeList.add(new Scope(Scopes.HEALTHKIT_STEP_REALTIME));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_REALTIME));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_ACTIVITY_RECORD_BOTH));
         HuaweiIdAuthParamsHelper authParamsHelper =
                 new HuaweiIdAuthParamsHelper(HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM);
         HuaweiIdAuthParams authParams =
@@ -106,8 +110,6 @@ public class LoyaltiHMStepsFragment extends Fragment {
                 if (exception instanceof ApiException) {
                     ApiException apiException = (ApiException) exception;
                     Log.i("TAG", "sign failed status:" + apiException.getStatusCode());
-                    Log.i("TAG", "sign failed status:" + apiException.getStatusMessage());
-                    Log.i("TAG", "sign failed status:" + apiException.getMessage());
                     Intent signInIntent = authService.getSignInIntent();
                     startActivityForResult(signInIntent, REQUEST_SIGN_IN_LOGIN);
                 }
