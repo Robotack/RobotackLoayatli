@@ -44,12 +44,13 @@ public class LoyaltyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         try {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor edit = preferences.edit();
             edit.putString(Language,LanguageValue );
             edit.commit();
-            
+
         } catch (Exception e) {
         }
 
