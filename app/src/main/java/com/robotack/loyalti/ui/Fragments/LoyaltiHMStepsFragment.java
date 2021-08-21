@@ -86,16 +86,17 @@ public class LoyaltiHMStepsFragment extends Fragment {
         circularProgressBar = rootView.findViewById(R.id.circularProgressbar);
         circularProgressBar.setProgressBarColor(Color.parseColor("#306095"));
         circularProgressBar.setBackgroundProgressBarColor(Color.parseColor("#40306095"));
-
         setupFitness();
+        HiHealthOptions fitnessOptions = HiHealthOptions.builder().build();
+        AuthHuaweiId signInHuaweiId = HuaweiIdAuthManager.getExtendedAuthResult(fitnessOptions);
+        mSettingController = HuaweiHiHealth.getSettingController(getActivity(), signInHuaweiId);
+
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACTIVITY_RECOGNITION)
                 != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACTIVITY_RECOGNITION},
                     101);
         }
-
         submitCLick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
