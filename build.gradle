@@ -3,13 +3,13 @@ buildscript {
     repositories {
         google()
         jcenter()
-//        maven {url 'http://developer.huawei.com/repo/'}
+        maven {url 'http://developer.huawei.com/repo/'}
 
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
         classpath 'com.google.gms:google-services:4.0.1'
-//        classpath 'com.huawei.agconnect:agcp:1.0.0.300'
+        classpath 'com.huawei.agconnect:agcp:1.0.0.300'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,7 +23,7 @@ allprojects {
         maven {
             url 'https://maven.google.com/'
             name 'Google'
-//            maven {url 'http://developer.huawei.com/repo/'}
+            maven {url 'http://developer.huawei.com/repo/'}
 
         }
     }
