@@ -17,7 +17,7 @@ import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CustomerDataModel;
 import com.robotack.loyalti.utilities.Utils;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class LoyaltyActivity extends AppCompatActivity {
 

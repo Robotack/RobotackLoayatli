@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -19,13 +18,12 @@ import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
 import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
-import com.robotack.loyalti.models.CustomerDataModel;
 import com.robotack.loyalti.models.CustomerHistoryModel;
 import com.robotack.loyalti.ui.Adapters.PointsHistoryPagerAdapter;
 
 import java.util.List;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class HistoryRedeemPointsActivity extends FragmentActivity {
     ImageView backIcon;

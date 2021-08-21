@@ -28,7 +28,7 @@ import com.robotack.loyalti.utilities.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class RedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;

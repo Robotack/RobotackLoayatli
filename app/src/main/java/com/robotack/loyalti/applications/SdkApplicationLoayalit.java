@@ -17,15 +17,15 @@ import java.util.Locale;
  * Created by moayed on 12/16/17.
  */
 
-public class MyApplication extends Application {
+public class SdkApplicationLoayalit extends Application {
     private static Context context;
     public void onCreate() {
         super.onCreate();
-        MyApplication.context = getApplicationContext();
+        SdkApplicationLoayalit.context = getApplicationContext();
         updateLanguage(context);
     }
     public static Context getAppContext() {
-        return MyApplication.context;
+        return SdkApplicationLoayalit.context;
     }
     @Override
     protected void attachBaseContext(Context base) {

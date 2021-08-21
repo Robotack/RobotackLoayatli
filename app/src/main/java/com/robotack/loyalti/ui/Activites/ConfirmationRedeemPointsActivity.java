@@ -26,7 +26,7 @@ import com.robotack.loyalti.utilities.Utils;
 
 import xyz.hasnat.sweettoast.SweetToast;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;

@@ -13,9 +13,8 @@ import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
 
 import com.robotack.loyalti.ui.Fragments.StepsFragment;
-import com.robotack.loyalti.utilities.Utils;
 
-import static com.robotack.loyalti.applications.MyApplication.updateLanguage;
+import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class StepsActivity extends AppCompatActivity {
     ImageView backIcon;
