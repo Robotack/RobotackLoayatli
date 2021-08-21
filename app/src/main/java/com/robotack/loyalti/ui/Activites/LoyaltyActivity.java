@@ -60,7 +60,7 @@ public class LoyaltyActivity extends AppCompatActivity {
         stepsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoyaltyActivity.this, StepsActivity.class));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiStepsActivity.class));
             }
         });
         redeemBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class LoyaltyActivity extends AppCompatActivity {
                 {
                     return;
                 }
-                startActivity(new Intent(LoyaltyActivity.this, RedeemPointsActivity.class).putExtra("customerDataModel",customerDataModel));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel",customerDataModel));
             }
         });
 

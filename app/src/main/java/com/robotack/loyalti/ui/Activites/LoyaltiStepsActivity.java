@@ -16,7 +16,7 @@ import com.robotack.loyalti.ui.Fragments.LoyaltiStepsFragment;
 import com.robotack.loyalti.utilities.Utils;
 
 
-public class StepsActivity extends AppCompatActivity {
+public class LoyaltiStepsActivity extends AppCompatActivity {
     ImageView backIcon;
     TextView toolbarTitle;
 

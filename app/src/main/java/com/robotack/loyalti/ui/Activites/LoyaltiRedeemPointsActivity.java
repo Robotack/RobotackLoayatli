@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RedeemPointsActivity extends AppCompatActivity {
+public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;
     TextView toolbarTitle;
     TextView submitBtn;
@@ -57,7 +57,7 @@ public class RedeemPointsActivity extends AppCompatActivity {
                 RedeemModel redeemModel = new RedeemModel();
                 redeemModel.setAccount(accountID);
                 redeemModel.setPoints(pointsValue.getText().toString());
-                startActivity(new Intent(RedeemPointsActivity.this, LoyaltiConfirmationRedeemPointsActivity.class).putExtra("redeemModel",redeemModel));
+                startActivity(new Intent(LoyaltiRedeemPointsActivity.this, LoyaltiConfirmationRedeemPointsActivity.class).putExtra("redeemModel",redeemModel));
             }
         });
         toolbarTitle.setText(R.string.redeem);

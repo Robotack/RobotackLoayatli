@@ -17,7 +17,7 @@ import com.robotack.loyalti.ui.Adapters.PointHistoryTypesAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PointsHistoryFragment extends Fragment {
+public class LoyaltiPointsHistoryFragment extends Fragment {
     private View rootView = null;
     private Context context;
     private List<CustomerHistoryModel.Item> data = new ArrayList<>();

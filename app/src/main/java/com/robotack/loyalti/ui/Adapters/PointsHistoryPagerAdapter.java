@@ -1,6 +1,5 @@
 package com.robotack.loyalti.ui.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.models.CustomerHistoryModel;
-import com.robotack.loyalti.ui.Fragments.PointsHistoryFragment;
+import com.robotack.loyalti.ui.Fragments.LoyaltiPointsHistoryFragment;
 
 import java.io.Serializable;
 import java.util.List;
@@ -33,7 +32,7 @@ public class PointsHistoryPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("key", (Serializable) data.get(position).getItems());
-        PointsHistoryFragment insideCategoryFragment = new PointsHistoryFragment();
+        LoyaltiPointsHistoryFragment insideCategoryFragment = new LoyaltiPointsHistoryFragment();
         insideCategoryFragment.setArguments(bundle);
         return insideCategoryFragment;
     }
