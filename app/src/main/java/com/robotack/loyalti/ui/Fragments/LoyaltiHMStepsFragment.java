@@ -1,24 +1,28 @@
 package com.robotack.loyalti.ui.Fragments;
 
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.huawei.hmf.tasks.OnFailureListener;
 import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
@@ -40,15 +44,14 @@ import com.huawei.hms.support.hwid.request.HuaweiIdAuthParamsHelper;
 import com.huawei.hms.support.hwid.result.AuthHuaweiId;
 import com.huawei.hms.support.hwid.result.HuaweiIdAuthResult;
 import com.huawei.hms.support.hwid.service.HuaweiIdAuthService;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 import com.robotack.loyalti.R;
+import com.robotack.loyalti.managers.ApiCallResponse;
+import com.robotack.loyalti.managers.BusinessManager;
+import com.robotack.loyalti.models.GainPointsModel;
+import com.robotack.loyalti.models.GenralModel;
+import com.robotack.loyalti.utilities.Utils;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,33 +64,101 @@ import xyz.hasnat.sweettoast.SweetToast;
 
 public class LoyaltiHMStepsFragment extends Fragment {
     View rootView;
-    LinearLayout getCoinsLinearLayout;
+
+    private TextView submitCLick;
+    private TextView tvToday;
+    String todaySteps = "";
+    CircularProgressBar circularProgressBar;
     private SettingController mSettingController;
     private static final String HEALTH_APP_SETTING_DATA_SHARE_HEALTHKIT_ACTIVITY_SCHEME =
             "huaweischeme://healthapp/achievement?module=kit";
     private static final int REQUEST_SIGN_IN_LOGIN = 1002;
     private static final int REQUEST_HEALTH_AUTH = 1003;
     private DataController dataController;
-    String stepsCount;
-    String currentDate = "";
-    String yesterdaydate = "";
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
-        loginInHuaweiID();
-        initValue();
+        tvToday = (TextView) rootView.findViewById(R.id.tvToday);
+        progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+        submitCLick = (TextView) rootView.findViewById(R.id.submitCLick);
+        circularProgressBar = rootView.findViewById(R.id.circularProgressbar);
+        circularProgressBar.setProgressBarColor(Color.parseColor("#306095"));
+        circularProgressBar.setBackgroundProgressBarColor(Color.parseColor("#40306095"));
 
+        setupFitness();
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACTIVITY_RECOGNITION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACTIVITY_RECOGNITION},
+                    101);
+        }
+
+        submitCLick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gainPoints();
+            }
+        });
 
         return rootView;
     }
 
+    private void gainPoints() {
+        submitCLick.setEnabled(false);
+        progressBar.setVisibility(View.VISIBLE);
+        GainPointsModel senderClass = new GainPointsModel();
+        senderClass.identifierValue = new Utils().getIdentifierValue(getActivity());
+        senderClass.points = todaySteps;
+        senderClass.eventKey = "steps";
+        Gson gson = new Gson();
+        String json = gson.toJson(senderClass);
+        JsonObject gsonObject = new JsonObject();
+        JsonParser jsonParser = new JsonParser();
+        gsonObject = (JsonObject) jsonParser.parse(json.toString());
+        new BusinessManager().gainPoints(getActivity(), gsonObject, new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                progressBar.setVisibility(View.GONE);
+                submitCLick.setEnabled(true);
+                GenralModel genralModel = null;
+                try {
+                    genralModel = (GenralModel) responseObject;
+                    if (genralModel.getErrorCode() == 0) {
 
-    private void loginInHuaweiID() {
-        signIn();
+                        SweetToast.success(getActivity(), genralModel.getDescriptionCode(), 3000);
+
+                    } else {
+                        try {
+                            SweetToast.error(getActivity(), genralModel.getDescriptionCode(), 3000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(String errorResponse) {
+                progressBar.setVisibility(View.GONE);
+                submitCLick.setEnabled(true);
+                try {
+                    SweetToast.error(getActivity(), errorResponse, 3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
-    private void signIn() {
+
+    private void setupFitness() {
         List<Scope> scopeList = new ArrayList<>();
         scopeList.add(new Scope(Scopes.HEALTHKIT_STEP_BOTH));
         scopeList.add(new Scope(Scopes.HEALTHKIT_HEIGHTWEIGHT_BOTH));
@@ -145,8 +216,6 @@ public class LoyaltiHMStepsFragment extends Fragment {
             @Override
             public void onSuccess(Boolean result) {
 
-
-                Log.i("Success Permission", "checkOrAuthorizeHealth get result success");
                 if (Boolean.TRUE.equals(result)) {
                     setupHMSFitness();
                 } else {
@@ -155,7 +224,7 @@ public class LoyaltiHMStepsFragment extends Fragment {
                     if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                         startActivityForResult(intent, REQUEST_HEALTH_AUTH);
                     } else {
-                        Log.i("Failed Permission", "checkOrAuthorizeHealth get result success");
+
                     }
                 }
 
@@ -212,61 +281,39 @@ public class LoyaltiHMStepsFragment extends Fragment {
         AuthHuaweiId signInHuaweiId = HuaweiIdAuthManager.getExtendedAuthResult(fitnessOptions);
         mSettingController = HuaweiHiHealth.getSettingController(getActivity(), signInHuaweiId);
 
-//        refresh = rootView.findViewById(R.id.swiperefresh);
-//        tvToday = rootView.findViewById(R.id.tv_today_steps);
-//        fit_umnicoin = (ImageView) rootView.findViewById(R.id.fit_umnicoin);
-//        tvYesterday = rootView.findViewById(R.id.tv_yesterday_steps);
-//        getCoinsLinearLayout = rootView.findViewById(R.id.getCoinsLinearLayout);
-//        getCoinsLinearLayout.setAlpha(0.4f);
-//        getCoinsLinearLayout.setEnabled(false);
-//        refresh.setOnRefreshListener(this);
-//        getCoinsLinearLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getYourCoinsApiCall();
-//            }
-//        });
-
     }
 
     class MyAwesomeAsyncTask extends AsyncTask<Void, Void, Void> {
-
-
         @Override
         protected void onPreExecute() {
+            try {
+                progressBar.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
 
+            }
         }
-
         @Override
         protected Void doInBackground(Void... params) {
-
-            // Execute query here
             try {
-                currentDate = getDate(getTime());
-                yesterdaydate = getDateyesterday(getTime());
-
+                progressBar.setVisibility(View.GONE);
             } catch (Exception e) {
-                currentDate = "";
-                yesterdaydate = "";
+
             }
-
             return null;
-
         }
-
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             try {
-                yesterdaySteps();
-            } catch (ParseException e) {
-            }
+                progressBar.setVisibility(View.GONE);
+            } catch (Exception e) {
 
+            }
             try {
+
                 todaysteps2();
             } catch (Exception e) {
             }
-
         }
 
     }
@@ -286,8 +333,6 @@ public class LoyaltiHMStepsFragment extends Fragment {
 
         }
     }
-
-
     private void handleHealthAuthResult(int requestCode) {
         if (requestCode != REQUEST_HEALTH_AUTH) {
             return;
@@ -314,110 +359,6 @@ public class LoyaltiHMStepsFragment extends Fragment {
             }
         });
     }
-
-    public void yesterdaySteps() throws ParseException {
-        try {
-            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DATE, -1);
-            Date yesterday = calendar.getTime();
-            if (currentDate == "") {
-                currentDate = df.format(new Date());
-            }
-            if (yesterdaydate == "") {
-                yesterdaydate = df.format(yesterday);
-            }
-            int endTime = Integer.parseInt(currentDate);
-            int startTime = Integer.parseInt(yesterdaydate);
-            Task<SampleSet> daliySummationTask =
-                    dataController.readDailySummation(DataType.DT_CONTINUOUS_STEPS_DELTA, startTime, endTime);
-            daliySummationTask.addOnSuccessListener(new OnSuccessListener<SampleSet>() {
-                @Override
-                public void onSuccess(SampleSet sampleSet) {
-                    System.out.println("Success yesterday summation from HMS core");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-                    for (SamplePoint samplePoint : sampleSet.getSamplePoints()) {
-                        for (Field field : samplePoint.getDataType().getFields()) {
-//                        logger("Field: " + field.getName() + " Value: " + samplePoint.getFieldValue(field));
-                            // o  mean yesterday
-                            String yesterdayvalue = "";
-                            if (sampleSet.getSamplePoints().size() == 1) {
-                                yesterdayvalue = "0";
-                            } else {
-                                yesterdayvalue = sampleSet.getSamplePoints().get(0).getFieldValue(field) + "";
-
-                            }
-                            System.out.println(yesterdayvalue);
-
-                            try {
-                                if (Integer.parseInt(stepsCount) > 9999) {
-                                    getCoinsLinearLayout.setAlpha(1);
-                                    getCoinsLinearLayout.setEnabled(true);
-
-                                } else {
-                                    getCoinsLinearLayout.setAlpha(0.4f);
-                                    getCoinsLinearLayout.setEnabled(false);
-                                }
-                            } catch (Exception e) {
-
-                            }
-
-                        }
-                    }
-
-                }
-            });
-            daliySummationTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(Exception e) {
-                    System.out.println(e.getMessage() + "" + "readYesterdaySummation");
-                }
-            });
-        } catch (Exception e) {
-
-        }
-
-    }
-
-    private long getTime() {
-        String url = "https://time.is/Unix_time_now";
-        Document doc = null;
-        try {
-            doc = Jsoup.parse(new URL(url).openStream(), "UTF-8", url);
-        } catch (IOException e) {
-
-        }
-        String[] tags = new String[]{
-                "div[id=time_section]",
-                "div[id=clock0_bg]"
-        };
-        Elements elements = doc.select(tags[0]);
-        for (int i = 0; i < tags.length; i++) {
-            elements = elements.select(tags[i]);
-        }
-        return Long.parseLong(elements.text());
-    }
-
-    private String getDate(long time) {
-        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(time * 1000);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-
-        return dateFormat.format(cal.getTime());
-    }
-
-    private String getDateyesterday(long time) {
-        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(time * 1000);
-        cal.add(Calendar.DATE, -1);
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-
-
-        return dateFormat.format(cal.getTime());
-    }
-
     public void todaysteps2() {
         try {
             Task<SampleSet> todaySummationTask = dataController.readTodaySummation(DataType.DT_CONTINUOUS_STEPS_DELTA);
@@ -425,21 +366,33 @@ public class LoyaltiHMStepsFragment extends Fragment {
                 @Override
                 public void onSuccess(SampleSet sampleSet) {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
                     for (SamplePoint samplePoint : sampleSet.getSamplePoints()) {
                         for (Field field : samplePoint.getDataType().getFields()) {
                             String todayvalue = "";
                             todayvalue = sampleSet.getSamplePoints().get(0).getFieldValue(field) + "";
-
-
                             System.out.println(todayvalue + "");
 
+                            todayvalue = "200000";
                             try {
-//                                tvToday.setText(todayvalue);
+                                tvToday.setText(todayvalue);
                             } catch (Exception e) {
 
 
                             }
+                            try {
+                                if (Integer.parseInt(todayvalue) > 9999) {
+                                    submitCLick.setAlpha(1);
+                                    submitCLick.setEnabled(true);
+
+                                } else {
+                                    submitCLick.setAlpha(0.4f);
+                                    submitCLick.setEnabled(false);
+                                }
+                            }catch (Exception e)
+                            {
+
+                            }
+
                         }
                     }
                 }
@@ -454,64 +407,5 @@ public class LoyaltiHMStepsFragment extends Fragment {
         }
 
     }
-
-    public void todayStepsByDaliy() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        String currentDate = df.format(new Date());
-
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.add(Calendar.DATE, -1);
-
-        Date yesterday = calendar.getTime();
-
-        String yesterdaydate = df.format(yesterday);
-
-
-        int endTime = Integer.parseInt(currentDate);
-        int startTime = Integer.parseInt(yesterdaydate);
-
-
-        Task<SampleSet> daliySummationTask =
-                dataController.readDailySummation(DataType.DT_CONTINUOUS_STEPS_DELTA, startTime, endTime);
-
-
-        daliySummationTask.addOnSuccessListener(new OnSuccessListener<SampleSet>() {
-            @Override
-            public void onSuccess(SampleSet sampleSet) {
-                System.out.println("Success today summation from HMS core");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-                for (SamplePoint samplePoint : sampleSet.getSamplePoints()) {
-                    for (Field field : samplePoint.getDataType().getFields()) {
-//                        logger("Field: " + field.getName() + " Value: " + samplePoint.getFieldValue(field));
-                        // o  mean yesterday
-                        String todayvalue = "";
-                        if (sampleSet.getSamplePoints().size() == 1) {
-                            todayvalue = sampleSet.getSamplePoints().get(0).getFieldValue(field) + "";
-
-                        } else {
-                            todayvalue = sampleSet.getSamplePoints().get(1).getFieldValue(field) + "";
-                        }
-                        System.out.println(todayvalue + "");
-
-                        try {
-//                            tvToday.setText(todayvalue);
-                        } catch (Exception e) {
-
-
-                        }
-                    }
-                }
-            }
-        });
-        daliySummationTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(Exception e) {
-                System.out.println(e.getMessage() + "" + "readTodaySummation");
-            }
-        });
-    }
-
 
 }
