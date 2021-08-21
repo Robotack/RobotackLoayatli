@@ -28,7 +28,6 @@ import com.robotack.loyalti.utilities.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class RedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;
@@ -43,7 +42,7 @@ public class RedeemPointsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateLanguage(this);
+        new Utils().updateLangauge(this);
         setContentView(R.layout.activity_redeem_points);
         setupViews();
         setToolbarView();

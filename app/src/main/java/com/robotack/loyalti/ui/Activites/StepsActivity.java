@@ -13,8 +13,8 @@ import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
 
 import com.robotack.loyalti.ui.Fragments.StepsFragment;
+import com.robotack.loyalti.utilities.Utils;
 
-import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class StepsActivity extends AppCompatActivity {
     ImageView backIcon;
@@ -23,7 +23,7 @@ public class StepsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateLanguage(this);
+        new Utils().updateLangauge(this);
         setContentView(R.layout.activity_steps_activity);
         setToolbarView();
 

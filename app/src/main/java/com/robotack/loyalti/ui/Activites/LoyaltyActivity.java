@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,8 +18,7 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CustomerDataModel;
 import com.robotack.loyalti.utilities.Utils;
-
-import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
+import static com.robotack.loyalti.helpers.SharedPrefConstants.Language;
 
 public class LoyaltyActivity extends AppCompatActivity {
 
@@ -34,13 +35,26 @@ public class LoyaltyActivity extends AppCompatActivity {
     ShimmerFrameLayout mShimmerViewContainer;
     CustomerDataModel customerDataModel = null;
 
+
+    String LanguageValue = "ar";
+
     ImageView arrow;
     ImageView arrowSteps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateLanguage(this);
         setContentView(R.layout.activity_main);
+        try {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor edit = preferences.edit();
+            edit.putString(Language,LanguageValue );
+            edit.commit();
+            
+        } catch (Exception e) {
+        }
+
+        new Utils().updateLangauge(this);
+
         setupViews();
         stepsCard.setOnClickListener(new View.OnClickListener() {
             @Override

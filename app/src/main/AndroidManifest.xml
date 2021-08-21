@@ -4,8 +4,6 @@
 
     <application
         android:allowBackup="true"
-        android:name=".applications.SdkApplicationLoayalit"
-
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

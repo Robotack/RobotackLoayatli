@@ -20,10 +20,10 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CustomerHistoryModel;
 import com.robotack.loyalti.ui.Adapters.PointsHistoryPagerAdapter;
+import com.robotack.loyalti.utilities.Utils;
 
 import java.util.List;
 
-import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
 
 public class HistoryRedeemPointsActivity extends FragmentActivity {
     ImageView backIcon;
@@ -35,7 +35,7 @@ public class HistoryRedeemPointsActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateLanguage(this);
+        new Utils().updateLangauge(this);
         setContentView(R.layout.activity_history);
         setToolbarView();
         getCustomerHistory();

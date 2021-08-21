@@ -26,8 +26,6 @@ import com.robotack.loyalti.utilities.Utils;
 
 import xyz.hasnat.sweettoast.SweetToast;
 
-import static com.robotack.loyalti.applications.SdkApplicationLoayalit.updateLanguage;
-
 public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
     ImageView backIcon;
     TextView toolbarTitle;
@@ -42,7 +40,7 @@ public class ConfirmationRedeemPointsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateLanguage(this);
+        new Utils().updateLangauge(this);
         setContentView(R.layout.activity_confirmation_redeem);
         setToolbarView();
         setupView();

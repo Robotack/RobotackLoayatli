@@ -1,12 +1,18 @@
 package com.robotack.loyalti.utilities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.robotack.loyalti.helpers.SharedPreferencesHelper;
+import com.robotack.loyalti.helpers.LanguageHelper;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import static com.robotack.loyalti.helpers.PrefConstant.custumerID;
 import static com.robotack.loyalti.helpers.PrefConstant.identifierValue;
@@ -14,19 +20,39 @@ import static com.robotack.loyalti.helpers.PrefConstant.identifierValue;
 public class Utils {
 
     public void setUserID(String userID, Context context) {
-        SharedPreferencesHelper.putSharedPreferencesString(context, custumerID, userID);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putString(custumerID, userID);
+        edit.commit();
     }
 
     public void setIdentifierValue(String userID, Context context) {
-        SharedPreferencesHelper.putSharedPreferencesString(context, identifierValue, userID);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putString(identifierValue, userID);
+        edit.commit();
     }
-
+    public void updateLangauge(Context context)
+    {
+        Configuration cfg = new Configuration();
+        if (!TextUtils.isEmpty(LanguageHelper.getCurrentLanguage(context))) {
+            Locale locale = new Locale(LanguageHelper.getCurrentLanguage(context));
+            cfg.locale = locale;
+        }
+        else
+            cfg.locale = Locale.getDefault();
+        context.getResources().updateConfiguration(cfg, null);
+    }
 
     public String getUserId(Context context) {
-        return SharedPreferencesHelper.getSharedPreferencesString(context, custumerID, "");
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(custumerID, "");
     }
     public String getIdentifierValue(Context context) {
-        return SharedPreferencesHelper.getSharedPreferencesString(context, custumerID, "");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(identifierValue, "");
     }
 
     public static Typeface SetTFace(Context context) {
