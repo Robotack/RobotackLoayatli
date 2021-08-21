@@ -18,6 +18,8 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CustomerDataModel;
 import com.robotack.loyalti.utilities.Utils;
+
+import static com.robotack.loyalti.helpers.PrefConstant.sdkLanguage;
 import static com.robotack.loyalti.helpers.SharedPrefConstants.Language;
 
 public class LoyaltyActivity extends AppCompatActivity {
@@ -36,26 +38,27 @@ public class LoyaltyActivity extends AppCompatActivity {
     CustomerDataModel customerDataModel = null;
 
 
-    String LanguageValue = "ar";
-
     ImageView arrow;
     ImageView arrowSteps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loyatli);
-
         try {
+            String LanguageValue = null;
+            try {
+                LanguageValue = getIntent().getStringExtra(sdkLanguage);
+            } catch (Exception e) {
+                LanguageValue = "en";
+            }
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor edit = preferences.edit();
-            edit.putString(Language,LanguageValue );
+            edit.putString(Language, LanguageValue);
             edit.commit();
-
         } catch (Exception e) {
         }
-
         new Utils().updateLangauge(this);
-
+        setContentView(R.layout.activity_loyatli);
         setupViews();
         stepsCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +69,10 @@ public class LoyaltyActivity extends AppCompatActivity {
         redeemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (customerDataModel == null)
-                {
+                if (customerDataModel == null) {
                     return;
                 }
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel",customerDataModel));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel", customerDataModel));
             }
         });
 
@@ -82,6 +84,12 @@ public class LoyaltyActivity extends AppCompatActivity {
         });
         new Utils().setUserID("UAT-00281252", this);
         getCustomerInfo();
+        arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void setupViews() {
@@ -93,8 +101,7 @@ public class LoyaltyActivity extends AppCompatActivity {
         redeemBtn = (TextView) findViewById(R.id.redeemBtn);
         arrow = (ImageView) findViewById(R.id.arrow);
         arrowSteps = (ImageView) findViewById(R.id.arrowSteps);
-        if (LanguageHelper.getCurrentLanguage(this).equals("ar"))
-        {
+        if (LanguageHelper.getCurrentLanguage(this).equals("ar")) {
             arrow.setScaleX(-1);
             arrowSteps.setScaleX(-1);
         }
@@ -119,7 +126,7 @@ public class LoyaltyActivity extends AppCompatActivity {
                         accumulatedCashback.setText(customerDataModel.getAccumulatedCashback().toString());
                         accumulatedPoints.setText(customerDataModel.getAccumulatedPoints().toString());
                         try {
-                            new Utils().setIdentifierValue(customerDataModel.getIdentifierValue(),LoyaltyActivity.this);
+                            new Utils().setIdentifierValue(customerDataModel.getIdentifierValue(), LoyaltyActivity.this);
                         } catch (Exception e) {
 
                         }
@@ -129,6 +136,7 @@ public class LoyaltyActivity extends AppCompatActivity {
                 }
 
             }
+
             @Override
             public void onFailure(String errorResponse) {
                 mShimmerViewContainer.setVisibility(View.GONE);

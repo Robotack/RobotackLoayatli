@@ -16,8 +16,10 @@ public class LanguageHelper {
 
     public static String getCurrentLanguage (Context context)
     {
-        final SharedPreferences settings = context.getSharedPreferences(SharedPrefConstants.Language, 0);
-        String lang = settings.getString(SharedPrefConstants.Locale, "en");
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String lang = preferences.getString(SharedPrefConstants.Language, "en");
         if (lang.contains("en"))
         {
             return "en";

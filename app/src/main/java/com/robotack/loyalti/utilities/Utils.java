@@ -3,6 +3,7 @@ package com.robotack.loyalti.utilities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -35,14 +36,13 @@ public class Utils {
     }
     public void updateLangauge(Context context)
     {
-        Configuration cfg = new Configuration();
-        if (!TextUtils.isEmpty(LanguageHelper.getCurrentLanguage(context))) {
-            Locale locale = new Locale(LanguageHelper.getCurrentLanguage(context));
-            cfg.locale = locale;
-        }
-        else
-            cfg.locale = Locale.getDefault();
-        context.getResources().updateConfiguration(cfg, null);
+        Locale locale = new Locale(LanguageHelper.getCurrentLanguage(context));
+        Locale.setDefault(locale);
+        Resources resources = context.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+
     }
 
     public String getUserId(Context context) {

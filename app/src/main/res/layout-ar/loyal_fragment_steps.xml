@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp" android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/circleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/circularProgressbar"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center"
+                    app:cpb_background_progressbar_color="@color/blue_colorsdk"
+                    app:cpb_background_progressbar_width="8dp"
+
+                    app:cpb_progressbar_color="@color/blue_color_progresssdk"
+                    app:cpb_progressbar_width="8dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:src="@drawable/steps_icon"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/steps"
+                        android:layout_height="@dimen/_40sdp">
+
+                    </ImageView>
+                    <com.robotack.loyalti.utilities.CustomFont
+                        android:id="@+id/tvToday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:lines="2"
+                        android:textStyle="bold"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@id/steps"
+                        android:text=""
+                        android:textColor="@color/blue_colorsdk"
+                        android:textSize="@dimen/_12sdp"/>
+                </RelativeLayout>
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+        <com.robotack.loyalti.utilities.CustomFont
+            android:layout_width="match_parent"
+            android:text="10,000 Steps = 10 Points"
+            android:textSize="@dimen/_14sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:textColor="@color/blue_colorsdk"
+            android:layout_height="wrap_content">
+
+        </com.robotack.loyalti.utilities.CustomFont>
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/progress" >
+        </ProgressBar>
+
+        <com.robotack.loyalti.utilities.CustomFont
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:alpha="0.7"
+            android:enabled="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/submit_"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/submitCLick"
+            android:textColor="@color/whitesdk"
+            android:background="@drawable/dark_button"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content">
+
+        </com.robotack.loyalti.utilities.CustomFont>
+
+
+
+        <com.robotack.loyalti.utilities.CustomFont
+            android:layout_width="match_parent"
+            android:text="@string/you_need_to_reach"
+            android:textSize="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="italic"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:textColor="@color/colorPrimarysdk"
+            android:layout_height="wrap_content">
+
+        </com.robotack.loyalti.utilities.CustomFont>
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
