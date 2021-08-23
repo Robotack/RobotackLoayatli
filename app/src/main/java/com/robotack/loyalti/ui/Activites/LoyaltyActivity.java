@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
+import com.robotack.loyalti.helpers.PrefConstant;
 import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CustomerDataModel;
@@ -26,21 +27,17 @@ public class LoyaltyActivity extends AppCompatActivity {
 
     TextView redeemBtn;
     CardView stepsCard;
-
     TextView accumulatedPoints;
     TextView accumulatedCashback;
     TextView expiryPoint;
     TextView currentPoints;
     TextView currentPointsValue;
-
     TextView historyBtn;
     ShimmerFrameLayout mShimmerViewContainer;
     CustomerDataModel customerDataModel = null;
-
-
     ImageView arrow;
     ImageView arrowSteps;
-
+    String userID = "UAT-00281252";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +56,16 @@ public class LoyaltyActivity extends AppCompatActivity {
         }
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
+
+        try {
+             userID = getIntent().getStringExtra(PrefConstant.custumerID);
+             if (userID == null)
+             {
+                 userID = "UAT-00281252";
+             }
+        } catch (Exception e) {
+            userID = "UAT-00281252";
+        }
         setupViews();
         stepsCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +89,8 @@ public class LoyaltyActivity extends AppCompatActivity {
                 startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class));
             }
         });
-        new Utils().setUserID("UAT-00281252", this);
+
+        new Utils().setUserID(userID, this);
         getCustomerInfo();
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,10 +124,11 @@ public class LoyaltyActivity extends AppCompatActivity {
         new BusinessManager().getUserInfoApiCall(this, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
-                mShimmerViewContainer.setVisibility(View.GONE);
+
                 try {
                     customerDataModel = (CustomerDataModel) responseObject;
                     if (customerDataModel != null) {
+
                         expiryPoint.setText(getResources().getString(R.string.expiry_points).replace("xxx", customerDataModel.getExpiryPoint().toString()));
                         currentPoints.setText(customerDataModel.getCurrentPoints().toString());
                         currentPointsValue.setText(getResources().getString(R.string.jod).replace("xxx", customerDataModel.getCurrentPointsValue().toString()));
@@ -130,16 +139,14 @@ public class LoyaltyActivity extends AppCompatActivity {
                         } catch (Exception e) {
 
                         }
+                        mShimmerViewContainer.setVisibility(View.GONE);
                     }
                 } catch (Exception e) {
-                    mShimmerViewContainer.setVisibility(View.GONE);
                 }
-
             }
-
             @Override
             public void onFailure(String errorResponse) {
-                mShimmerViewContainer.setVisibility(View.GONE);
+
             }
         });
     }

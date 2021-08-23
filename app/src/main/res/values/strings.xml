@@ -8,13 +8,14 @@
     <string name="point_">Point</string>
     <string name="claim_steps">Claim Steps Points</string>
     <string name="accumlated_cashback">Accumulated Cashback</string>
-    <string name="accumlated_exipred">Accumulated Expired Points</string>
+    <string name="accumlated_exipred">Accumulated \n Points</string>
     <string name="current_points_balance">Current points balance</string>
     <string name="avilable_points">Available points</string>
     <string name="points_to_transfer">Points to transfer :</string>
     <string name="transfer_to_account">Transfer to account :</string>
     <string name="calcualeted_cashback">Calculated cashback</string>
     <string name="submit_">Submit</string>
+    <string name="confirm">Confirm</string>
     <string name="jod">(JOD xxx)</string>
     <string name="you_need_to_reach">You need to reach 10,000 steps to claim points.</string>
     <string name="please_enter_points">Please Enter Points To Transfer Value</string>

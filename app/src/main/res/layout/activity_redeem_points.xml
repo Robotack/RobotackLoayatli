@@ -1,29 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.core.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="?attr/actionBarSize">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                app:cardBackgroundColor="@color/colorAccentsdk"
-                app:cardCornerRadius="20dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/pointsValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/black_edittext"
+                    android:ems="10"
+                    android:gravity="center|start"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="15sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/black_edittext">
+
+                    <Spinner
+                        android:id="@+id/accountsSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:backgroundTint="@color/whitesdk" />
+                </RelativeLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    app:cardBackgroundColor="@color/colorAccentsdk"
+                    app:cardCornerRadius="20dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="@dimen/_3sdp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_28sdp"
+                                        android:layout_height="@dimen/_28sdp"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="@dimen/_14sdp"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:layout_marginRight="@dimen/_6sdp"
+                                        android:src="@drawable/ic_point">
+
+                                    </ImageView>
+
+                                    <com.robotack.loyalti.utilities.CustomFont
+                                        android:id="@+id/currentPoints"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:textColor="@color/whitesdk"
+                                        android:textSize="@dimen/_36sdp"
+                                        android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_minus6sdp"
+                                    android:orientation="horizontal">
+
+                                    <com.robotack.loyalti.utilities.CustomFont
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/_48sdp"
+                                        android:layout_marginRight="@dimen/_48sdp"
+
+                                        android:layout_weight="1"
+                                        android:gravity="start|center"
+                                        android:text="@string/avilable_points"
+                                        android:textColor="@color/whitesdk"
+                                        android:textSize="@dimen/_10sdp"
+                                        android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
+
+
+                                    <com.robotack.loyalti.utilities.CustomFont
+                                        android:id="@+id/currentPointsValue"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="@dimen/_8sdp"
+                                        android:layout_marginRight="@dimen/_8sdp"
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="center"
+                                        android:textColor="@color/whitesdk"
+                                        android:textSize="@dimen/_13sdp"
+                                        android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <com.robotack.loyalti.utilities.CustomFont
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/transfer_to_account"
+                    android:textColor="@color/gray_colorsdk">
+
+                </com.robotack.loyalti.utilities.CustomFont>
+
+
+                <com.robotack.loyalti.utilities.CustomFont
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/points_to_transfer"
+                    android:textColor="@color/gray_colorsdk">
+
+                </com.robotack.loyalti.utilities.CustomFont>
+
+                <com.robotack.loyalti.utilities.CustomFont
+                    android:id="@+id/submitBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginRight="20dp"
+                    android:alpha="0.7"
+                    android:background="@drawable/dark_button"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:text="@string/submit_"
+                    android:textColor="@color/whitesdk"
+                    android:textSize="18sp"
+                    android:textStyle="bold">
+
+                </com.robotack.loyalti.utilities.CustomFont>
+
+
+                <com.robotack.loyalti.utilities.CustomFont
+                    android:id="@+id/pleaseEnter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    android:gravity="center"
+                    android:text="@string/please_enter_points"
+                    android:textColor="@color/colorPrimarysdk"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="italic"
+                    android:visibility="gone">
+
+                </com.robotack.loyalti.utilities.CustomFont>
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:visibility="visible"
+            shimmer:duration="800">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
 
 
                 <LinearLayout
@@ -31,205 +286,77 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <include
+                        layout="@layout/slider_placeholder"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginBottom="@dimen/_3sdp"
-                            android:layout_gravity="center"
-                            android:layout_height="wrap_content">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="@dimen/_28sdp"
-                                    android:layout_height="@dimen/_28sdp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_10sdp"
-                                    android:layout_marginLeft="@dimen/_14sdp"
-                                    android:layout_marginRight="@dimen/_6sdp"
-                                    android:src="@drawable/ic_point">
-
-                                </ImageView>
-
-                                <com.robotack.loyalti.utilities.CustomFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:id="@+id/currentPoints"
-                                    android:textColor="@color/whitesdk"
-                                    android:textSize="@dimen/_36sdp"
-                                    android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="@dimen/_minus6sdp"
-                                android:layout_height="wrap_content">
-
-                                <com.robotack.loyalti.utilities.CustomFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="start|center"
-                                    android:layout_weight="1"
-
-                                    android:text="@string/avilable_points"
-                                    android:layout_marginLeft="@dimen/_48sdp"
-                                    android:layout_marginRight="@dimen/_48sdp"
-                                    android:textColor="@color/whitesdk"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
-
-
-                                <com.robotack.loyalti.utilities.CustomFont
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:id="@+id/currentPointsValue"
-                                    android:layout_marginBottom="4dp"
-                                    android:layout_marginRight="@dimen/_8sdp"
-                                    android:layout_marginLeft="@dimen/_8sdp"
-                                    android:textColor="@color/whitesdk"
-                                    android:textSize="@dimen/_13sdp"
-                                    android:textStyle="bold"></com.robotack.loyalti.utilities.CustomFont>
-                            </LinearLayout>
-
-
-
-                        </LinearLayout>
-
-
-
-
-                    </LinearLayout>
-
-
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
-
-
-            <com.robotack.loyalti.utilities.CustomFont
-                android:layout_width="match_parent"
-                android:text="@string/points_to_transfer"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="14dp"
-                android:textColor="@color/gray_colorsdk"
-                android:layout_marginRight="20dp"
-                android:layout_height="wrap_content">
-
-            </com.robotack.loyalti.utilities.CustomFont>
-
-
-
-            <EditText
-                android:id="@+id/pointsValue"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/black_edittext"
-                android:ems="10"
-                android:gravity="center|start"
-                android:inputType="numberDecimal"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="15sp" />
-
-
-            <com.robotack.loyalti.utilities.CustomFont
-                android:layout_width="match_parent"
-                android:text="@string/transfer_to_account"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="14dp"
-                android:textColor="@color/gray_colorsdk"
-                android:layout_marginRight="20dp"
-                android:layout_height="wrap_content">
-
-            </com.robotack.loyalti.utilities.CustomFont>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/black_edittext">
-
-                <Spinner
-                    android:id="@+id/accountsSpinner"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:backgroundTint="@color/whitesdk"
-                   />
-            </RelativeLayout>
+                    android:orientation="vertical">
 
-            <com.robotack.loyalti.utilities.CustomFont
-                android:layout_width="match_parent"
-                android:textSize="18sp"
-                android:alpha="0.7"
-                android:enabled="false"
-                android:textStyle="bold"
-                android:id="@+id/submitBtn"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:text="@string/submit_"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/whitesdk"
-                android:background="@drawable/dark_button"
-                android:layout_marginRight="20dp"
-                android:layout_height="wrap_content">
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
 
-            </com.robotack.loyalti.utilities.CustomFont>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
 
 
-            <com.robotack.loyalti.utilities.CustomFont
-                android:layout_width="match_parent"
-                android:id="@+id/pleaseEnter"
-                android:visibility="gone"
-                android:text="@string/please_enter_points"
-                android:textSize="@dimen/_10sdp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textStyle="italic"
-                android:layout_marginTop="@dimen/_14sdp"
-                android:textColor="@color/colorPrimarysdk"
-                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            </com.robotack.loyalti.utilities.CustomFont>
+                    <include
+                        layout="@layout/slider_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp" />
+
+                </LinearLayout>
 
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
+        <include layout="@layout/toolbarview">
 
-    <include layout="@layout/toolbarview">
+        </include>
 
-    </include>
+    </RelativeLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

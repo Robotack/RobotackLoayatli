@@ -77,16 +77,147 @@ public class LoyaltiHMStepsFragment extends Fragment {
     private DataController dataController;
     ProgressBar progressBar;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
+        loginInHuaweiID();
+        initValue();
+
+        return rootView;
+    }
+
+    private void loginInHuaweiID() {
+        signIn();
+    }
+
+    private void signIn() {
+        List<Scope> scopeList = new ArrayList<>();
+        scopeList.add(new Scope(Scopes.HEALTHKIT_STEP_BOTH));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_HEIGHTWEIGHT_BOTH));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_BOTH));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_STEP_REALTIME));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_REALTIME));
+        scopeList.add(new Scope(Scopes.HEALTHKIT_ACTIVITY_RECORD_BOTH));
+        HuaweiIdAuthParamsHelper authParamsHelper =
+                new HuaweiIdAuthParamsHelper(HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM);
+        HuaweiIdAuthParams authParams =
+                authParamsHelper.setIdToken().setAccessToken().setScopeList(scopeList).createParams();
+        final HuaweiIdAuthService authService =
+                HuaweiIdAuthManager.getService(getActivity(), authParams);
+        Task<AuthHuaweiId> authHuaweiIdTask = authService.silentSignIn();
+        authHuaweiIdTask.addOnSuccessListener(huaweiId -> {
+            checkOrAuthorizeHealth();
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception exception) {
+                if (exception instanceof ApiException) {
+                    ApiException apiException = (ApiException) exception;
+                    Log.i("TAG", "sign failed status:" + apiException.getStatusCode());
+                    Intent signInIntent = authService.getSignInIntent();
+                    startActivityForResult(signInIntent, REQUEST_SIGN_IN_LOGIN);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        handleSignInResult(requestCode, data);
+        handleHealthAuthResult(requestCode);
+    }
+
+    private void handleSignInResult(int requestCode, Intent data) {
+        if (requestCode != REQUEST_SIGN_IN_LOGIN) {
+            return;
+        }
+        HuaweiIdAuthResult result = HuaweiIdAuthAPIManager.HuaweiIdAuthAPIService.parseHuaweiIdFromIntent(data);
+        if (result != null) {
+            if (result.isSuccess()) {
+                HuaweiIdAuthResult authResult =
+                        HuaweiIdAuthAPIManager.HuaweiIdAuthAPIService.parseHuaweiIdFromIntent(data);
+                checkOrAuthorizeHealth();
+            }
+        }
+    }
+
+    private void checkOrAuthorizeHealth() {
+        Task<Boolean> authTask = mSettingController.getHealthAppAuthorisation();
+        authTask.addOnSuccessListener(new OnSuccessListener<Boolean>() {
+            @Override
+            public void onSuccess(Boolean result) {
+                Log.i("Success Permission", "checkOrAuthorizeHealth get result success");
+                if (Boolean.TRUE.equals(result)) {
+
+                    setupHMSFitness();
+
+                } else {
+                    Uri healthKitSchemaUri = Uri.parse(HEALTH_APP_SETTING_DATA_SHARE_HEALTHKIT_ACTIVITY_SCHEME);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, healthKitSchemaUri);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivityForResult(intent, REQUEST_HEALTH_AUTH);
+                    } else {
+
+                    }
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception exception) {
+                try {
+
+                    if (exception != null) {
+                        if (exception.getMessage().equals("50000")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error), 3000);
+                        } else if (exception.getMessage().contains("50005")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error2), 3000);
+                        } else if (exception.getMessage().contains("50007")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error3), 3000);
+                        } else if (exception.getMessage().contains("50008")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error4), 3000);
+                        } else if (exception.getMessage().contains("50009")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error5), 3000);
+                        } else if (exception.getMessage().contains("50026")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error6), 3000);
+                        } else if (exception.getMessage().contains("50037")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error7), 3000);
+                        } else if (exception.getMessage().contains("50038")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error8), 3000);
+                        } else if (exception.getMessage().contains("50010")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error9), 3000);
+                        } else if (exception.getMessage().contains("50032")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error10), 3000);
+                        } else if (exception.getMessage().contains("50032")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error10), 3000);
+                        } else if (exception.getMessage().contains("50033")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error11), 3000);
+                        } else if (exception.getMessage().contains("50034")) {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error12), 3000);
+                        } else {
+                            SweetToast.error(getActivity(), getResources().getString(R.string.huawei_error), 3000);
+                        }
+                    }
+
+                } catch (Exception e) {
+
+                }
+
+
+            }
+
+        });
+    }
+
+    private void initValue() {
         tvToday = (TextView) rootView.findViewById(R.id.tvToday);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         submitCLick = (TextView) rootView.findViewById(R.id.submitCLick);
         circularProgressBar = rootView.findViewById(R.id.circularProgressbar);
         circularProgressBar.setProgressBarColor(Color.parseColor("#306095"));
         circularProgressBar.setBackgroundProgressBarColor(Color.parseColor("#40306095"));
-        setupFitness();
+
         HiHealthOptions fitnessOptions = HiHealthOptions.builder().build();
         AuthHuaweiId signInHuaweiId = HuaweiIdAuthManager.getExtendedAuthResult(fitnessOptions);
         mSettingController = HuaweiHiHealth.getSettingController(getActivity(), signInHuaweiId);
@@ -103,8 +234,6 @@ public class LoyaltiHMStepsFragment extends Fragment {
                 gainPoints();
             }
         });
-
-        return rootView;
     }
 
     private void gainPoints() {
@@ -158,141 +287,19 @@ public class LoyaltiHMStepsFragment extends Fragment {
         });
     }
 
-
-    private void setupFitness() {
-        List<Scope> scopeList = new ArrayList<>();
-        scopeList.add(new Scope(Scopes.HEALTHKIT_STEP_BOTH));
-        scopeList.add(new Scope(Scopes.HEALTHKIT_HEIGHTWEIGHT_BOTH));
-        scopeList.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_BOTH));
-        scopeList.add(new Scope(Scopes.HEALTHKIT_STEP_REALTIME));
-        scopeList.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_REALTIME));
-        scopeList.add(new Scope(Scopes.HEALTHKIT_ACTIVITY_RECORD_BOTH));
-        HuaweiIdAuthParamsHelper authParamsHelper =
-                new HuaweiIdAuthParamsHelper(HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM);
-        HuaweiIdAuthParams authParams =
-                authParamsHelper.setIdToken().setAccessToken().setScopeList(scopeList).createParams();
-        final HuaweiIdAuthService authService =
-                HuaweiIdAuthManager.getService(getActivity(), authParams);
-        Task<AuthHuaweiId> authHuaweiIdTask = authService.silentSignIn();
-        authHuaweiIdTask.addOnSuccessListener(huaweiId -> {
-            checkOrAuthorizeHealth();
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(Exception exception) {
-                if (exception instanceof ApiException) {
-                    ApiException apiException = (ApiException) exception;
-                    Log.i("TAG", "sign failed status:" + apiException.getStatusCode());
-                    Intent signInIntent = authService.getSignInIntent();
-                    startActivityForResult(signInIntent, REQUEST_SIGN_IN_LOGIN);
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        handleSignInResult(requestCode, data);
-        handleHealthAuthResult(requestCode);
-    }
-
-    private void handleSignInResult(int requestCode, Intent data) {
-        if (requestCode != REQUEST_SIGN_IN_LOGIN) {
-            return;
-        }
-        HuaweiIdAuthResult result = HuaweiIdAuthAPIManager.HuaweiIdAuthAPIService.parseHuaweiIdFromIntent(data);
-        if (result != null) {
-            if (result.isSuccess()) {
-                HuaweiIdAuthResult authResult =
-                        HuaweiIdAuthAPIManager.HuaweiIdAuthAPIService.parseHuaweiIdFromIntent(data);
-                checkOrAuthorizeHealth();
-            }
-        }
-    }
-
-    private void checkOrAuthorizeHealth() {
-
-        Task<Boolean> authTask = mSettingController.getHealthAppAuthorisation();
-        authTask.addOnSuccessListener(new OnSuccessListener<Boolean>() {
-            @Override
-            public void onSuccess(Boolean result) {
-
-                if (Boolean.TRUE.equals(result)) {
-                    setupHMSFitness();
-                } else {
-                    Uri healthKitSchemaUri = Uri.parse(HEALTH_APP_SETTING_DATA_SHARE_HEALTHKIT_ACTIVITY_SCHEME);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, healthKitSchemaUri);
-                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        startActivityForResult(intent, REQUEST_HEALTH_AUTH);
-                    } else {
-
-                    }
-                }
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(Exception exception) {
-                try {
-                    if (exception != null) {
-                        if (exception.getMessage().equals("50000")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error), 3000);
-                        } else if (exception.getMessage().contains("50005")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error2), 3000);
-                        } else if (exception.getMessage().contains("50007")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error3), 3000);
-                        } else if (exception.getMessage().contains("50008")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error4), 3000);
-                        } else if (exception.getMessage().contains("50009")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error5), 3000);
-                        } else if (exception.getMessage().contains("50026")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error6), 3000);
-                        } else if (exception.getMessage().contains("50037")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error7), 3000);
-                        } else if (exception.getMessage().contains("50038")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error8), 3000);
-                        } else if (exception.getMessage().contains("50010")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error9), 3000);
-                        } else if (exception.getMessage().contains("50032")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error10), 3000);
-                        } else if (exception.getMessage().contains("50032")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error10), 3000);
-                        } else if (exception.getMessage().contains("50033")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error11), 3000);
-                        } else if (exception.getMessage().contains("50034")) {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error12), 3000);
-                        }else {
-                            SweetToast.error(getActivity(),getResources().getString(R.string.huawei_error), 3000);
-                        }
-                    }
-
-                } catch (Exception e) {
-
-                }
-
-
-
-            }
-
-        });
-    }
-
-    private void initValue() {
-        HiHealthOptions fitnessOptions = HiHealthOptions.builder().build();
-        AuthHuaweiId signInHuaweiId = HuaweiIdAuthManager.getExtendedAuthResult(fitnessOptions);
-        mSettingController = HuaweiHiHealth.getSettingController(getActivity(), signInHuaweiId);
-
-    }
-
     class MyAwesomeAsyncTask extends AsyncTask<Void, Void, Void> {
+
+
         @Override
         protected void onPreExecute() {
+            //Create progress dialog here and show it
             try {
                 progressBar.setVisibility(View.VISIBLE);
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
+
         @Override
         protected Void doInBackground(Void... params) {
             try {
@@ -301,7 +308,9 @@ public class LoyaltiHMStepsFragment extends Fragment {
 
             }
             return null;
+
         }
+
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
@@ -315,6 +324,7 @@ public class LoyaltiHMStepsFragment extends Fragment {
                 todaysteps2();
             } catch (Exception e) {
             }
+
         }
 
     }
@@ -333,33 +343,38 @@ public class LoyaltiHMStepsFragment extends Fragment {
         } catch (Exception e) {
 
         }
+
+
     }
+
+
     private void handleHealthAuthResult(int requestCode) {
         if (requestCode != REQUEST_HEALTH_AUTH) {
             return;
         }
+
         queryHealthAuthorization();
     }
+
     private void queryHealthAuthorization() {
+
         Task<Boolean> queryTask = mSettingController.getHealthAppAuthorisation();
         queryTask.addOnSuccessListener(new OnSuccessListener<Boolean>() {
             @Override
             public void onSuccess(Boolean result) {
-                if (Boolean.TRUE.equals(result)) {
-                    Log.d("onSuccess","true");
-                } else {
-                    Log.d("onSuccess","false");
-                }
+
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(Exception exception) {
-                if (exception != null) {
-                    Log.d("addOnFailureListener",exception.getMessage());
-                }
+
+
             }
         });
     }
+
+
     public void todaysteps2() {
         try {
             Task<SampleSet> todaySummationTask = dataController.readTodaySummation(DataType.DT_CONTINUOUS_STEPS_DELTA);
@@ -367,33 +382,21 @@ public class LoyaltiHMStepsFragment extends Fragment {
                 @Override
                 public void onSuccess(SampleSet sampleSet) {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
                     for (SamplePoint samplePoint : sampleSet.getSamplePoints()) {
                         for (Field field : samplePoint.getDataType().getFields()) {
                             String todayvalue = "";
                             todayvalue = sampleSet.getSamplePoints().get(0).getFieldValue(field) + "";
+
+
                             System.out.println(todayvalue + "");
 
-                            todayvalue = "200000";
                             try {
                                 tvToday.setText(todayvalue);
                             } catch (Exception e) {
 
 
                             }
-                            try {
-                                if (Integer.parseInt(todayvalue) > 9999) {
-                                    submitCLick.setAlpha(1);
-                                    submitCLick.setEnabled(true);
-
-                                } else {
-                                    submitCLick.setAlpha(0.4f);
-                                    submitCLick.setEnabled(false);
-                                }
-                            }catch (Exception e)
-                            {
-
-                            }
-
                         }
                     }
                 }
@@ -408,5 +411,7 @@ public class LoyaltiHMStepsFragment extends Fragment {
         }
 
     }
+
+
 
 }

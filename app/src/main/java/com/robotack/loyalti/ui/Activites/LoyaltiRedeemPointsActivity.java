@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
 import com.robotack.loyalti.managers.ApiCallResponse;
@@ -39,6 +40,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
     EditText pointsValue;
     Spinner accountsSpinner;
     String accountID = "";
+    ShimmerFrameLayout mShimmerViewContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +51,17 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
         getUserAccounts();
     }
 
-    private void setToolbarView ()
-    {
+    private void setToolbarView() {
+        mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+        mShimmerViewContainer.startShimmerAnimation();
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RedeemModel redeemModel = new RedeemModel();
                 redeemModel.setAccount(accountID);
                 redeemModel.setPoints(pointsValue.getText().toString());
-                startActivity(new Intent(LoyaltiRedeemPointsActivity.this, LoyaltiConfirmationRedeemPointsActivity.class).putExtra("redeemModel",redeemModel));
+                startActivity(new Intent(LoyaltiRedeemPointsActivity.this, LoyaltiConfirmationRedeemPointsActivity.class).putExtra("redeemModel", redeemModel));
             }
         });
         toolbarTitle.setText(R.string.redeem);
@@ -67,15 +71,13 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        if (LanguageHelper.getCurrentLanguage(this).equals("ar"))
-        {
+        if (LanguageHelper.getCurrentLanguage(this).equals("ar")) {
             backIcon.setScaleX(-1);
         }
 
     }
 
-    private void setupViews()
-    {
+    private void setupViews() {
         accountsSpinner = (Spinner) findViewById(R.id.accountsSpinner);
         backIcon = (ImageView) findViewById(R.id.backIcon);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
@@ -85,7 +87,6 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
         pleaseEnter = (TextView) findViewById(R.id.pleaseEnter);
         currentPoints = (TextView) findViewById(R.id.currentPoints);
         currentPointsValue = (TextView) findViewById(R.id.currentPointsValue);
-
         CustomerDataModel customerDataModel = null;
         try {
             customerDataModel = (CustomerDataModel) getIntent().getSerializableExtra("customerDataModel");
@@ -94,62 +95,53 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         accountsSpinner.getBackground().setColorFilter(ContextCompat.getColor(this,
                 R.color.gray_colorsdk), PorterDuff.Mode.SRC_ATOP);
-
-
         pointsValue.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void afterTextChanged(Editable s) {}
-
+            public void afterTextChanged(Editable s) {
+            }
             @Override
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence chars, int start,
                                       int before, int count) {
-                if(chars.length() != 0)
-                {
+                if (chars.length() != 0) {
                     submitBtn.setEnabled(true);
                     submitBtn.setAlpha(1f);
-                }else {
+                } else {
                     submitBtn.setEnabled(false);
                     submitBtn.setAlpha(0.7f);
                 }
-
             }
         });
     }
-    private void getUserAccounts()
-    {
 
+    private void getUserAccounts() {
         new BusinessManager().getUserAccounts(this, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 CustomerAccountsModel customerAccountsModel = (CustomerAccountsModel) responseObject;
-                if (customerAccountsModel != null)
-                {
-                    if (!customerAccountsModel.getData().isEmpty())
-                    {
+                if (customerAccountsModel != null) {
+                    if (!customerAccountsModel.getData().isEmpty()) {
                         setAccountsData(customerAccountsModel.getData());
+                        mShimmerViewContainer.setVisibility(View.GONE);
                     }
                 }
             }
-
             @Override
             public void onFailure(String errorResponse) {
             }
         });
     }
 
-    private void setAccountsData(List<CustomerAccountsModel.Datum> data)
-    {
+    private void setAccountsData(List<CustomerAccountsModel.Datum> data) {
         List<String> array = new ArrayList<>();
-        for (int counter = 0 ; counter < data.size(); counter ++)
-        {
+        for (int counter = 0; counter < data.size(); counter++) {
             array.add(data.get(counter).getTitle());
         }
         ArrayAdapter<String> arrayAdapter5 = new ArrayAdapter<String>(this, R.layout.account_item, array);
@@ -159,6 +151,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 accountID = data.get(position).getValue();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
