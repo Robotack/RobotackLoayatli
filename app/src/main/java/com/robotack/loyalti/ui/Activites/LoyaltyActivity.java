@@ -124,7 +124,7 @@ public class LoyaltyActivity extends AppCompatActivity {
         new BusinessManager().getUserInfoApiCall(this, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
-
+                mShimmerViewContainer.setVisibility(View.GONE);
                 try {
                     customerDataModel = (CustomerDataModel) responseObject;
                     if (customerDataModel != null) {
@@ -146,7 +146,7 @@ public class LoyaltyActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(String errorResponse) {
-
+                mShimmerViewContainer.setVisibility(View.GONE);
             }
         });
     }
