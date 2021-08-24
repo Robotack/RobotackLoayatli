@@ -39,4 +39,9 @@
     <string name="huawei_error11">Install the latest version of Huawei Health, grant authorizations, and try again</string>
 
     <string name="huawei_error12">Install the latest version of Huawei Health and try again.</string>
+
+    <string name="down_for_maintenance">We’ll Be Back Soon!</string>
+    <string name="steps_count">yyyy Steps = xxxx Points</string>
+
+
 </resources>

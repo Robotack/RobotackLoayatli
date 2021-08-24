@@ -40,4 +40,8 @@
 
 
     <string name="huawei_error12">Install the latest version of Huawei Health and try again.</string>
+
+    <string name="down_for_maintenance">سوف نعود قريبا!</string>
+
+    <string name="steps_count">xxxx خطوة = yyyy نقطة</string>
 </resources>

@@ -50,6 +50,8 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.GainPointsModel;
 import com.robotack.loyalti.models.GenralModel;
+import com.robotack.loyalti.models.StepsInfoModel;
+import com.robotack.loyalti.ui.Activites.MaintancePageActivity;
 import com.robotack.loyalti.utilities.Utils;
 
 import java.text.SimpleDateFormat;
@@ -64,7 +66,7 @@ import xyz.hasnat.sweettoast.SweetToast;
 
 public class LoyaltiHMStepsFragment extends Fragment {
     View rootView;
-
+    int StepCountValue = 10000;
     private TextView submitCLick;
     private TextView tvToday;
     String todaySteps = "";
@@ -76,14 +78,14 @@ public class LoyaltiHMStepsFragment extends Fragment {
     private static final int REQUEST_HEALTH_AUTH = 1003;
     private DataController dataController;
     ProgressBar progressBar;
-
+    private TextView infoSteps;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
         loginInHuaweiID();
         initValue();
-
+        getStepsInfo();
         return rootView;
     }
 
@@ -211,6 +213,7 @@ public class LoyaltiHMStepsFragment extends Fragment {
     }
 
     private void initValue() {
+        infoSteps = (TextView) rootView.findViewById(R.id.infoSteps);
         tvToday = (TextView) rootView.findViewById(R.id.tvToday);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         submitCLick = (TextView) rootView.findViewById(R.id.submitCLick);
@@ -260,6 +263,9 @@ public class LoyaltiHMStepsFragment extends Fragment {
 
                         SweetToast.success(getActivity(), genralModel.getDescriptionCode(), 3000);
 
+                    }else if (genralModel.getErrorCode() == -99) {
+                        startActivity(new Intent(getActivity(), MaintancePageActivity.class));
+
                     } else {
                         try {
                             SweetToast.error(getActivity(), genralModel.getDescriptionCode(), 3000);
@@ -282,6 +288,33 @@ public class LoyaltiHMStepsFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+            }
+        });
+    }
+
+    private void getStepsInfo() {
+        new BusinessManager().getStepsInfo(getActivity(), new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                StepsInfoModel genralModel = null;
+                try {
+                    genralModel = (StepsInfoModel) responseObject;
+                    if (genralModel.getErrorCode() == 0) {
+                        infoSteps.setText(getString(R.string.steps_count).replace("xxxx", genralModel.getPoints()).replace("yyyy", genralModel.getStepsCount()));
+                        StepCountValue = Integer.parseInt(genralModel.getStepsCount());
+                    } else if (genralModel.getErrorCode() == -99) {
+                        startActivity(new Intent(getActivity(), MaintancePageActivity.class));
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(String errorResponse) {
 
             }
         });
@@ -385,16 +418,30 @@ public class LoyaltiHMStepsFragment extends Fragment {
 
                     for (SamplePoint samplePoint : sampleSet.getSamplePoints()) {
                         for (Field field : samplePoint.getDataType().getFields()) {
-                            String todayvalue = "";
-                            todayvalue = sampleSet.getSamplePoints().get(0).getFieldValue(field) + "";
-
-
-                            System.out.println(todayvalue + "");
 
                             try {
-                                tvToday.setText(todayvalue);
+                                tvToday.setText("0" + "" + "/10000");
                             } catch (Exception e) {
 
+                            }
+                            String todayvalue = "";
+                            todayvalue = sampleSet.getSamplePoints().get(0).getFieldValue(field) + "";
+                            try {
+                                tvToday.setText(todayvalue + "" + "/10000");
+                            } catch (Exception e) {
+
+                            }
+
+                            try {
+                                if (Integer.parseInt(tvToday.getText().toString()) >= StepCountValue) {
+                                    submitCLick.setAlpha(1);
+                                    submitCLick.setEnabled(true);
+
+                                } else {
+                                    submitCLick.setAlpha(0.4f);
+                                    submitCLick.setEnabled(false);
+                                }
+                            } catch (Exception e) {
 
                             }
                         }
@@ -411,7 +458,6 @@ public class LoyaltiHMStepsFragment extends Fragment {
         }
 
     }
-
 
 
 }

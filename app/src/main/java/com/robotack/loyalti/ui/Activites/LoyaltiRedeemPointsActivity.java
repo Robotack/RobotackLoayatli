@@ -41,6 +41,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
     Spinner accountsSpinner;
     String accountID = "";
     ShimmerFrameLayout mShimmerViewContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +103,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
@@ -133,6 +135,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(String errorResponse) {
             }

@@ -74,8 +74,8 @@
 
         <com.robotack.loyalti.utilities.CustomFont
             android:layout_width="match_parent"
-            android:text="10,000 Steps = 10 Points"
             android:textSize="@dimen/_14sdp"
+            android:id="@+id/infoSteps"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_marginTop="@dimen/_14sdp"

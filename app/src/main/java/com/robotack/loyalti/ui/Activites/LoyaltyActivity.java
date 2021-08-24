@@ -38,14 +38,19 @@ public class LoyaltyActivity extends AppCompatActivity {
     ImageView arrow;
     ImageView arrowSteps;
     String userID = "UAT-00281252";
+    String LanguageValue = "en";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            String LanguageValue = null;
+
             try {
                 LanguageValue = getIntent().getStringExtra(sdkLanguage);
             } catch (Exception e) {
+                LanguageValue = "en";
+            }
+            if (LanguageValue == null)
+            {
                 LanguageValue = "en";
             }
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -53,16 +58,16 @@ public class LoyaltyActivity extends AppCompatActivity {
             edit.putString(Language, LanguageValue);
             edit.commit();
         } catch (Exception e) {
+            LanguageValue = "en";
         }
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
 
         try {
-             userID = getIntent().getStringExtra(PrefConstant.custumerID);
-             if (userID == null)
-             {
-                 userID = "UAT-00281252";
-             }
+            userID = getIntent().getStringExtra(PrefConstant.custumerID);
+            if (userID == null) {
+                userID = "UAT-00281252";
+            }
         } catch (Exception e) {
             userID = "UAT-00281252";
         }
@@ -118,35 +123,45 @@ public class LoyaltyActivity extends AppCompatActivity {
         expiryPoint = (TextView) findViewById(R.id.expiryPoint);
         currentPoints = (TextView) findViewById(R.id.currentPoints);
         currentPointsValue = (TextView) findViewById(R.id.currentPointsValue);
+
+
+
     }
 
     private void getCustomerInfo() {
         new BusinessManager().getUserInfoApiCall(this, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
-                mShimmerViewContainer.setVisibility(View.GONE);
+
                 try {
                     customerDataModel = (CustomerDataModel) responseObject;
                     if (customerDataModel != null) {
 
-                        expiryPoint.setText(getResources().getString(R.string.expiry_points).replace("xxx", customerDataModel.getExpiryPoint().toString()));
-                        currentPoints.setText(customerDataModel.getCurrentPoints().toString());
-                        currentPointsValue.setText(getResources().getString(R.string.jod).replace("xxx", customerDataModel.getCurrentPointsValue().toString()));
-                        accumulatedCashback.setText(customerDataModel.getAccumulatedCashback().toString());
-                        accumulatedPoints.setText(customerDataModel.getAccumulatedPoints().toString());
-                        try {
-                            new Utils().setIdentifierValue(customerDataModel.getIdentifierValue(), LoyaltyActivity.this);
-                        } catch (Exception e) {
+                        if (customerDataModel.getErrorCode().toString().equals("0"))
+                        {
+                            mShimmerViewContainer.setVisibility(View.GONE);
+                            expiryPoint.setText(getResources().getString(R.string.expiry_points).replace("xxx", customerDataModel.getExpiryPoint().toString()));
+                            currentPoints.setText(customerDataModel.getCurrentPoints().toString());
+                            currentPointsValue.setText(getResources().getString(R.string.jod).replace("xxx", customerDataModel.getCurrentPointsValue().toString()));
+                            accumulatedCashback.setText(customerDataModel.getAccumulatedCashback().toString());
+                            accumulatedPoints.setText(customerDataModel.getAccumulatedPoints().toString());
+                            try {
+                                new Utils().setIdentifierValue(customerDataModel.getIdentifierValue(), LoyaltyActivity.this);
+                            } catch (Exception e) {
 
+                            }
+                        }else if (customerDataModel.getErrorCode().toString().equals("-99")) {
+                            startActivity(new Intent(LoyaltyActivity.this,MaintancePageActivity.class));
                         }
-                        mShimmerViewContainer.setVisibility(View.GONE);
+
                     }
                 } catch (Exception e) {
                 }
             }
+
             @Override
             public void onFailure(String errorResponse) {
-                mShimmerViewContainer.setVisibility(View.GONE);
+
             }
         });
     }

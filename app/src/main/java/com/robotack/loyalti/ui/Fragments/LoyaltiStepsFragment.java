@@ -47,6 +47,9 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.GainPointsModel;
 import com.robotack.loyalti.models.GenralModel;
+import com.robotack.loyalti.models.StepsInfoModel;
+import com.robotack.loyalti.ui.Activites.LoyaltyActivity;
+import com.robotack.loyalti.ui.Activites.MaintancePageActivity;
 import com.robotack.loyalti.utilities.Utils;
 
 
@@ -64,30 +67,31 @@ import xyz.hasnat.sweettoast.SweetToast;
 
 public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
-
     private static final int REQUEST_OAUTH_REQUEST_CODE = 0x1001;
     private TextView submitCLick;
     private TextView tvToday;
+    private TextView infoSteps;
     String todaySteps = "";
     private GoogleApiClient mGoogleApiClient;
     CircularProgressBar circularProgressBar;
     ArrayList<String> steps = new ArrayList<>();
     private Handler handler;
     private int delay = 3000;
-
+    int StepCountValue = 10000;
     ProgressBar progressBar;
     Runnable runnable;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
         tvToday = (TextView) rootView.findViewById(R.id.tvToday);
+        infoSteps = (TextView) rootView.findViewById(R.id.infoSteps);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         submitCLick = (TextView) rootView.findViewById(R.id.submitCLick);
         circularProgressBar = rootView.findViewById(R.id.circularProgressbar);
         circularProgressBar.setProgressBarColor(Color.parseColor("#306095"));
         circularProgressBar.setBackgroundProgressBarColor(Color.parseColor("#40306095"));
         setupFitness();
+        getStepsInfo();
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACTIVITY_RECOGNITION)
                 != PackageManager.PERMISSION_GRANTED) {
 
@@ -103,6 +107,34 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
             }
         });
         return rootView;
+    }
+
+
+    private void getStepsInfo() {
+        new BusinessManager().getStepsInfo(getActivity(), new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                StepsInfoModel genralModel = null;
+                try {
+                    genralModel = (StepsInfoModel) responseObject;
+                    if (genralModel.getErrorCode() == 0) {
+                        infoSteps.setText(getString(R.string.steps_count).replace("xxxx", genralModel.getPoints()).replace("yyyy", genralModel.getStepsCount()));
+                        StepCountValue = Integer.parseInt(genralModel.getStepsCount());
+                    } else if (genralModel.getErrorCode() == -99) {
+                        startActivity(new Intent(getActivity(), MaintancePageActivity.class));
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(String errorResponse) {
+
+            }
+        });
     }
 
     private void gainPoints() {
@@ -128,6 +160,9 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
                     if (genralModel.getErrorCode() == 0) {
 
                         SweetToast.success(getActivity(), genralModel.getDescriptionCode(), 3000);
+
+                    } else if (genralModel.getErrorCode() == -99) {
+                        startActivity(new Intent(getActivity(), MaintancePageActivity.class));
 
                     } else {
                         try {
@@ -291,7 +326,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
             if (!steps.isEmpty()) {
 
                 try {
-                    if (Integer.parseInt(todaySteps) > 9999) {
+                    if (Integer.parseInt(todaySteps) >= StepCountValue) {
                         submitCLick.setAlpha(1);
                         submitCLick.setEnabled(true);
 

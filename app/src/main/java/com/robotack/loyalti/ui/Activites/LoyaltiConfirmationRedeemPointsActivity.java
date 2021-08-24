@@ -100,11 +100,18 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
             public void onSuccess(Object responseObject, String responseMessage) {
                 CalculateAmountClass calculateAmountClass = (CalculateAmountClass) responseObject;
                 try {
-                    mShimmerViewContainer.setVisibility(View.GONE);
-                    calculatePoints.setText(calculateAmountClass.getAmount().toString());
+                    if (calculateAmountClass.getErrorCode() == 0) {
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                        calculatePoints.setText(calculateAmountClass.getAmount().toString());
+                    } else if (calculateAmountClass.getErrorCode() == -99) {
+                        startActivity(new Intent(LoyaltiConfirmationRedeemPointsActivity.this, MaintancePageActivity.class));
+
+                    }
+
                 } catch (Exception e) {
                 }
             }
+
             @Override
             public void onFailure(String errorResponse) {
             }
@@ -136,6 +143,9 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoyaltiConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                } else if (genralModel.getErrorCode() == -99) {
+                    startActivity(new Intent(LoyaltiConfirmationRedeemPointsActivity.this, MaintancePageActivity.class));
+
                 } else {
                     SweetToast.error(LoyaltiConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
 //                    Intent intent = new Intent(ConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
@@ -143,6 +153,7 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
 //                    startActivity(intent);
                 }
             }
+
             @Override
             public void onFailure(String errorResponse) {
                 progressBar.setVisibility(View.GONE);
