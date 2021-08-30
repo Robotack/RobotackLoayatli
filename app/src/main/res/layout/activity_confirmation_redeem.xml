@@ -19,47 +19,7 @@
             android:orientation="vertical">
 
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:indeterminateDrawable="@drawable/progress"
-                android:visibility="gone"></ProgressBar>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/black">
-
-            </View>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/black">
-
-            </View>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/black">
-
-            </View>
 
 
             <com.facebook.shimmer.ShimmerFrameLayout
@@ -251,6 +211,15 @@
 
             </com.robotack.loyalti.utilities.CustomFont>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black">
+
+            </View>
 
             <com.robotack.loyalti.utilities.CustomFont
                 android:layout_width="match_parent"
@@ -263,6 +232,7 @@
                 android:textSize="@dimen/_12sdp">
 
             </com.robotack.loyalti.utilities.CustomFont>
+
 
             <com.robotack.loyalti.utilities.CustomFont
                 android:id="@+id/transfer"
@@ -277,6 +247,16 @@
 
             </com.robotack.loyalti.utilities.CustomFont>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black">
+
+            </View>
             <com.robotack.loyalti.utilities.CustomFont
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -303,6 +283,28 @@
 
             </com.robotack.loyalti.utilities.CustomFont>
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/black">
+
+            </View>
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:indeterminateDrawable="@drawable/progress"
+                android:visibility="gone"></ProgressBar>
             <com.robotack.loyalti.utilities.CustomFont
                 android:id="@+id/submitClick"
                 android:layout_width="match_parent"
