@@ -39,6 +39,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     ImageView arrowSteps;
     String userID = "UAT-00281252";
     String LanguageValue = "en";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +50,7 @@ public class LoyaltyActivity extends AppCompatActivity {
             } catch (Exception e) {
                 LanguageValue = "en";
             }
-            if (LanguageValue == null)
-            {
+            if (LanguageValue == null) {
                 LanguageValue = "en";
             }
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -72,6 +72,10 @@ public class LoyaltyActivity extends AppCompatActivity {
             userID = "UAT-00281252";
         }
         setupViews();
+        if (!new Utils().isGMSAvailable(this)) {
+            stepsCard.setVisibility(View.GONE);
+        }
+
         stepsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,7 +129,6 @@ public class LoyaltyActivity extends AppCompatActivity {
         currentPointsValue = (TextView) findViewById(R.id.currentPointsValue);
 
 
-
     }
 
     private void getCustomerInfo() {
@@ -137,8 +140,7 @@ public class LoyaltyActivity extends AppCompatActivity {
                     customerDataModel = (CustomerDataModel) responseObject;
                     if (customerDataModel != null) {
 
-                        if (customerDataModel.getErrorCode().toString().equals("0"))
-                        {
+                        if (customerDataModel.getErrorCode().toString().equals("0")) {
                             mShimmerViewContainer.setVisibility(View.GONE);
                             expiryPoint.setText(getResources().getString(R.string.expiry_points).replace("xxx", customerDataModel.getExpiryPoint().toString()));
                             currentPoints.setText(customerDataModel.getCurrentPoints().toString());
@@ -150,8 +152,8 @@ public class LoyaltyActivity extends AppCompatActivity {
                             } catch (Exception e) {
 
                             }
-                        }else if (customerDataModel.getErrorCode().toString().equals("-99")) {
-                            startActivity(new Intent(LoyaltyActivity.this,MaintancePageActivity.class));
+                        } else if (customerDataModel.getErrorCode().toString().equals("-99")) {
+                            startActivity(new Intent(LoyaltyActivity.this, MaintancePageActivity.class));
                         }
 
                     }
