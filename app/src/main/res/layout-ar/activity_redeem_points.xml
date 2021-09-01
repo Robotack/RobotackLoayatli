@@ -230,6 +230,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="#fff"
+            app:shimmer_direction="left_to_right"
+            app:shimmer_highlight_alpha="0.4"
+            app:shimmer_colored="false"
+            app:shimmer_base_alpha="1"
             android:orientation="vertical"
             android:visibility="visible"
             shimmer:duration="800">

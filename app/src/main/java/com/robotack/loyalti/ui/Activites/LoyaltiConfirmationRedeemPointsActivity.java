@@ -72,7 +72,7 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
     private void setupView() {
         try {
             mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-            mShimmerViewContainer.startShimmerAnimation();
+            mShimmerViewContainer.startShimmer();
             redeemModel = (RedeemModel) getIntent().getSerializableExtra("redeemModel");
             points = (TextView) findViewById(R.id.points);
             calculatePoints = (TextView) findViewById(R.id.calculatePoints);

@@ -54,7 +54,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
 
     private void setToolbarView() {
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.startShimmer();
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +132,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
                     if (!customerAccountsModel.getData().isEmpty()) {
                         setAccountsData(customerAccountsModel.getData());
                         mShimmerViewContainer.setVisibility(View.GONE);
+                        mShimmerViewContainer.stopShimmer();
                     }
                 }
             }

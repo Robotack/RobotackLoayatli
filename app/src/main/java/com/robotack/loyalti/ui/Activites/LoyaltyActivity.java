@@ -112,7 +112,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     private void setupViews() {
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.startShimmer();
         stepsCard = (CardView) findViewById(R.id.stepsCard);
         historyBtn = (TextView) findViewById(R.id.historyBtn);
         redeemBtn = (TextView) findViewById(R.id.redeemBtn);
@@ -142,6 +142,7 @@ public class LoyaltyActivity extends AppCompatActivity {
 
                         if (customerDataModel.getErrorCode().toString().equals("0")) {
                             mShimmerViewContainer.setVisibility(View.GONE);
+                            mShimmerViewContainer.stopShimmer();
                             expiryPoint.setText(getResources().getString(R.string.expiry_points).replace("xxx", customerDataModel.getExpiryPoint().toString()));
                             currentPoints.setText(customerDataModel.getCurrentPoints().toString());
                             currentPointsValue.setText(getResources().getString(R.string.jod).replace("xxx", customerDataModel.getCurrentPointsValue().toString()));

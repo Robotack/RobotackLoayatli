@@ -272,6 +272,10 @@
             android:layout_gravity="center"
             android:background="#fff"
             android:orientation="vertical"
+            app:shimmer_direction="left_to_right"
+            app:shimmer_highlight_alpha="0.4"
+            app:shimmer_colored="false"
+            app:shimmer_base_alpha="1"
             android:visibility="visible"
             shimmer:duration="800">
 

@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.library'
+    id 'com.android.application'
 }
 
 android {
@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-//        applicationId "com.robotack.loyalti"
+        applicationId "com.robotack.loyalti"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -46,7 +46,6 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.0.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.2'
@@ -55,14 +54,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.0.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     implementation 'klogi.com:rtlviewpager:1.0.0'
-    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'com.google.android.gms:play-services-fitness:20.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.github.TheHasnatBD:SweetToast:1.0.2'
-//    implementation('com.huawei.hms:hwid:5.0.1.300')
-//    implementation 'com.huawei.hms:health:5.0.4.300'
-
-
 }
 apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.huawei.agconnect'

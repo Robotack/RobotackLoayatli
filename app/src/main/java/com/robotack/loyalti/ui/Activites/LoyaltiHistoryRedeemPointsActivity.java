@@ -44,7 +44,7 @@ public class LoyaltiHistoryRedeemPointsActivity extends FragmentActivity {
     private void setToolbarView ()
     {
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.startShimmer();
         historyTabs = (TabLayout) findViewById(R.id.historyTabs);
         historyViewPager = (ViewPager) findViewById(R.id.historyViewPager);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
@@ -71,6 +71,7 @@ public class LoyaltiHistoryRedeemPointsActivity extends FragmentActivity {
                     CustomerHistoryModel customerHistoryModel = (CustomerHistoryModel) responseObject;
                     setPointsHistoryAdapter(customerHistoryModel.getData());
                     mShimmerViewContainer.setVisibility(View.GONE);
+                    mShimmerViewContainer.stopShimmer();
                 } catch (Exception e) {
 
                 }

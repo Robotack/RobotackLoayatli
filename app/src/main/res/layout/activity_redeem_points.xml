@@ -232,6 +232,10 @@
             android:background="#fff"
             android:orientation="vertical"
             android:visibility="visible"
+            app:shimmer_direction="left_to_right"
+            app:shimmer_highlight_alpha="0.4"
+            app:shimmer_colored="false"
+            app:shimmer_base_alpha="1"
             shimmer:duration="800">
 
             <LinearLayout
