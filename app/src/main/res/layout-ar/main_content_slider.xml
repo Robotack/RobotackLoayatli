@@ -99,14 +99,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content">
 
         <com.robotack.loyalti.utilities.AutoScrollViewPager
             android:id="@+id/imagesViewPager"
             android:layout_width="fill_parent"
 
-            android:layout_height="180dp"
+            android:layout_height="160dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.robotack.loyalti.utilities.CirclePageIndicator

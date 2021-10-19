@@ -10,4 +10,5 @@ public class ApiConstants {
     public static final String redeemAPI = "customer/redeem";
     public static final String gainAPI = "customer/gain";
     public static final String stepsInfo = "steps_info";
+    public static final String AdBanner = "ads";
 }

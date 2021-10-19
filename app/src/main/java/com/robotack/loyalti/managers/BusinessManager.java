@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.robotack.loyalti.helpers.ApiConstants;
+import com.robotack.loyalti.models.AdsBannerModel;
 import com.robotack.loyalti.models.CalculateAmountClass;
 import com.robotack.loyalti.models.CustomerAccountsModel;
 import com.robotack.loyalti.models.CustomerDataModel;
@@ -33,6 +34,29 @@ public class BusinessManager {
                     Gson gson = new Gson();
                     String json = responseObject.toString();
                     CustomerDataModel parseObject = gson.fromJson(json, CustomerDataModel.class);
+                    callResponse.onSuccess(parseObject, responseMessage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorResponse) {
+                callResponse.onFailure(errorResponse);
+            }
+        });
+    }
+
+    public void getAdsBanner(Context context, final ApiCallResponse callResponse) {
+        Map<String, String> Params = new HashMap<>();
+        String url = ApiConstants.AdBanner;
+        ConnectionManager.GET(context, url, Params, new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                try {
+                    Gson gson = new Gson();
+                    String json = responseObject.toString();
+                    AdsBannerModel parseObject = gson.fromJson(json, AdsBannerModel.class);
                     callResponse.onSuccess(parseObject, responseMessage);
                 } catch (Exception e) {
                     e.printStackTrace();

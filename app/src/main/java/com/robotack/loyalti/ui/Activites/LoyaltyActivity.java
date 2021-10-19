@@ -17,7 +17,12 @@ import com.robotack.loyalti.helpers.LanguageHelper;
 import com.robotack.loyalti.helpers.PrefConstant;
 import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
+import com.robotack.loyalti.models.AdsBannerModel;
 import com.robotack.loyalti.models.CustomerDataModel;
+import com.robotack.loyalti.models.CustomerHistoryModel;
+import com.robotack.loyalti.ui.Adapters.ImageSlideAdapter;
+import com.robotack.loyalti.utilities.AutoScrollViewPager;
+import com.robotack.loyalti.utilities.CirclePageIndicator;
 import com.robotack.loyalti.utilities.Utils;
 
 import static com.robotack.loyalti.helpers.PrefConstant.sdkLanguage;
@@ -40,6 +45,8 @@ public class LoyaltyActivity extends AppCompatActivity {
     String userID = "UAT-00281252";
     String LanguageValue = "en";
 
+    AutoScrollViewPager imagesViewPager;
+    CirclePageIndicator imagesPageIndicator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,9 @@ public class LoyaltyActivity extends AppCompatActivity {
         }
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
+
+        imagesPageIndicator = (CirclePageIndicator) findViewById(R.id.imagesPageIndicator);
+        imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);
 
         try {
             userID = getIntent().getStringExtra(PrefConstant.custumerID);
@@ -100,7 +110,9 @@ public class LoyaltyActivity extends AppCompatActivity {
         });
 
         new Utils().setUserID(userID, this);
+        getAdsBanner();
         getCustomerInfo();
+
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,6 +140,34 @@ public class LoyaltyActivity extends AppCompatActivity {
         currentPoints = (TextView) findViewById(R.id.currentPoints);
         currentPointsValue = (TextView) findViewById(R.id.currentPointsValue);
 
+
+    }
+
+    private void getAdsBanner()
+    {
+        new BusinessManager().getAdsBanner(this, new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                AdsBannerModel customerHistoryModel = null;
+                try {
+                    customerHistoryModel = (AdsBannerModel) responseObject;
+                    ImageSlideAdapter imageSlideAdapter = new ImageSlideAdapter(LoyaltyActivity.this, customerHistoryModel.getData());
+                    imagesViewPager.setAdapter(imageSlideAdapter);
+                    imagesPageIndicator.setViewPager(imagesViewPager);
+                    imagesViewPager.startAutoScroll();
+                    imagesViewPager.setInterval(3000);
+                    imagesViewPager.setCycle(true);
+                    imagesViewPager.setStopScrollWhenTouch(true);
+                } catch (Exception e) {
+                }
+
+            }
+
+            @Override
+            public void onFailure(String errorResponse) {
+
+            }
+        });
 
     }
 
