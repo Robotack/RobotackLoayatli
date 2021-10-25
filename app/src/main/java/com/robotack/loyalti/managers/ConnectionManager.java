@@ -171,24 +171,15 @@ public class ConnectionManager {
 //        public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1/";
 
 
+        @Headers({"Accept-Language:ar","Authorization:Um9ib3RhY2tfdmlyZ2luXzIwMjA=","sdk_version:1","android_os_version:1",})
         @GET()
         public Call<ResponseBody> GET(@Url String url, @QueryMap Map<String, String> params);
 
 
-        @Headers({"Content-Type:application/x-www-form-urlencoded"})
-        @FormUrlEncoded
-        @POST
-        public Call<ResponseBody> POST_FormUrlEncoded(@Url String url, @FieldMap Map<String, String> params);
-
-
-
+        @Headers({"Accept-Language:ar","Authorization:Um9ib3RhY2tfdmlyZ2luXzIwMjA=","sdk_version:1","android_os_version:1",})
         @POST()
         Call<ResponseBody> POST_RAW(@Url String url, @Body JsonObject requestBody);
 
-
-        @FormUrlEncoded
-        @POST
-        public Call<ResponseBody> POST_AUTH(@Url String url, @FieldMap Map<String, String> params, @Header("Authorization") String token);
     }
 
 }
