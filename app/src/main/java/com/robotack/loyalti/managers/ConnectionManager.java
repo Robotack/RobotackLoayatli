@@ -53,7 +53,7 @@ public class ConnectionManager {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         APIService service = retrofit.create(APIService.class);
-        Call<ResponseBody> call = service.GET(URl, Params);
+        Call<ResponseBody> call = service.GET(URl, Params,LanguageHelper.getCurrentLanguage(context));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -89,7 +89,7 @@ public class ConnectionManager {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ConnectionManager.APIService  service = retrofit.create(ConnectionManager.APIService .class);
-        Call<ResponseBody> call = service.POST_RAW(URl, requestBody);
+        Call<ResponseBody> call = service.POST_RAW(URl, requestBody,LanguageHelper.getCurrentLanguage(context));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -167,18 +167,18 @@ public class ConnectionManager {
     }
 
     public interface APIService {
-        public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1/";
-//        public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1/";
+//        public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1/";
+        public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1/";
 
 
-        @Headers({"Accept-Language:ar","Authorization:Um9ib3RhY2tfdmlyZ2luXzIwMjA=","sdk_version:1","android_os_version:1",})
+        @Headers({"Authorization:Um9ib3RhY2tfdmlyZ2luXzIwMjA=","sdk_version:1","android_os_version:1",})
         @GET()
-        public Call<ResponseBody> GET(@Url String url, @QueryMap Map<String, String> params);
+        public Call<ResponseBody> GET(@Url String url, @QueryMap Map<String, String> params,@Header("Accept-Language") String lang);
 
 
-        @Headers({"Accept-Language:ar","Authorization:Um9ib3RhY2tfdmlyZ2luXzIwMjA=","sdk_version:1","android_os_version:1",})
+        @Headers({"Authorization:Um9ib3RhY2tfdmlyZ2luXzIwMjA=","sdk_version:1","android_os_version:1",})
         @POST()
-        Call<ResponseBody> POST_RAW(@Url String url, @Body JsonObject requestBody);
+        Call<ResponseBody> POST_RAW(@Url String url, @Body JsonObject requestBody,@Header("Accept-Language") String lang);
 
     }
 
