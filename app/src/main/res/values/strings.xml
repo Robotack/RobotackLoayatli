@@ -42,6 +42,8 @@
 
     <string name="down_for_maintenance">We’ll Be Back Soon!</string>
     <string name="steps_count">yyyy Steps = xxxx Points</string>
+    <string name="ok__">OK</string>
+    <string name="something_wrong">Something wrong , please try again later</string>
 
 
 </resources>

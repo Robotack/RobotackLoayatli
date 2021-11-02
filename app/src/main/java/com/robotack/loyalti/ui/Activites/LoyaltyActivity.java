@@ -3,10 +3,15 @@ package com.robotack.loyalti.ui.Activites;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -195,6 +200,8 @@ public class LoyaltyActivity extends AppCompatActivity {
                             }
                         } else if (customerDataModel.getErrorCode().toString().equals("-99")) {
                             startActivity(new Intent(LoyaltyActivity.this, MaintancePageActivity.class));
+                        }else {
+                            showSettingsAlert(LoyaltyActivity.this,customerDataModel.getDescriptionCode().toString());
                         }
 
                     }
@@ -204,8 +211,22 @@ public class LoyaltyActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorResponse) {
-
+                showSettingsAlert(LoyaltyActivity.this,getString(R.string.something_wrong));
             }
         });
+    }
+
+    public void showSettingsAlert(Context context,String message) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("");
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton(Html.fromHtml(context.getResources().getString(R.string.ok__)), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+              finish();
+            }
+        });
+        alertDialog.setCancelable(false);
+        alertDialog.show();
     }
 }

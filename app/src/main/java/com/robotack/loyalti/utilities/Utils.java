@@ -79,8 +79,6 @@ public class Utils {
 
     public boolean isGMSAvailable(Context context) {
         try {
-
-
             GoogleApiAvailability gms = GoogleApiAvailability.getInstance();
             int isGMS = gms.isGooglePlayServicesAvailable(context);
             return isGMS == com.google.android.gms.common.ConnectionResult.SUCCESS;

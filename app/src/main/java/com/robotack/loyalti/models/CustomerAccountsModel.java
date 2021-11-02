@@ -47,4 +47,6 @@ public class CustomerAccountsModel implements Serializable {
         this.data = data;
     }
 
+
+
 }

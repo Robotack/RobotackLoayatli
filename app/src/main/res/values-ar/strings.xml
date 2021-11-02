@@ -44,4 +44,7 @@
     <string name="down_for_maintenance">سوف نعود قريبا!</string>
 
     <string name="steps_count">xxxx خطوة = yyyy نقطة</string>
+
+    <string name="ok__">موافق</string>
+    <string name="something_wrong">حدث خطآ يرجى المحاولة لاحقا</string>
 </resources>

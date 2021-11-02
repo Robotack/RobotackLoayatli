@@ -105,7 +105,8 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
                         calculatePoints.setText(calculateAmountClass.getAmount().toString());
                     } else if (calculateAmountClass.getErrorCode() == -99) {
                         startActivity(new Intent(LoyaltiConfirmationRedeemPointsActivity.this, MaintancePageActivity.class));
-
+                    }else {
+                        SweetToast.error(LoyaltiConfirmationRedeemPointsActivity.this, calculateAmountClass.getDescriptionCode(), 3000);
                     }
 
                 } catch (Exception e) {
@@ -148,9 +149,6 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
 
                 } else {
                     SweetToast.error(LoyaltiConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
-//                    Intent intent = new Intent(ConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);
                 }
             }
 

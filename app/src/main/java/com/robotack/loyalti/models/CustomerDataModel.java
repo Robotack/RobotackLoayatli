@@ -15,6 +15,19 @@ public class CustomerDataModel implements Serializable {
     @Expose
     private String errorCode;
 
+
+    @SerializedName("descriptionCode")
+    @Expose
+    private String descriptionCode;
+
+    public String getDescriptionCode() {
+        return descriptionCode;
+    }
+
+    public void setDescriptionCode(String descriptionCode) {
+        this.descriptionCode = descriptionCode;
+    }
+
     public String getErrorCode() {
         return errorCode;
     }
