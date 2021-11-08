@@ -26,6 +26,7 @@ public class BusinessManager {
 
     public void getUserInfoApiCall(Context context, final ApiCallResponse callResponse) {
         Map<String, String> Params = new HashMap<>();
+        
         String url = ApiConstants.getUserInfoAPI + new Utils().getUserId(context);
         ConnectionManager.GET(context, url, Params, new ApiCallResponse() {
             @Override
