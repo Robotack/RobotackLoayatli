@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
+import com.robotack.loyalti.helpers.PrefConstant;
 import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CalculateAmountClass;
@@ -121,6 +122,8 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
 
     private void setRedeemPoints(String points, String accountId) {
         submitClick.setEnabled(false);
+        String userId =  new Utils().getIdentifierValue(this);
+
         progressBar.setVisibility(View.VISIBLE);
         SenderRedeemClass senderClass = new SenderRedeemClass();
         senderClass.identifierValue = new Utils().getIdentifierValue(this);
@@ -143,6 +146,7 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
                     SweetToast.success(LoyaltiConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
                     Intent intent = new Intent(LoyaltiConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                   intent.putExtra(userId, PrefConstant.custumerID);
                     startActivity(intent);
                 } else if (genralModel.getErrorCode() == -99) {
                     startActivity(new Intent(LoyaltiConfirmationRedeemPointsActivity.this, MaintancePageActivity.class));
