@@ -128,6 +128,9 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="italic"
+            android:visibility="gone"
+            android:id="@+id/stepsStatis"
+
             android:layout_marginTop="@dimen/_14sdp"
             android:textColor="@color/colorPrimarysdk"
             android:layout_height="wrap_content">

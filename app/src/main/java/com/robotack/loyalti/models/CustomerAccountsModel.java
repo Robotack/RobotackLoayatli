@@ -35,6 +35,30 @@ public class CustomerAccountsModel implements Serializable {
 
     }
 
+    @SerializedName("errorCode")
+    @Expose
+    private Integer errorCode;
+    @SerializedName("descriptionCode")
+    @Expose
+    private String descriptionCode;
+
+
+    public String getDescriptionCode() {
+        return descriptionCode;
+    }
+
+    public void setDescriptionCode(String descriptionCode) {
+        this.descriptionCode = descriptionCode;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+    }
+
     @SerializedName("data")
     @Expose
     private List<Datum> data = null;

@@ -47,7 +47,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     CustomerDataModel customerDataModel = null;
     ImageView arrow;
     ImageView arrowSteps;
-    String userID = "UAT-00281253";
+    String userID = "UAT-00281252";
     String LanguageValue = "en";
 
     AutoScrollViewPager imagesViewPager;
@@ -79,12 +79,18 @@ public class LoyaltyActivity extends AppCompatActivity {
         imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);
 
         try {
-            userID = getIntent().getStringExtra(PrefConstant.custumerID);
+//            userID = getIntent().getStringExtra(PrefConstant.custumerID);
+
             if (userID == null) {
-                userID = "UAT-00281253";
+                showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
+
+            }else {
+                new Utils().setUserID(userID, this);
+                getAdsBanner();
+                getCustomerInfo();
             }
         } catch (Exception e) {
-            userID = "UAT-00281253";
+            showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
         }
         setupViews();
         if (!new Utils().isGMSAvailable(this)) {
@@ -114,9 +120,7 @@ public class LoyaltyActivity extends AppCompatActivity {
             }
         });
 
-        new Utils().setUserID(userID, this);
-        getAdsBanner();
-        getCustomerInfo();
+
 
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override

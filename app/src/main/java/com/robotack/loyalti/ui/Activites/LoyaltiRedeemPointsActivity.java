@@ -3,10 +3,14 @@ package com.robotack.loyalti.ui.Activites;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -128,12 +132,22 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 CustomerAccountsModel customerAccountsModel = (CustomerAccountsModel) responseObject;
+
                 if (customerAccountsModel != null) {
-                    if (!customerAccountsModel.getData().isEmpty()) {
-                        setAccountsData(customerAccountsModel.getData());
-                        mShimmerViewContainer.setVisibility(View.GONE);
-                        mShimmerViewContainer.stopShimmer();
+                    if (customerAccountsModel.getErrorCode().toString().equals("0"))
+                    {
+                        if (!customerAccountsModel.getData().isEmpty()) {
+                            setAccountsData(customerAccountsModel.getData());
+                            mShimmerViewContainer.setVisibility(View.GONE);
+                            mShimmerViewContainer.stopShimmer();
+                        }
+                    }else {
+                        showSettingsAlert(LoyaltiRedeemPointsActivity.this,customerAccountsModel.getDescriptionCode());
+
                     }
+
+                }else {
+                    showSettingsAlert(LoyaltiRedeemPointsActivity.this,customerAccountsModel.getDescriptionCode());
                 }
             }
 
@@ -141,6 +155,21 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
             public void onFailure(String errorResponse) {
             }
         });
+    }
+
+
+    public void showSettingsAlert(Context context, String message) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("");
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton(Html.fromHtml(context.getResources().getString(R.string.ok__)), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog.setCancelable(false);
+        alertDialog.show();
     }
 
     private void setAccountsData(List<CustomerAccountsModel.Datum> data) {

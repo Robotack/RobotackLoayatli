@@ -72,6 +72,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
     private TextView tvToday;
     private TextView infoSteps;
     String todaySteps = "";
+    TextView stepsStatis;
     private GoogleApiClient mGoogleApiClient;
     CircularProgressBar circularProgressBar;
     ArrayList<String> steps = new ArrayList<>();
@@ -80,11 +81,13 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
     int StepCountValue = 10000;
     ProgressBar progressBar;
     Runnable runnable;
+    String stepCountValidation = "10000";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
         tvToday = (TextView) rootView.findViewById(R.id.tvToday);
         infoSteps = (TextView) rootView.findViewById(R.id.infoSteps);
+        stepsStatis = (TextView) rootView.findViewById(R.id.stepsStatis);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         submitCLick = (TextView) rootView.findViewById(R.id.submitCLick);
         circularProgressBar = rootView.findViewById(R.id.circularProgressbar);
@@ -120,6 +123,9 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
                     if (genralModel.getErrorCode() == 0) {
                         infoSteps.setText(getString(R.string.steps_count).replace("xxxx", genralModel.getPoints()).replace("yyyy", genralModel.getStepsCount()));
                         StepCountValue = Integer.parseInt(genralModel.getStepsCount());
+                        stepsStatis.setText(getString(R.string.you_need_to_reach).toString().replace("xxxx",genralModel.getStepsCount()));
+                        stepsStatis.setVisibility(View.VISIBLE);
+                        stepCountValidation = genralModel.getStepsCount().toString();
                     } else if (genralModel.getErrorCode() == -99) {
                         startActivity(new Intent(getActivity(), MaintancePageActivity.class));
 
@@ -193,8 +199,14 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        GetStepCountTask task = new GetStepCountTask();
-        task.execute();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                GetStepCountTask task = new GetStepCountTask();
+                task.execute();            }
+        }, 3000);
+
 
     }
 
@@ -309,16 +321,16 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
 
             if (todaySteps.isEmpty()) {
                 try {
-                    tvToday.setText("0/10000");
+                    tvToday.setText("0/"+stepCountValidation);
                 } catch (Exception e) {
 
                 }
             } else {
                 try {
-                    tvToday.setText(todaySteps + "" + "/10000");
-                    circularProgressBar.setProgressMax(10000f);
+                    tvToday.setText(todaySteps + "" + "/ "+stepCountValidation);
+                    circularProgressBar.setProgressMax(Float.parseFloat(stepCountValidation));
                     circularProgressBar.setProgress(Integer.parseInt(todaySteps));
-                    circularProgressBar.setProgressWithAnimation(Integer.parseInt(todaySteps), (long) 10000);
+                    circularProgressBar.setProgressWithAnimation(Integer.parseInt(todaySteps), (long) Float.parseFloat(stepCountValidation));
                 } catch (Exception e) {
 
                 }

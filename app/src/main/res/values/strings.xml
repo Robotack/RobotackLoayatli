@@ -16,8 +16,9 @@
     <string name="calcualeted_cashback">Calculated cashback</string>
     <string name="submit_">Submit</string>
     <string name="confirm">Confirm</string>
+    <string name="no_user">there is no login user</string>
     <string name="jod">(JOD xxx)</string>
-    <string name="you_need_to_reach">You need to reach 10,000 steps to claim points.</string>
+    <string name="you_need_to_reach">You need to reach xxxx steps to claim points.</string>
     <string name="please_enter_points">Please Enter Points To Transfer Value</string>
 
     <string name="expiry_points">xxx points will be expired by end of this month.</string>
