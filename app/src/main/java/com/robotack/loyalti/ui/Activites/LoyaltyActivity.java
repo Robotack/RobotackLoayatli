@@ -47,7 +47,8 @@ public class LoyaltyActivity extends AppCompatActivity {
     CustomerDataModel customerDataModel = null;
     ImageView arrow;
     ImageView arrowSteps;
-    String userID = "UAT-00281252";
+//    String userID = "UAT-00281252";
+    String userID = null;
     String LanguageValue = "en";
 
     AutoScrollViewPager imagesViewPager;
@@ -79,7 +80,7 @@ public class LoyaltyActivity extends AppCompatActivity {
         imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);
 
         try {
-//            userID = getIntent().getStringExtra(PrefConstant.custumerID);
+            userID = getIntent().getStringExtra(PrefConstant.custumerID);
 
             if (userID == null) {
                 showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
