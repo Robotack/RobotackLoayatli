@@ -21,12 +21,12 @@
         <activity android:name=".ui.Activites.LoyaltiConfirmationRedeemPointsActivity" />
         <activity android:name=".ui.Activites.LoyaltyActivity">
 
-            <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
