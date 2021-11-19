@@ -175,7 +175,11 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
     private void setAccountsData(List<CustomerAccountsModel.Datum> data) {
         List<String> array = new ArrayList<>();
         for (int counter = 0; counter < data.size(); counter++) {
-            array.add(data.get(counter).getTitle());
+            try {
+                array.add(Utils.decryptData(data.get(counter).getTitle()));
+            } catch (Exception e) {
+
+            }
         }
         ArrayAdapter<String> arrayAdapter5 = new ArrayAdapter<String>(this, R.layout.account_item, array);
         accountsSpinner.setAdapter(arrayAdapter5);

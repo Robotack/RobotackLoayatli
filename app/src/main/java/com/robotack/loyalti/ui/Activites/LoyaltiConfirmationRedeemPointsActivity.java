@@ -79,7 +79,11 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
             calculatePoints = (TextView) findViewById(R.id.calculatePoints);
             transfer = (TextView) findViewById(R.id.transfer);
             points.setText(redeemModel.getPoints().toString());
-            transfer.setText(redeemModel.getAccount().toString());
+            try {
+                transfer.setText(Utils.decryptData(redeemModel.getAccount().toString()));
+            } catch (Exception e) {
+
+            }
             setCalculatePoints(redeemModel.getPoints());
         } catch (Exception e) {
             e.printStackTrace();

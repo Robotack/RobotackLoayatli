@@ -144,7 +144,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
     }
 
     private void gainPoints() {
-        submitCLick.setEnabled(false);
+
         progressBar.setVisibility(View.VISIBLE);
         GainPointsModel senderClass = new GainPointsModel();
         senderClass.identifierValue = new Utils().getIdentifierValue(getActivity());
@@ -159,7 +159,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 progressBar.setVisibility(View.GONE);
-                submitCLick.setEnabled(true);
+
                 GenralModel genralModel = null;
                 try {
                     genralModel = (GenralModel) responseObject;
@@ -186,7 +186,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
             @Override
             public void onFailure(String errorResponse) {
                 progressBar.setVisibility(View.GONE);
-                submitCLick.setEnabled(true);
+
                 try {
                     SweetToast.error(getActivity(), errorResponse, 3000);
                 } catch (Exception e) {
@@ -335,7 +335,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
 
                 }
             }
-            if (!steps.isEmpty()) {
+            if (!todaySteps.isEmpty()) {
 
                 try {
                     if (Integer.parseInt(todaySteps) >= StepCountValue) {
