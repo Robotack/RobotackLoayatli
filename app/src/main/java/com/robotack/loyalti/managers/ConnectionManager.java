@@ -167,8 +167,8 @@ public class ConnectionManager {
     }
 
     public interface APIService {
-//       public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1/";
-        public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1.1/";
+      public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1/";
+//         public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1.1/";
 
 
         @Headers({"Authorization:Um9ib3RhY2tfdmlyZ2luXzIwMjA=","sdk_version:1","android_os_version:1",})
