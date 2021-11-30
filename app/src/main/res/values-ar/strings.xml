@@ -48,4 +48,6 @@
 
     <string name="ok__">موافق</string>
     <string name="something_wrong">حدث خطآ يرجى المحاولة لاحقا</string>
+
+    <string name="internal_error">لا يوجد توكن</string>
 </resources>

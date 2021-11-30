@@ -25,6 +25,10 @@ public class ImageSlideAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
+        if (slider == null)
+        {
+            return 0;
+        }
         return slider.size();
     }
 

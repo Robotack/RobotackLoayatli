@@ -20,6 +20,7 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CalculateAmountClass;
 import com.robotack.loyalti.models.GenralModel;
+import com.robotack.loyalti.models.GetTokenListener;
 import com.robotack.loyalti.models.RedeemModel;
 import com.robotack.loyalti.models.SenderCalculateClass;
 import com.robotack.loyalti.models.SenderRedeemClass;
@@ -37,12 +38,14 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
     ProgressBar progressBar;
     RedeemModel redeemModel = null;
     ShimmerFrameLayout mShimmerViewContainer;
-
+    GetTokenListener inter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_confirmation_redeem);
+        Intent intent = getIntent();
+        inter = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
         setToolbarView();
         setupView();
     }
@@ -100,7 +103,7 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
         JsonObject gsonObject = new JsonObject();
         JsonParser jsonParser = new JsonParser();
         gsonObject = (JsonObject) jsonParser.parse(json.toString());
-        new BusinessManager().postCalcautePoints(this, gsonObject, new ApiCallResponse() {
+        new BusinessManager().postCalcautePoints(this, gsonObject,inter.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 CalculateAmountClass calculateAmountClass = (CalculateAmountClass) responseObject;
@@ -139,7 +142,7 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
         JsonObject gsonObject = new JsonObject();
         JsonParser jsonParser = new JsonParser();
         gsonObject = (JsonObject) jsonParser.parse(json.toString());
-        new BusinessManager().redeemPoints(this, gsonObject, new ApiCallResponse() {
+        new BusinessManager().redeemPoints(this, gsonObject,inter.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 submitClick.setEnabled(true);

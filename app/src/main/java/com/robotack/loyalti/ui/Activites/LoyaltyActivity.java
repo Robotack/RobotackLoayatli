@@ -10,11 +10,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -25,7 +24,7 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.AdsBannerModel;
 import com.robotack.loyalti.models.CustomerDataModel;
-import com.robotack.loyalti.models.CustomerHistoryModel;
+import com.robotack.loyalti.models.GetTokenListener;
 import com.robotack.loyalti.ui.Adapters.ImageSlideAdapter;
 import com.robotack.loyalti.utilities.AutoScrollViewPager;
 import com.robotack.loyalti.utilities.CirclePageIndicator;
@@ -48,10 +47,12 @@ public class LoyaltyActivity extends AppCompatActivity {
     CustomerDataModel customerDataModel = null;
     ImageView arrow;
     ImageView arrowSteps;
-//    String userID = "UAT-00281253";
-    String userID = null;
+    String userID = "UAT-00281253";
+//    String userID = null;
     String LanguageValue = "en";
+    LinearLayout mainView;
 
+    GetTokenListener getTokenListener ;
     AutoScrollViewPager imagesViewPager;
     CirclePageIndicator imagesPageIndicator;
     @Override
@@ -77,7 +78,20 @@ public class LoyaltyActivity extends AppCompatActivity {
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
 
+
+        try {
+            Intent intent = getIntent();
+            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
+            if (getTokenListener == null)
+            {
+                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
+                return;
+            }
+        } catch (Exception e) {
+
+        }
         imagesPageIndicator = (CirclePageIndicator) findViewById(R.id.imagesPageIndicator);
+        mainView = (LinearLayout) findViewById(R.id.mainView);
         imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);
 
         try {
@@ -102,7 +116,8 @@ public class LoyaltyActivity extends AppCompatActivity {
         stepsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiStepsActivity.class));
+
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiStepsActivity.class).putExtra("getTokenListener",getTokenListener));
             }
         });
         redeemBtn.setOnClickListener(new View.OnClickListener() {
@@ -111,14 +126,15 @@ public class LoyaltyActivity extends AppCompatActivity {
                 if (customerDataModel == null) {
                     return;
                 }
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel", customerDataModel));
+
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel", customerDataModel).putExtra("getTokenListener",getTokenListener));
             }
         });
 
         historyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class).putExtra("getTokenListener",getTokenListener));
             }
         });
 
@@ -156,7 +172,7 @@ public class LoyaltyActivity extends AppCompatActivity {
 
     private void getAdsBanner()
     {
-        new BusinessManager().getAdsBanner(this, new ApiCallResponse() {
+        new BusinessManager().getAdsBanner(this,getTokenListener.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 AdsBannerModel customerHistoryModel = null;
@@ -183,7 +199,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     }
 
     private void getCustomerInfo() {
-        new BusinessManager().getUserInfoApiCall(this, new ApiCallResponse() {
+        new BusinessManager().getUserInfoApiCall(this,getTokenListener.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
 
@@ -194,6 +210,7 @@ public class LoyaltyActivity extends AppCompatActivity {
                         if (customerDataModel.getErrorCode().toString().equals("0")) {
                             mShimmerViewContainer.setVisibility(View.GONE);
                             mShimmerViewContainer.stopShimmer();
+                            mainView.setVisibility(View.VISIBLE);
                             expiryPoint.setText(getResources().getString(R.string.expiry_points).replace("xxx", customerDataModel.getExpiryPoint().toString()));
                             currentPoints.setText(customerDataModel.getCurrentPoints().toString());
                             currentPointsValue.setText(getResources().getString(R.string.jod).replace("xxx", customerDataModel.getCurrentPointsValue().toString()));
@@ -235,4 +252,6 @@ public class LoyaltyActivity extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.show();
     }
+
+
 }

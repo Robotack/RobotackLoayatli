@@ -1,6 +1,7 @@
 package com.robotack.loyalti.ui.Activites;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.robotack.loyalti.helpers.LanguageHelper;
 import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CustomerHistoryModel;
+import com.robotack.loyalti.models.GetTokenListener;
 import com.robotack.loyalti.ui.Adapters.PointsHistoryPagerAdapter;
 import com.robotack.loyalti.utilities.Utils;
 
@@ -32,12 +34,16 @@ public class LoyaltiHistoryRedeemPointsActivity extends FragmentActivity {
     TabLayout historyTabs;
     ViewPager historyViewPager;
     ShimmerFrameLayout mShimmerViewContainer;
+    GetTokenListener inter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_history);
         setToolbarView();
+        Intent intent = getIntent();
+         inter = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
+
         getCustomerHistory();
     }
 
@@ -64,7 +70,7 @@ public class LoyaltiHistoryRedeemPointsActivity extends FragmentActivity {
 
     private void getCustomerHistory()
     {
-        new BusinessManager().getUserHistoryApiCall(this, new ApiCallResponse() {
+        new BusinessManager().getUserHistoryApiCall(this,inter.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 try {

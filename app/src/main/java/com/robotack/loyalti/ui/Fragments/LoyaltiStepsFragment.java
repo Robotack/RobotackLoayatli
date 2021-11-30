@@ -47,6 +47,7 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.GainPointsModel;
 import com.robotack.loyalti.models.GenralModel;
+import com.robotack.loyalti.models.GetTokenListener;
 import com.robotack.loyalti.models.StepsInfoModel;
 import com.robotack.loyalti.ui.Activites.LoyaltyActivity;
 import com.robotack.loyalti.ui.Activites.MaintancePageActivity;
@@ -82,6 +83,12 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
     ProgressBar progressBar;
     Runnable runnable;
     String stepCountValidation = "10000";
+
+    GetTokenListener interToken ;
+    public LoyaltiStepsFragment(GetTokenListener inter) {
+        interToken = inter;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
@@ -114,7 +121,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
 
 
     private void getStepsInfo() {
-        new BusinessManager().getStepsInfo(getActivity(), new ApiCallResponse() {
+        new BusinessManager().getStepsInfo(getActivity(),interToken.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 StepsInfoModel genralModel = null;
@@ -155,7 +162,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
         JsonObject gsonObject = new JsonObject();
         JsonParser jsonParser = new JsonParser();
         gsonObject = (JsonObject) jsonParser.parse(json.toString());
-        new BusinessManager().gainPoints(getActivity(), gsonObject, new ApiCallResponse() {
+        new BusinessManager().gainPoints(getActivity(), gsonObject,interToken.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 progressBar.setVisibility(View.GONE);
