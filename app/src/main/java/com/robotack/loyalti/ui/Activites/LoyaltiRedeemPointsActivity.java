@@ -71,7 +71,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
                 RedeemModel redeemModel = new RedeemModel();
                 redeemModel.setAccount(accountID);
                 redeemModel.setPoints(pointsValue.getText().toString());
-                startActivity(new Intent(LoyaltiRedeemPointsActivity.this, LoyaltiConfirmationRedeemPointsActivity.class).putExtra("redeemModel", redeemModel).putExtra("getTokenListener",inter));
+                startActivity(new Intent(LoyaltiRedeemPointsActivity.this, LoyaltiConfirmationRedeemPointsActivity.class).putExtra("redeemModel", redeemModel));
             }
         });
         toolbarTitle.setText(R.string.redeem);
