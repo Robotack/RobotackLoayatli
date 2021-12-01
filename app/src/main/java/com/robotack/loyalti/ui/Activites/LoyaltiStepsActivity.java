@@ -13,9 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.robotack.loyalti.R;
 import com.robotack.loyalti.helpers.LanguageHelper;
-
-
-import com.robotack.loyalti.models.GetTokenListener;
 import com.robotack.loyalti.ui.Fragments.LoyaltiStepsFragment;
 import com.robotack.loyalti.utilities.Utils;
 
@@ -30,12 +27,9 @@ public class LoyaltiStepsActivity extends AppCompatActivity {
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_steps_activity);
         setToolbarView();
-
-        Intent intent = getIntent();
-        GetTokenListener inter = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
         FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.coordinator, new LoyaltiStepsFragment(inter)).commit();
+        transaction.replace(R.id.coordinator, new LoyaltiStepsFragment(LoyaltyActivity.getTokenListener)).commit();
 
     }
 

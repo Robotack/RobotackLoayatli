@@ -27,7 +27,7 @@ import com.robotack.loyalti.managers.ApiCallResponse;
 import com.robotack.loyalti.managers.BusinessManager;
 import com.robotack.loyalti.models.CustomerAccountsModel;
 import com.robotack.loyalti.models.CustomerDataModel;
-import com.robotack.loyalti.models.GetTokenListener;
+
 import com.robotack.loyalti.models.RedeemModel;
 import com.robotack.loyalti.utilities.Utils;
 
@@ -46,15 +46,12 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
     Spinner accountsSpinner;
     String accountID = "";
     ShimmerFrameLayout mShimmerViewContainer;
-    GetTokenListener inter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_redeem_points);
-        Intent intent = getIntent();
-         inter = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
 
         setupViews();
         setToolbarView();
@@ -133,7 +130,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
     }
 
     private void getUserAccounts() {
-        new BusinessManager().getUserAccounts(this,inter.getToken(), new ApiCallResponse() {
+        new BusinessManager().getUserAccounts(this,LoyaltyActivity.getTokenListener.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 CustomerAccountsModel customerAccountsModel = (CustomerAccountsModel) responseObject;

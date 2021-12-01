@@ -49,7 +49,6 @@ import com.robotack.loyalti.models.GainPointsModel;
 import com.robotack.loyalti.models.GenralModel;
 import com.robotack.loyalti.models.GetTokenListener;
 import com.robotack.loyalti.models.StepsInfoModel;
-import com.robotack.loyalti.ui.Activites.LoyaltyActivity;
 import com.robotack.loyalti.ui.Activites.MaintancePageActivity;
 import com.robotack.loyalti.utilities.Utils;
 
