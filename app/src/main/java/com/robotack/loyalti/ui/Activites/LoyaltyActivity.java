@@ -146,13 +146,13 @@ public class LoyaltyActivity extends AppCompatActivity {
             }
         });
     }
-    public void setGetTokenListener(GetTokenListener listener)
+    public static void init(Context context ,String customerID , String languageValue ,GetTokenListener listener)
     {
-        this.getTokenListener = listener;
-        if (getTokenListener == null) {
-            showSettingsAlert(LoyaltyActivity.this, getString(R.string.internal_error));
-            return;
-        }
+        Intent in = new Intent(context, LoyaltyActivity.class);
+        in.putExtra("getTokenListener", listener);
+        in.putExtra("custumerID", customerID);
+        in.putExtra("sdkLanguage", languageValue);
+        context.startActivity(in);
     }
 
     private void setupViews() {
