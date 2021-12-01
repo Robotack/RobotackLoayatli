@@ -79,13 +79,13 @@ public class LoyaltyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loyatli);
 
         try {
-//            Intent intent = getIntent();
-//            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
-//            if (getTokenListener == null)
-//            {
-//                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
-//                return;
-//            }
+            Intent intent = getIntent();
+            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
+            if (getTokenListener == null)
+            {
+                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
+                return;
+            }
         } catch (Exception e) {
 
         }
