@@ -78,15 +78,14 @@ public class LoyaltyActivity extends AppCompatActivity {
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
 
-
         try {
-            Intent intent = getIntent();
-            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
-            if (getTokenListener == null)
-            {
-                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
-                return;
-            }
+//            Intent intent = getIntent();
+//            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
+//            if (getTokenListener == null)
+//            {
+//                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
+//                return;
+//            }
         } catch (Exception e) {
 
         }
@@ -146,6 +145,14 @@ public class LoyaltyActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void setGetTokenListener(GetTokenListener listener)
+    {
+        this.getTokenListener = listener;
+        if (getTokenListener == null) {
+            showSettingsAlert(LoyaltyActivity.this, getString(R.string.internal_error));
+            return;
+        }
     }
 
     private void setupViews() {
