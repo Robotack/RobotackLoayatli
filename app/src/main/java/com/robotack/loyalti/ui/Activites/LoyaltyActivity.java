@@ -52,7 +52,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     String LanguageValue = "en";
     LinearLayout mainView;
 
-    public  GetTokenListener getTokenListener ;
+    public  static GetTokenListener getTokenListener ;
     AutoScrollViewPager imagesViewPager;
     CirclePageIndicator imagesPageIndicator;
     @Override
@@ -78,17 +78,17 @@ public class LoyaltyActivity extends AppCompatActivity {
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
 
-        try {
-            Intent intent = getIntent();
-            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
-            if (getTokenListener == null)
-            {
-                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
-                return;
-            }
-        } catch (Exception e) {
-
-        }
+//        try {
+//            Intent intent = getIntent();
+//            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
+//            if (getTokenListener == null)
+//            {
+//                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
+//                return;
+//            }
+//        } catch (Exception e) {
+//
+//        }
         imagesPageIndicator = (CirclePageIndicator) findViewById(R.id.imagesPageIndicator);
         mainView = (LinearLayout) findViewById(R.id.mainView);
         imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);
@@ -116,7 +116,7 @@ public class LoyaltyActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiStepsActivity.class).putExtra("getTokenListener",getTokenListener));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiStepsActivity.class));
             }
         });
         redeemBtn.setOnClickListener(new View.OnClickListener() {
@@ -126,14 +126,14 @@ public class LoyaltyActivity extends AppCompatActivity {
                     return;
                 }
 
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel", customerDataModel).putExtra("getTokenListener",getTokenListener));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel", customerDataModel));
             }
         });
 
         historyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class).putExtra("getTokenListener",getTokenListener));
+                startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class));
             }
         });
 
@@ -148,13 +148,22 @@ public class LoyaltyActivity extends AppCompatActivity {
     }
     public static void init(Context context ,String customerID , String languageValue ,GetTokenListener listener)
     {
+        setTokenListner(listener);
         Intent in = new Intent(context, LoyaltyActivity.class);
-        in.putExtra("getTokenListener", listener);
+
         in.putExtra("custumerID", customerID);
         in.putExtra("sdkLanguage", languageValue);
         context.startActivity(in);
     }
 
+    public static void setTokenListner(GetTokenListener listener)
+    {
+        if (listener == null)
+        {
+            return;
+        }
+        getTokenListener = listener;
+    }
     private void setupViews() {
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
