@@ -52,7 +52,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     String LanguageValue = "en";
     LinearLayout mainView;
 
-    GetTokenListener getTokenListener ;
+    public  GetTokenListener getTokenListener ;
     AutoScrollViewPager imagesViewPager;
     CirclePageIndicator imagesPageIndicator;
     @Override
