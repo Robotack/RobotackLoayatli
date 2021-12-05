@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Loyalti</string>
+    <string name="loyalti_app_name">Loyalti</string>
     <string name="my_rewards">نقاطي</string>
     <string name="show_history">عرض سجل الحركات</string>
     <string name="redeem">تحصيل المكافأه النقدية</string>

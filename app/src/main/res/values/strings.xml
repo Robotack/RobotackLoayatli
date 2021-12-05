@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Loyalti</string>
+    <string name="loyalti_app_name">Loyalti</string>
     <string name="my_rewards">My Rewards</string>
     <string name="show_history">View History</string>
     <string name="redeem">Redeem</string>
