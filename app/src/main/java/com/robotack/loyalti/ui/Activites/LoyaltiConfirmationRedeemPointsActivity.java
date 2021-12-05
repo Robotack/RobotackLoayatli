@@ -145,14 +145,13 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 GenralModel genralModel = (GenralModel) responseObject;
                 if (genralModel.getErrorCode() == 0) {
-
                     SweetToast.success(LoyaltiConfirmationRedeemPointsActivity.this, genralModel.getDescriptionCode(), 3000);
-                    Intent intent = new Intent(LoyaltiConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.putExtra( "custumerID",userId);
-                    intent.putExtra( "sdkLanguage",lang);
-
-                    startActivity(intent);
+                    if(LoyaltiRedeemPointsActivity.instance != null) {
+                        try {
+                            LoyaltiRedeemPointsActivity.instance.finish();
+                        } catch (Exception e) {}
+                    }
+                    finish();
                 } else if (genralModel.getErrorCode() == -99) {
                     startActivity(new Intent(LoyaltiConfirmationRedeemPointsActivity.this, MaintancePageActivity.class));
 
@@ -166,9 +165,13 @@ public class LoyaltiConfirmationRedeemPointsActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 submitClick.setEnabled(true);
                 SweetToast.error(LoyaltiConfirmationRedeemPointsActivity.this, errorResponse, 3000);
-                Intent intent = new Intent(LoyaltiConfirmationRedeemPointsActivity.this, LoyaltyActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                if(LoyaltiRedeemPointsActivity.instance != null) {
+                    try {
+                        LoyaltiRedeemPointsActivity.instance.finish();
+                    } catch (Exception e) {}
+                }
+
+                finish();
             }
         });
     }

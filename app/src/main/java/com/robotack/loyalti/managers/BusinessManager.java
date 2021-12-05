@@ -50,7 +50,7 @@ public class BusinessManager {
 
     public void getAdsBanner(Context context, String token, final ApiCallResponse callResponse) {
         Map<String, String> Params = new HashMap<>();
-        String url = ApiConstants.AdBanner;
+        String url = ApiConstants.AdBanner + new Utils().getIdentifierValue(context);
         ConnectionManager.GET(context, url, Params,token, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
@@ -97,7 +97,7 @@ public class BusinessManager {
 
     public void getUserAccounts(Context context,String token, final ApiCallResponse callResponse) {
         Map<String, String> Params = new HashMap<>();
-        String url = ApiConstants.getUserInfoAPI + new Utils().getIdentifierValue(context) + ApiConstants.getUserAccountAPI;
+        String url = ApiConstants.getUserInfoAPI  + "account/" +new Utils().getIdentifierValue(context);;
         ConnectionManager.GET(context, url, Params,token, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
@@ -120,7 +120,7 @@ public class BusinessManager {
 
 
     public void postCalcautePoints(Context context, JsonObject gsonObject,String token, final ApiCallResponse callResponse) {
-        String url = calculateAmountAPI;
+        String url = calculateAmountAPI+ new Utils().getIdentifierValue(context);
         new ConnectionManager().PostRAW(context, gsonObject, url,token, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
@@ -142,7 +142,7 @@ public class BusinessManager {
     }
 
     public void redeemPoints(Context context, JsonObject gsonObject,String token, final ApiCallResponse callResponse) {
-        String url = redeemAPI;
+        String url = redeemAPI+ new Utils().getIdentifierValue(context);
         new ConnectionManager().PostRAW(context, gsonObject, url,token, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
@@ -164,7 +164,7 @@ public class BusinessManager {
     }
 
     public void gainPoints(Context context, JsonObject gsonObject,String token, final ApiCallResponse callResponse) {
-        String url = gainAPI;
+        String url = gainAPI+ new Utils().getIdentifierValue(context);
         new ConnectionManager().PostRAW(context, gsonObject, url,token, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
@@ -186,7 +186,7 @@ public class BusinessManager {
     }
 
     public void getStepsInfo(Context context,String token, final ApiCallResponse callResponse) {
-        String url = stepsInfo;
+        String url = stepsInfo+ new Utils().getIdentifierValue(context);
         Map<String, String> Params = new HashMap<>();
         new ConnectionManager().GET(context, url, Params,token, new ApiCallResponse() {
             @Override

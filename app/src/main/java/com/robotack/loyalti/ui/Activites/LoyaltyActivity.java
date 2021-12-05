@@ -78,17 +78,6 @@ public class LoyaltyActivity extends AppCompatActivity {
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
 
-//        try {
-//            Intent intent = getIntent();
-//            getTokenListener = (GetTokenListener) intent.getSerializableExtra("getTokenListener");
-//            if (getTokenListener == null)
-//            {
-//                showSettingsAlert(LoyaltyActivity.this,getString(R.string.internal_error));
-//                return;
-//            }
-//        } catch (Exception e) {
-//
-//        }
         imagesPageIndicator = (CirclePageIndicator) findViewById(R.id.imagesPageIndicator);
         mainView = (LinearLayout) findViewById(R.id.mainView);
         imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);

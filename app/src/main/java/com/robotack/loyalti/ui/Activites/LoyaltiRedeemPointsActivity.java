@@ -46,16 +46,23 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
     Spinner accountsSpinner;
     String accountID = "";
     ShimmerFrameLayout mShimmerViewContainer;
+    public static LoyaltiRedeemPointsActivity instance = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_redeem_points);
+        instance = this;
 
         setupViews();
         setToolbarView();
         getUserAccounts();
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        instance = null;
     }
 
     private void setToolbarView() {
@@ -197,6 +204,7 @@ public class LoyaltiRedeemPointsActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
 }
