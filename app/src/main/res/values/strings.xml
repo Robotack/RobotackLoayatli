@@ -46,6 +46,7 @@
     <string name="steps_count">yyyy Steps = xxxx Points</string>
     <string name="ok__">OK</string>
     <string name="something_wrong">Something wrong , please try again later</string>
+    <string name="expiry_des">collected points will be valid for 24 months.</string>
 
 
 </resources>

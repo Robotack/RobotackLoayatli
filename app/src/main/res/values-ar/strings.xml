@@ -50,4 +50,5 @@
     <string name="something_wrong">حدث خطآ يرجى المحاولة لاحقا</string>
 
     <string name="internal_error">لا يوجد توكن</string>
+    <string name="expiry_des">النقاط المكتسبة صالحة لمدة ٢٤ شهر.</string>
 </resources>

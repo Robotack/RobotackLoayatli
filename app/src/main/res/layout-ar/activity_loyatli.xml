@@ -165,6 +165,18 @@
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="italic"></com.robotack.loyalti.utilities.CustomFont>
 
+                    <com.robotack.loyalti.utilities.CustomFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="@string/expiry_des"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_marginRight="@dimen/_12sdp"
+                        android:textColor="@color/whitesdk"
+                        android:textSize="@dimen/_11sdp"
+                        ></com.robotack.loyalti.utilities.CustomFont>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
