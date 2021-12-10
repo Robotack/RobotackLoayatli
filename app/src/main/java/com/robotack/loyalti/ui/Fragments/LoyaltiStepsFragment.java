@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.common.ConnectionResult;
@@ -259,7 +258,6 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     try {
-                                        Toast.makeText(getActivity(), "isSuccessful", Toast.LENGTH_SHORT).show();
                                         Log.e(">>>>>>", "Successfully subscribed!");
 
                                         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
@@ -275,8 +273,6 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
 
                                 } else {
                                     Log.e(">>>>>>", "There was a problem subscribing.", task.getException());
-                                    Toast.makeText(getActivity(), "NotisSuccessful", Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(getActivity(), task.getException().toString(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -288,10 +284,6 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_OAUTH_REQUEST_CODE) {
                 subscribe();
-                Toast.makeText(getActivity(), "onActivityResult", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(getActivity(), "onActivityResultNot", Toast.LENGTH_SHORT).show();
-
             }
         }
     }
@@ -306,7 +298,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
                     setupFitness();
 
                 } else {
-                    Toast.makeText(getActivity(), "onRequestPermissionsResult", Toast.LENGTH_SHORT).show();
+
                 }
                 return;
         }
