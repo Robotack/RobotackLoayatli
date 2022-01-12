@@ -47,6 +47,7 @@
     <string name="ok__">OK</string>
     <string name="something_wrong">Something wrong , please try again later</string>
     <string name="expiry_des">collected points will be valid for 24 months.</string>
+    <string name="sign_in_with_google">Sign In With Google</string>
 
 
 </resources>

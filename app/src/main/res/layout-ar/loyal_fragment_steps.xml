@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="?attr/actionBarSize"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -97,6 +98,17 @@
             android:layout_centerVertical="true"
             android:indeterminateDrawable="@drawable/progress" >
         </ProgressBar>
+
+
+        <com.developer.gbuttons.GoogleSignInButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/btn"
+            android:layout_marginRight="20dp"
+            android:text="@string/sign_in_with_google"
+            app:isDarkTheme="false" />
 
         <com.robotack.loyalti.utilities.CustomFont
             android:layout_width="match_parent"

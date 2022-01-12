@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.developer.gbuttons.GoogleSignInButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
@@ -71,6 +72,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
     private TextView submitCLick;
     private TextView tvToday;
     private TextView infoSteps;
+    private GoogleSignInButton btn;
     String todaySteps = "";
     TextView stepsStatis;
     private GoogleApiClient mGoogleApiClient;
@@ -91,6 +93,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.loyal_fragment_steps, container, false);
+        btn = (GoogleSignInButton) rootView.findViewById(R.id.btn);
         tvToday = (TextView) rootView.findViewById(R.id.tvToday);
         infoSteps = (TextView) rootView.findViewById(R.id.infoSteps);
         stepsStatis = (TextView) rootView.findViewById(R.id.stepsStatis);
@@ -99,7 +102,13 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
         circularProgressBar = rootView.findViewById(R.id.circularProgressbar);
         circularProgressBar.setProgressBarColor(Color.parseColor("#306095"));
         circularProgressBar.setBackgroundProgressBarColor(Color.parseColor("#40306095"));
-        setupFitness();
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupFitness();
+            }
+        });
+
         getStepsInfo();
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACTIVITY_RECOGNITION)
                 != PackageManager.PERMISSION_GRANTED) {

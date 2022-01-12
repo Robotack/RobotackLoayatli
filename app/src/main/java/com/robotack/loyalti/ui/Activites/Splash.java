@@ -13,7 +13,7 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash2);
-        LoyaltyActivity.init(this, "UAT-00281253", "ar", new GetTokenListener() {
+        LoyaltyActivity.init(this, "UAT-00281253", "en", new GetTokenListener() {
             @Override
             public String getToken() {
                 return "test";
