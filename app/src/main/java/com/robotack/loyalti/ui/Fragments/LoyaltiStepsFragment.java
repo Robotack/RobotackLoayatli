@@ -83,6 +83,7 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
     int StepCountValue = 10000;
     ProgressBar progressBar;
     Runnable runnable;
+
     String stepCountValidation = "10000";
 
     GetTokenListener interToken ;
