@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout-ar/loyal_fragment_steps.xml" value="0.2015625" />
-        <entry key="app/src/main/res/layout/loyal_fragment_steps.xml" value="0.2015625" />
+        <entry key="app/src/main/res/drawable/google_icon_sdk.xml" value="0.3453703703703704" />
+        <entry key="app/src/main/res/layout-ar/loyal_fragment_steps.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/loyal_fragment_steps.xml" value="0.25" />
       </map>
     </option>
   </component>

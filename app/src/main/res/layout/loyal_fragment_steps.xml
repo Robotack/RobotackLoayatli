@@ -99,16 +99,32 @@
             android:indeterminateDrawable="@drawable/progress" >
         </ProgressBar>
 
-        <com.developer.gbuttons.GoogleSignInButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/btn"
+      <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_marginRight="20dp"
+          android:layout_marginLeft="20dp"
+          android:id="@+id/clickBtn"
+          android:layout_height="54dp">
 
-            android:layout_marginRight="20dp"
-            android:text="@string/sign_in_with_google"
-            app:isDarkTheme="false" />
+          <TextView
+              android:layout_width="wrap_content"
+              android:textColor="@color/gray_colorsdk"
+              android:layout_gravity="center"
+              android:textSize="16sp"
+              android:text="@string/sign_in_with_google"
+              android:layout_height="wrap_content"></TextView>
+
+          <ImageView
+              android:layout_width="36dp"
+              android:layout_marginRight="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_gravity="center|start"
+              android:src="@drawable/google_icon_sdk"
+              android:layout_height="30dp">
+
+          </ImageView>
+
+      </androidx.cardview.widget.CardView>
 
 
         <com.robotack.loyalti.utilities.CustomFont

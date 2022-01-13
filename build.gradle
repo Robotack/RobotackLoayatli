@@ -18,14 +18,9 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-//            maven {url 'http://developer.huawei.com/repo/'}
-
-        }
+        google() // make it first element
         jcenter()
+        maven { url 'https://maven.google.com' }
     }
 }
 

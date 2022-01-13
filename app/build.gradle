@@ -15,9 +15,13 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
     }
     lintOptions {
         checkReleaseBuilds false
+        abortOnError false
+
     }
     dexOptions {
         javaMaxHeapSize "4g"
@@ -58,7 +62,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-fitness:20.0.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.github.TheHasnatBD:SweetToast:1.0.2'
-    implementation 'com.github.TutorialsAndroid:GButton:v1.0.19'
 
 
 }
