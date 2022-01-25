@@ -110,6 +110,19 @@ public class LoyaltiStepsFragment extends Fragment implements GoogleApiClient.Co
             }
         });
 
+        try {
+            FitnessOptions fitnessOptions = FitnessOptions.builder()
+                    .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE, FitnessOptions.ACCESS_READ)
+                    .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_WRITE)
+                    .build();
+            if (GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(getActivity()), fitnessOptions)) {
+                subscribe();
+            }
+        }catch (Exception e)
+        {
+
+        }
+
         getStepsInfo();
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACTIVITY_RECOGNITION)
                 != PackageManager.PERMISSION_GRANTED) {
