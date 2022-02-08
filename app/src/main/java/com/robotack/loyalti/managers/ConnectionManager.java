@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.google.gson.JsonObject;
 import com.robotack.loyalti.helpers.LanguageHelper;
+import com.robotack.loyalti.ui.Activites.LoyaltyActivity;
 
 import java.io.IOException;
 import java.util.Map;
@@ -26,18 +27,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
-
 import static com.robotack.loyalti.helpers.ApiConstants.SDK_VERSION;
-import static com.robotack.loyalti.managers.ConnectionManager.APIService.BASE_URL;
-
 
 /**
  * Created by moayed on 12/10/17.
@@ -48,7 +44,7 @@ public class ConnectionManager {
 
     public static void GET(Context context, String URl, Map<String, String> Params,String token, final ApiCallResponse callResponse) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(LoyaltyActivity.BASEURL)
                 .client(new ConnectionManager().getUserHeader(context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -84,7 +80,7 @@ public class ConnectionManager {
 
     public void PostRAW(Context context , JsonObject requestBody, String URl,String token, final ApiCallResponse callResponse) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(LoyaltyActivity.BASEURL)
                 .client(new ConnectionManager().getUserHeader(context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -167,13 +163,13 @@ public class ConnectionManager {
     }
 
     public interface APIService {
-
-//      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/";
-//      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/api/v1.3/";
-//      public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1.3/";
-
-//         public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1.3/";
-         public static String BASE_URL = "https://cbu.capitalbank.jo/api/v1.3/";
+//
+////      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/";
+////      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/api/v1.3/";
+////      public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1.3/";
+//
+////         public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1.3/";
+//         public static String BASE_URL = "https://cbu.capitalbank.jo/api/v1.3/";
 
 
         @Headers({"sdk_version:1","android_os_version:1"})
