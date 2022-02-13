@@ -47,7 +47,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     CustomerDataModel customerDataModel = null;
     ImageView arrow;
     ImageView arrowSteps;
-//    String userID = "UAT-00281253";
+    //    String userID = "UAT-00281253";
     String userID = null;
     String LanguageValue = "en";
     LinearLayout mainView;
@@ -81,14 +81,9 @@ public class LoyaltyActivity extends AppCompatActivity {
         }
         new Utils().updateLangauge(this);
         setContentView(R.layout.activity_loyatli);
-
-        imagesPageIndicator = (CirclePageIndicator) findViewById(R.id.imagesPageIndicator);
-        mainView = (LinearLayout) findViewById(R.id.mainView);
-        imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);
-
+        setupViews();
         try {
             userID = getIntent().getStringExtra(PrefConstant.custumerID);
-
             if (userID == null) {
                 showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
 
@@ -100,51 +95,51 @@ public class LoyaltyActivity extends AppCompatActivity {
         } catch (Exception e) {
             showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
         }
-        setupViews();
-        if (!new Utils().isGMSAvailable(this)) {
-            stepsCard.setVisibility(View.GONE);
+        try {
+            if (!new Utils().isGMSAvailable(this)) {
+                stepsCard.setVisibility(View.GONE);
+            }
+
+            stepsCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LoyaltyActivity.this, LoyaltiStepsActivity.class));
+                }
+            });
+            redeemBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (customerDataModel == null) {
+                        return;
+                    }
+
+                    startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel", customerDataModel));
+                }
+            });
+            historyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class));
+                }
+            });
+            arrow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+        }catch (Exception e)
+        {
+
         }
 
-        stepsCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiStepsActivity.class));
-            }
-        });
-        redeemBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (customerDataModel == null) {
-                    return;
-                }
-
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiRedeemPointsActivity.class).putExtra("customerDataModel", customerDataModel));
-            }
-        });
-
-        historyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoyaltyActivity.this, LoyaltiHistoryRedeemPointsActivity.class));
-            }
-        });
-
-
-
-        arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
     public static void init(Context context ,String customerID , String languageValue , String baseURL ,GetTokenListener listener)
     {
         setTokenListner(listener);
         Intent in = new Intent(context, LoyaltyActivity.class);
         in.putExtra("baseURL", baseURL);
-        in.putExtra("custumerID", customerID);
+        in.putExtra(PrefConstant.custumerID, customerID);
         in.putExtra("sdkLanguage", languageValue);
         context.startActivity(in);
     }
@@ -159,6 +154,9 @@ public class LoyaltyActivity extends AppCompatActivity {
     }
     private void setupViews() {
 
+        imagesPageIndicator = (CirclePageIndicator) findViewById(R.id.imagesPageIndicator);
+        mainView = (LinearLayout) findViewById(R.id.mainView);
+        imagesViewPager = (AutoScrollViewPager) findViewById(R.id.imagesViewPager);
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer.startShimmer();
         stepsCard = (CardView) findViewById(R.id.stepsCard);
@@ -175,8 +173,6 @@ public class LoyaltyActivity extends AppCompatActivity {
         expiryPoint = (TextView) findViewById(R.id.expiryPoint);
         currentPoints = (TextView) findViewById(R.id.currentPoints);
         currentPointsValue = (TextView) findViewById(R.id.currentPointsValue);
-
-
     }
 
     private void getAdsBanner()
@@ -254,7 +250,7 @@ public class LoyaltyActivity extends AppCompatActivity {
         alertDialog.setMessage(message);
         alertDialog.setPositiveButton(Html.fromHtml(context.getResources().getString(R.string.ok__)), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-              finish();
+                finish();
             }
         });
         alertDialog.setCancelable(false);
