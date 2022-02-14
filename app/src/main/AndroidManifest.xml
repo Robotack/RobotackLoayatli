@@ -14,19 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
+
         <activity android:name=".ui.Activites.MaintancePageActivity" />
         <activity android:name=".ui.Activites.LoyaltiRedeemPointsActivity" />
         <activity android:name=".ui.Activites.LoyaltiStepsActivity" />
         <activity android:name=".ui.Activites.LoyaltiHistoryRedeemPointsActivity" />
         <activity android:name=".ui.Activites.LoyaltiConfirmationRedeemPointsActivity" />
-        <activity android:name=".ui.Activites.LoyaltyActivity">
+        <activity android:name=".ui.Activites.LoyaltyActivity"></activity>
+    </application>
+
+    <!--        <activity android:name=".ui.Activites.Splash">-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
-        </activity>
-    </application>
+<!--        </activity>-->
+<!--    </application>-->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

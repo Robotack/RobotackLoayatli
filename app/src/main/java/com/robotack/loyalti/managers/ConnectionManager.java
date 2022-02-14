@@ -33,6 +33,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
+
 import static com.robotack.loyalti.helpers.ApiConstants.SDK_VERSION;
 
 /**
@@ -42,14 +43,14 @@ import static com.robotack.loyalti.helpers.ApiConstants.SDK_VERSION;
 public class ConnectionManager {
 
 
-    public static void GET(Context context, String URl, Map<String, String> Params,String token, final ApiCallResponse callResponse) {
+    public static void GET(Context context, String URl, Map<String, String> Params, String token, final ApiCallResponse callResponse) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LoyaltyActivity.BASEURL)
+                .baseUrl(APIService.BASE_URL)
                 .client(new ConnectionManager().getUserHeader(context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         APIService service = retrofit.create(APIService.class);
-        Call<ResponseBody> call = service.GET(URl, Params,LanguageHelper.getCurrentLanguage(context),token);
+        Call<ResponseBody> call = service.GET(URl, Params, LanguageHelper.getCurrentLanguage(context), token);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -78,23 +79,22 @@ public class ConnectionManager {
 
     }
 
-    public void PostRAW(Context context , JsonObject requestBody, String URl,String token, final ApiCallResponse callResponse) {
+    public void PostRAW(Context context, JsonObject requestBody, String URl, String token, final ApiCallResponse callResponse) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(LoyaltyActivity.BASEURL)
+                .baseUrl(APIService.BASE_URL)
                 .client(new ConnectionManager().getUserHeader(context))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        ConnectionManager.APIService  service = retrofit.create(ConnectionManager.APIService .class);
-        Call<ResponseBody> call = service.POST_RAW(URl, requestBody,LanguageHelper.getCurrentLanguage(context),"test");
+        ConnectionManager.APIService service = retrofit.create(ConnectionManager.APIService.class);
+        Call<ResponseBody> call = service.POST_RAW(URl, requestBody, LanguageHelper.getCurrentLanguage(context), "test");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    if (response.isSuccessful())
-                    {
+                    if (response.isSuccessful()) {
                         callResponse.onSuccess(response.body().string(), response.code() + "");
-                    }else {
-                        callResponse.onFailure(response.code()+"");
+                    } else {
+                        callResponse.onFailure(response.code() + "");
                     }
 
                 } catch (Exception e) {
@@ -123,7 +123,7 @@ public class ConnectionManager {
                 Request original = chain.request();
                 Request.Builder builder = original.newBuilder();
                 builder.method(original.method(), original.body());
-                builder.header("Accept-Language", LanguageHelper.getCurrentLanguage(context)).addHeader("sdk_version",SDK_VERSION).addHeader("android_os_version",android.os.Build.VERSION.SDK_INT+"");
+                builder.header("Accept-Language", LanguageHelper.getCurrentLanguage(context)).addHeader("sdk_version", SDK_VERSION).addHeader("android_os_version", android.os.Build.VERSION.SDK_INT + "");
                 return chain.proceed(builder.build());
             }
         });
@@ -135,15 +135,17 @@ public class ConnectionManager {
     }
 
 
-    private  OkHttpClient createOkHttpClient() {
+    private OkHttpClient createOkHttpClient() {
         try {
-            final TrustManager[] trustAllCerts = new TrustManager[] {
+            final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
                         @Override
-                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {}
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                        }
 
                         @Override
-                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {}
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
+                        }
 
                         @Override
                         public java.security.cert.X509Certificate[] getAcceptedIssuers() {
@@ -163,23 +165,23 @@ public class ConnectionManager {
     }
 
     public interface APIService {
-//
+        //
 ////      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/";
 ////      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/api/v1.3/";
-////      public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1.3/";
+        public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1.3/";
 //
 ////         public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1.3/";
 //         public static String BASE_URL = "https://cbu.capitalbank.jo/api/v1.3/";
 
 
-        @Headers({"sdk_version:1","android_os_version:1"})
+        @Headers({"sdk_version:1", "android_os_version:1"})
         @GET()
-        public Call<ResponseBody> GET(@Url String url, @QueryMap Map<String, String> params,@Header("Accept-Language") String lang,@Header("Authorization") String Authorization);
+        public Call<ResponseBody> GET(@Url String url, @QueryMap Map<String, String> params, @Header("Accept-Language") String lang, @Header("Authorization") String Authorization);
 
 
-        @Headers({"sdk_version:1","android_os_version:1"})
+        @Headers({"sdk_version:1", "android_os_version:1"})
         @POST()
-        Call<ResponseBody> POST_RAW(@Url String url, @Body JsonObject requestBody,@Header("Accept-Language") String lang,@Header("Authorization") String Authorization);
+        Call<ResponseBody> POST_RAW(@Url String url, @Body JsonObject requestBody, @Header("Accept-Language") String lang, @Header("Authorization") String Authorization);
 
     }
 

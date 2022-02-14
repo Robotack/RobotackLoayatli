@@ -51,7 +51,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     String userID = null;
     String LanguageValue = "en";
     LinearLayout mainView;
-    public static String BASEURL = "";
+
     public  static GetTokenListener getTokenListener ;
     AutoScrollViewPager imagesViewPager;
     CirclePageIndicator imagesPageIndicator;
@@ -59,11 +59,6 @@ public class LoyaltyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            try {
-                BASEURL = getIntent().getStringExtra("baseURL");
-            } catch (Exception e) {
-                showSettingsAlert(LoyaltyActivity.this,"BASEURL ERROR");
-            }
             try {
                 LanguageValue = getIntent().getStringExtra(sdkLanguage);
             } catch (Exception e) {
@@ -134,11 +129,10 @@ public class LoyaltyActivity extends AppCompatActivity {
         }
 
     }
-    public static void init(Context context ,String customerID , String languageValue , String baseURL ,GetTokenListener listener)
+    public static void init(Context context ,String customerID , String languageValue ,GetTokenListener listener)
     {
         setTokenListner(listener);
         Intent in = new Intent(context, LoyaltyActivity.class);
-        in.putExtra("baseURL", baseURL);
         in.putExtra(PrefConstant.custumerID, customerID);
         in.putExtra("sdkLanguage", languageValue);
         context.startActivity(in);
