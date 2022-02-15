@@ -23,7 +23,7 @@
         <activity android:name=".ui.Activites.LoyaltyActivity"></activity>
     </application>
 
-    <!--        <activity android:name=".ui.Activites.Splash">-->
+<!--            <activity android:name=".ui.Activites.Splash">-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 

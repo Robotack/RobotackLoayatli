@@ -84,8 +84,9 @@ public class LoyaltyActivity extends AppCompatActivity {
 
             }else {
                 new Utils().setUserID(userID, this);
-                getAdsBanner();
                 getCustomerInfo();
+                getAdsBanner();
+
             }
         } catch (Exception e) {
             showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
