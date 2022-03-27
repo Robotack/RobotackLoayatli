@@ -20,6 +20,7 @@ import java.util.Map;
 import static com.robotack.loyalti.helpers.ApiConstants.calculateAmountAPI;
 import static com.robotack.loyalti.helpers.ApiConstants.gainAPI;
 import static com.robotack.loyalti.helpers.ApiConstants.redeemAPI;
+import static com.robotack.loyalti.helpers.ApiConstants.register;
 import static com.robotack.loyalti.helpers.ApiConstants.stepsInfo;
 
 public class BusinessManager {
@@ -144,6 +145,29 @@ public class BusinessManager {
     public void redeemPoints(Context context, JsonObject gsonObject,String token, final ApiCallResponse callResponse) {
         String url = redeemAPI+ new Utils().getIdentifierValue(context);
         new ConnectionManager().PostRAW(context, gsonObject, url,token, new ApiCallResponse() {
+            @Override
+            public void onSuccess(Object responseObject, String responseMessage) {
+                try {
+                    Gson gson = new Gson();
+                    String json = responseObject.toString();
+                    GenralModel parseObject = gson.fromJson(json, GenralModel.class);
+                    callResponse.onSuccess(parseObject, responseMessage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String errorResponse) {
+                callResponse.onFailure(errorResponse);
+            }
+        });
+    }
+
+    public void registerAPI(Context context,String token, final ApiCallResponse callResponse) {
+        String url = register+ new Utils().getIdentifierValue(context);
+        Map<String, String> Params = new HashMap<>();
+        ConnectionManager.GET(context, url, Params,token, new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 try {

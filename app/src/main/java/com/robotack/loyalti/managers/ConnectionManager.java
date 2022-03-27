@@ -166,8 +166,8 @@ public class ConnectionManager {
     public interface APIService {
         //
 //      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/api/v1.3/";
-//      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/api/v1.3/";
-        public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1.3/";
+      public static String BASE_URL = "https://cbu-test.capitalbank.jo:8453/api/v1.3/";
+//        public static String BASE_URL = "https://loyalty-test.capitalbank.jo:8443/api/v1.3/";
 //
 ////         public static String BASE_URL = "https://robotack.au.ngrok.io/AdminPortal/api/v1.3/";
 //         public static String BASE_URL = "https://cbu.capitalbank.jo/api/v1.3/";

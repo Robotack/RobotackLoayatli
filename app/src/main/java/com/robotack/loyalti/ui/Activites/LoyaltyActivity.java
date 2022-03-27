@@ -52,9 +52,10 @@ public class LoyaltyActivity extends AppCompatActivity {
     String LanguageValue = "en";
     LinearLayout mainView;
 
-    public  static GetTokenListener getTokenListener ;
+    public static GetTokenListener getTokenListener;
     AutoScrollViewPager imagesViewPager;
     CirclePageIndicator imagesPageIndicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,16 +81,16 @@ public class LoyaltyActivity extends AppCompatActivity {
         try {
             userID = getIntent().getStringExtra(PrefConstant.custumerID);
             if (userID == null) {
-                showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
+                showSettingsAlert(LoyaltyActivity.this, getString(R.string.no_user));
 
-            }else {
+            } else {
                 new Utils().setUserID(userID, this);
                 getCustomerInfo();
                 getAdsBanner();
 
             }
         } catch (Exception e) {
-            showSettingsAlert(LoyaltyActivity.this,getString(R.string.no_user));
+            showSettingsAlert(LoyaltyActivity.this, getString(R.string.no_user));
         }
         try {
             if (!new Utils().isGMSAvailable(this)) {
@@ -124,14 +125,13 @@ public class LoyaltyActivity extends AppCompatActivity {
                     finish();
                 }
             });
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
 
     }
-    public static void init(Context context ,String customerID , String languageValue ,GetTokenListener listener)
-    {
+
+    public static void init(Context context, String customerID, String languageValue, GetTokenListener listener) {
         setTokenListner(listener);
         Intent in = new Intent(context, LoyaltyActivity.class);
         in.putExtra(PrefConstant.custumerID, customerID);
@@ -139,14 +139,13 @@ public class LoyaltyActivity extends AppCompatActivity {
         context.startActivity(in);
     }
 
-    public static void setTokenListner(GetTokenListener listener)
-    {
-        if (listener == null)
-        {
+    public static void setTokenListner(GetTokenListener listener) {
+        if (listener == null) {
             return;
         }
         getTokenListener = listener;
     }
+
     private void setupViews() {
 
         imagesPageIndicator = (CirclePageIndicator) findViewById(R.id.imagesPageIndicator);
@@ -170,9 +169,8 @@ public class LoyaltyActivity extends AppCompatActivity {
         currentPointsValue = (TextView) findViewById(R.id.currentPointsValue);
     }
 
-    private void getAdsBanner()
-    {
-        new BusinessManager().getAdsBanner(this,getTokenListener.getToken(), new ApiCallResponse() {
+    private void getAdsBanner() {
+        new BusinessManager().getAdsBanner(this, getTokenListener.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
                 AdsBannerModel customerHistoryModel = null;
@@ -199,7 +197,7 @@ public class LoyaltyActivity extends AppCompatActivity {
     }
 
     private void getCustomerInfo() {
-        new BusinessManager().getUserInfoApiCall(this,getTokenListener.getToken(), new ApiCallResponse() {
+        new BusinessManager().getUserInfoApiCall(this, getTokenListener.getToken(), new ApiCallResponse() {
             @Override
             public void onSuccess(Object responseObject, String responseMessage) {
 
@@ -207,6 +205,10 @@ public class LoyaltyActivity extends AppCompatActivity {
                     customerDataModel = (CustomerDataModel) responseObject;
                     if (customerDataModel != null) {
 
+                        if (customerDataModel.getStatus().toString().equals("3") || customerDataModel.getStatus().toString().equals("4")) {
+                            finish();
+                            startActivity(new Intent(LoyaltyActivity.this, RegisterationActivity.class).putExtra("userID",userID).putExtra("LanguageValue",LanguageValue));
+                        }
                         if (customerDataModel.getErrorCode().toString().equals("0")) {
                             mShimmerViewContainer.setVisibility(View.GONE);
                             mShimmerViewContainer.stopShimmer();
@@ -223,8 +225,8 @@ public class LoyaltyActivity extends AppCompatActivity {
                             }
                         } else if (customerDataModel.getErrorCode().toString().equals("-99")) {
                             startActivity(new Intent(LoyaltyActivity.this, MaintancePageActivity.class));
-                        }else {
-                            showSettingsAlert(LoyaltyActivity.this,customerDataModel.getDescriptionCode().toString());
+                        }  else {
+                            showSettingsAlert(LoyaltyActivity.this, customerDataModel.getDescriptionCode().toString());
                         }
 
                     }
@@ -234,12 +236,12 @@ public class LoyaltyActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorResponse) {
-                showSettingsAlert(LoyaltyActivity.this,getString(R.string.something_wrong));
+                showSettingsAlert(LoyaltyActivity.this, getString(R.string.something_wrong));
             }
         });
     }
 
-    public void showSettingsAlert(Context context,String message) {
+    public void showSettingsAlert(Context context, String message) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setTitle("");
         alertDialog.setMessage(message);

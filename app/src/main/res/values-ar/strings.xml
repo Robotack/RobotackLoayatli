@@ -17,6 +17,8 @@
     <string name="submit_">ارسال</string>
     <string name="jod">(دينار xxx)</string>
     <string name="confirm">تأكيد</string>
+    <string name="regsiter_now_loyatli">سجل الأن</string>
+    <string name="regsiter_now_loyatli_desc">سجل الآن في برنامج الولاء capital reward، لكسب النقاط على تفاعلك اليومي مع البنك واستبدال النقاط نقدا فوري</string>
 
     <string name="no_user">لا يوجد مستخدم</string>
     <string name="you_need_to_reach">لتتمكن من الحصول على نقاط الخطوات, تأكد انك اتتممت xxxx خطوة </string>

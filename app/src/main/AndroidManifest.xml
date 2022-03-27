@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-
+        <activity
+            android:name=".ui.Activites.RegisterationActivity"
+            android:exported="false" />
         <activity android:name=".ui.Activites.MaintancePageActivity" />
         <activity android:name=".ui.Activites.LoyaltiRedeemPointsActivity" />
         <activity android:name=".ui.Activites.LoyaltiStepsActivity" />

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <com.robotack.loyalti.utilities.CustomFont
+        android:id="@+id/infoSteps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="@dimen/_14sdp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="@string/regsiter_now_loyatli_desc"
+        android:textColor="@color/blue_colorsdk"
+        android:textSize="@dimen/_14sdp">
+
+    </com.robotack.loyalti.utilities.CustomFont>
+
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_below="@id/infoSteps"
+
+        android:layout_centerVertical="true"
+        android:indeterminateDrawable="@drawable/progress" >
+    </ProgressBar>
+    <com.robotack.loyalti.utilities.CustomFont
+        android:id="@+id/registerBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progressBar"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/dark_button"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/regsiter_now_loyatli"
+        android:textColor="@color/whitesdk"
+        android:textSize="18sp"
+        android:textStyle="bold">
+
+    </com.robotack.loyalti.utilities.CustomFont>
+</RelativeLayout>

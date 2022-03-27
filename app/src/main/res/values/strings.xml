@@ -16,6 +16,8 @@
     <string name="calcualeted_cashback">Calculated cashback</string>
     <string name="submit_">Submit</string>
     <string name="confirm">Confirm</string>
+    <string name="regsiter_now_loyatli">Register now</string>
+    <string name="regsiter_now_loyatli_desc">Register now to capital reward loyalty program, to earn points on your everyday interaction with the bank and redeem the points into cash instantly</string>
     <string name="no_user">there is no login user</string>
     <string name="internal_error">Not Valid Token</string>
     <string name="jod">(JOD xxx)</string>

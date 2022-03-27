@@ -15,6 +15,18 @@ public class CustomerDataModel implements Serializable {
     @Expose
     private String errorCode;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @SerializedName("status")
+    @Expose
+    private String status;
+
 
     @SerializedName("descriptionCode")
     @Expose
