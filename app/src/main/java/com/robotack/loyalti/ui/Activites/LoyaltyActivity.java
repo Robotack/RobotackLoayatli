@@ -208,7 +208,7 @@ public class LoyaltyActivity extends AppCompatActivity {
                         if (customerDataModel.getStatus().toString().equals("3") || customerDataModel.getStatus().toString().equals("4")) {
                             finish();
                             startActivity(new Intent(LoyaltyActivity.this, RegisterationActivity.class).putExtra("userID",userID).putExtra("LanguageValue",LanguageValue));
-                        }
+                        }else
                         if (customerDataModel.getErrorCode().toString().equals("0")) {
                             mShimmerViewContainer.setVisibility(View.GONE);
                             mShimmerViewContainer.stopShimmer();
